@@ -27,6 +27,8 @@ structure Certificate where
   timestamp : String
   parameters? : Option Json := none
   limits? : Option LimitsInfo := none
+  canonicalization : IO.CanonicalizationInfo :=
+    IO.defaultCanonicalization
   signature? : Option IO.SignatureInfo := none
 
 namespace JsonHelpers
@@ -103,7 +105,8 @@ def LimitsInfo.toJson (info : LimitsInfo) : Json :=
 
 def Certificate.toJson (cert : Certificate) : Json :=
   mkObj <|
-    [ ("schema", Json.str cert.schema) ]
+    [ ("schema", Json.str cert.schema)
+    , ("canonicalization", cert.canonicalization.toJson) ]
     ++ optField "modelId" cert.modelId?
     ++ [ ("modelHash", Json.str cert.modelHash)
        , ("semantics", Json.arr (cert.semantics.map Json.str |>.toArray))
@@ -121,10 +124,12 @@ def Certificate.toJson (cert : Certificate) : Json :=
 
 def Certificate.render (cert : Certificate) (pretty := true) : String :=
   let json := cert.toJson
-  if pretty then
-    json.pretty 2
-  else
-    json.compress
+  let body :=
+    if pretty then
+      json.pretty 2
+    else
+      json.compress
+  if body.endsWith "\n" then body else body ++ "\n"
 
 /-- Parse a certificate JSON payload into the structured representation. -/
 def Certificate.fromJson? (json : Json) : Except String Certificate := do
@@ -162,6 +167,18 @@ def Certificate.fromJson? (json : Json) : Except String Certificate := do
     match json.getObjVal? "timestamp" with
     | Except.ok (Json.str s) => pure s
     | _ => Except.error "timestamp must be a string"
+  let canonJson ←
+    match json.getObjVal? "canonicalization" with
+    | Except.ok value => pure value
+    | Except.error err => Except.error err
+  let canonicalization ←
+    match IO.CanonicalizationInfo.fromJson? canonJson with
+    | Except.ok canon => pure canon
+    | Except.error err => Except.error err
+  if canonicalization.scheme ≠ IO.canonicalScheme then
+    Except.error s!"Unsupported canonicalization scheme '{canonicalization.scheme}'"
+  if canonicalization.newlineTerminated = false then
+    Except.error "canonicalization.newlineTerminated must be true"
   let parameters? :=
     match json.getObjVal? "parameters" with
     | Except.ok value => some value
@@ -190,6 +207,7 @@ def Certificate.fromJson? (json : Json) : Except String Certificate := do
       , timestamp
       , parameters?
       , limits?
+      , canonicalization
       , signature? }
 
 def save (path : System.FilePath) (cert : Certificate) (pretty := true) :

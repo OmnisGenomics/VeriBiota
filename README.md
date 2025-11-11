@@ -33,6 +33,7 @@ The frozen schemas live at:
 
 - Checks: <https://veribiota.ai/schema/v1/checks.json>
 - Certificate: <https://veribiota.ai/schema/v1/certificate.json>
+- Model IR layout: `docs/model-ir.md`
 
 Artifacts conforming to schema v1 are valid for every pilot contract through **2025-Q1**. Version bumps will get new URLs (`/schema/v2/...`) and release tags.
 
@@ -41,6 +42,19 @@ Artifacts conforming to schema v1 are valid for every pilot contract through **2
 - Folder: `releases/pilot-demo-v1`
 - Contents: canonical SIR model/certificate/checks JSON files, SHA sidecars, JWKS sample, and frozen helper scripts.
 - Usage: `make pilot-demo` prints SHA lines + verification output; send the resulting bundle alongside the Stripe invoice.
+
+## Quickstart
+
+### CLI in 60 seconds
+```bash
+make emit
+BIOLEAN_SIG_MODE=signed-soft BIOLEAN_SIG_KID=veribiota-prod-2025-q1 \
+BIOLEAN_SIG_KEY="$(cat ~/veribiota-secrets/veribiota_ed25519.pem)" \
+  make sign-soft
+make verify
+```
+
+See `docs/cli.md` for the full flag reference (`--emit-all`, `--canon`, `--checks-schema`, `verify results`, etc.).
 
 ## Engine integration handoff
 

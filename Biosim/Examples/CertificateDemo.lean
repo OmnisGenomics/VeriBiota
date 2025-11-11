@@ -51,20 +51,29 @@ private def runOpensslSign (keyPath payloadPath : System.FilePath) :
 
 private def SigningPlan.signPayload (plan : SigningPlan)
     (hintPath : System.FilePath) (payload : ByteArray)
-    (payloadHash : String) : IO (Option IO.SignatureInfo) := do
+    (payloadHash : String) (canon : Biosim.IO.CanonicalizationInfo) :
+    IO (Option IO.SignatureInfo) := do
   if !plan.requiresSignature then
     return none
   let some keyPath := plan.keyPath?
     | throw <| IO.userError "--sign-key required for selected signature mode"
   let some kid := plan.kid?
     | throw <| IO.userError "--sign-kid required for selected signature mode"
-  let canonScheme := "biolean-canon-v1"
+  if canon.scheme ≠ Biosim.IO.canonicalScheme then
+    throw <| IO.userError s!"Canonicalization scheme mismatch (expected {Biosim.IO.canonicalScheme}, found {canon.scheme})"
+  if canon.newlineTerminated = false then
+    throw <| IO.userError "Canonicalization must be newline-terminated"
+  if payload.size == 0 then
+    throw <| IO.userError "Canonical payload cannot be empty"
+  let lastByte := payload.get! (payload.size - 1)
+  if lastByte ≠ 0x0A then
+    throw <| IO.userError "Canonical payload must end with LF (0x0A)"
   let headerJson :=
     Json.mkObj
       [ ("alg", Json.str "EdDSA")
       , ("kid", Json.str kid)
       , ("typ", Json.str "JWT")
-      , ("bioleanCanon", Json.str canonScheme) ]
+      , ("veribiotaCanon", Json.str Biosim.IO.canonicalScheme) ]
   let headerBytes := headerJson.compress.toUTF8
   let headerB64 := Base64Url.encode headerBytes
   let payloadB64 := Base64Url.encode payload
@@ -79,8 +88,6 @@ private def SigningPlan.signPayload (plan : SigningPlan)
       try IO.FS.removeFile tmp catch _ => pure ()
   let signatureB64 := Base64Url.fromStandard signatureStd
   let issuedAt ← Biosim.IO.currentIsoTimestamp
-  let canon : Biosim.IO.CanonicalizationInfo :=
-    { scheme := canonScheme, newlineTerminated := true }
   let jws := s!"{headerB64}.{payloadB64}.{signatureB64}"
   let sig : IO.SignatureInfo :=
     { alg := "Ed25519"
@@ -176,7 +183,7 @@ structure EmitResult where
 def saveArtifacts (paths : ArtifactPaths)
     (plan : SigningPlan := {}) (pretty := true) :
     IO EmitResult := do
-  let modelDoc ← Model.save paths.model Model.SIR.document pretty
+  let modelDoc ← Model.save paths.model Model.SIR.spec pretty
   let baseCert :=
     { (sirCertificate "0.2" "0.1" modelDoc.hash)
         with signature? := none }
@@ -184,7 +191,8 @@ def saveArtifacts (paths : ArtifactPaths)
   let certBytes := certCanonical.toUTF8
   let certHashHex ← Biosim.IO.sha256HexBytesNear paths.certificate certBytes
   let certPayloadHash := s!"sha256:{certHashHex}"
-  let certSig? ← plan.signPayload paths.certificate certBytes certPayloadHash
+  let certSig? ←
+    plan.signPayload paths.certificate certBytes certPayloadHash baseCert.canonicalization
   let finalCert := { baseCert with signature? := certSig? }
   let finalCertBytes := (finalCert.render pretty).toUTF8
   discard <| Biosim.IO.writeFileWithSha paths.certificate finalCertBytes
@@ -193,7 +201,8 @@ def saveArtifacts (paths : ArtifactPaths)
   let bundleBytes := bundleCanonical.toUTF8
   let bundleHashHex ← Biosim.IO.sha256HexBytesNear paths.checks bundleBytes
   let bundlePayloadHash := s!"sha256:{bundleHashHex}"
-  let bundleSig? ← plan.signPayload paths.checks bundleBytes bundlePayloadHash
+  let bundleSig? ←
+    plan.signPayload paths.checks bundleBytes bundlePayloadHash unsignedBundle.canonicalization
   let finalBundle := { unsignedBundle with signature? := bundleSig? }
   let finalBundleBytes := (finalBundle.render pretty).toUTF8
   let digest ← Biosim.IO.writeFileWithSha paths.checks finalBundleBytes

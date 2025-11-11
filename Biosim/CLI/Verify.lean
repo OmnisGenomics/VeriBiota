@@ -198,7 +198,7 @@ def verifySignatureBlock (cfg : VerifyConfig) (signature? : Option SignatureInfo
     | return Except.error (.invalidSignature "JWKS document required")
   if sig.alg ≠ "Ed25519" then
     return Except.error (.canonicalMismatch s!"Unsupported signature alg '{sig.alg}'")
-  if sig.canonicalization.scheme ≠ "veribiota-canon-v1" ∨
+  if sig.canonicalization.scheme ≠ Biosim.IO.canonicalScheme ∨
       sig.canonicalization.newlineTerminated = false then
     return Except.error (.canonicalMismatch "Canonicalization metadata mismatch")
   let tag ← payloadHashTag target payloadBytes
