@@ -8,7 +8,8 @@
     "semantics",
     "toolchain",
     "theorems",
-    "timestamp"
+    "timestamp",
+    "canonicalization"
   ],
   "properties": {
     "schema": { "const": "veribiota.certificate.v1" },
@@ -28,6 +29,7 @@
     "timestamp": { "type": "string", "format": "date-time" },
     "parameters": { "type": ["object", "array", "null"] },
     "limits": { "$ref": "#/definitions/limits" },
+    "canonicalization": { "$ref": "#/definitions/canonicalization" },
     "signature": { "$ref": "#/definitions/signature" }
   },
   "additionalProperties": false,

@@ -7,6 +7,7 @@
     "toolchain",
     "modelHash",
     "generatedAt",
+    "canonicalization",
     "checks"
   ],
   "properties": {
@@ -21,6 +22,7 @@
       },
       "additionalProperties": false
     },
+    "canonicalization": { "$ref": "#/definitions/canonicalization" },
     "modelHash": { "$ref": "#/definitions/sha256Tag" },
     "generatedAt": { "type": "string", "format": "date-time" },
     "checks": {
