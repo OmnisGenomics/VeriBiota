@@ -58,6 +58,13 @@ jobs:
           ./veribiota import --in Biosim/Examples/Model/sir.model.json \
             --emit-all --out build/artifacts
 
+      - name: Determinism (re-emit)
+        run: |
+          cp -r build/artifacts build/artifacts.first
+          make emit
+          diff -u build/artifacts.first/checks/sir-demo.json build/artifacts/checks/sir-demo.json
+          diff -u build/artifacts.first/certificates/sir-demo.json build/artifacts/certificates/sir-demo.json
+
       - name: Canonicalize & validate schemas
         run: |
           ./veribiota --canon build/artifacts/checks/sir-demo.json \
@@ -65,13 +72,6 @@ jobs:
           ./veribiota --canon build/artifacts/certificates/sir-demo.json \
             --out build/artifacts/certificates/sir-demo.json
           node scripts/schemaValidate.mjs
-
-      - name: Determinism (re-emit)
-        run: |
-          cp -r build/artifacts build/artifacts.first
-          make emit
-          diff -u build/artifacts.first/checks/sir-demo.json build/artifacts/checks/sir-demo.json
-          diff -u build/artifacts.first/certificates/sir-demo.json build/artifacts/certificates/sir-demo.json
 
       - name: Tamper harness
         run: |
