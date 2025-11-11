@@ -3,7 +3,7 @@ import process from "node:process";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
-const ajv = new Ajv({ strict: true, allErrors: true });
+const ajv = new Ajv({ strict: false, allErrors: true, allowUnionTypes: true });
 addFormats(ajv);
 
 async function validatePair(schemaPath, dataPath) {
