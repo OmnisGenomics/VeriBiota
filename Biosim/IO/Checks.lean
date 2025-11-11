@@ -153,6 +153,8 @@ structure Bundle where
   toolchain : Biosim.IO.ToolchainInfo
   modelHash : String
   generatedAt : String
+  canonicalization : Biosim.IO.CanonicalizationInfo :=
+    Biosim.IO.defaultCanonicalization
   checks : List Check := []
   signature? : Option Biosim.IO.SignatureInfo := none
   deriving Repr
@@ -169,6 +171,7 @@ def toJson (bundle : Bundle) : Json :=
      , ("toolchain", normalized.toolchain.toChecksJson)
      , ("modelHash", Json.str normalized.modelHash)
      , ("generatedAt", Json.str normalized.generatedAt)
+     , ("canonicalization", normalized.canonicalization.toJson)
      , ("checks",
          Json.arr <|
            Array.mk (normalized.checks.map Check.toJson))] ++
@@ -302,6 +305,15 @@ def fromJson? (json : Json) : Except String Bundle := do
   let modelHash ← expectStringField json "modelHash"
   validateHash modelHash
   let generatedAt ← expectStringField json "generatedAt"
+  let canonJson ← json.getObjVal? "canonicalization"
+  let canonicalization ←
+    match Biosim.IO.CanonicalizationInfo.fromJson? canonJson with
+    | Except.ok canon => pure canon
+    | Except.error err => Except.error err
+  if canonicalization.scheme ≠ Biosim.IO.canonicalScheme then
+    Except.error s!"Unsupported canonicalization scheme '{canonicalization.scheme}'"
+  if canonicalization.newlineTerminated = false then
+    Except.error "canonicalization.newlineTerminated must be true"
   let signature? ←
     match json.getObjVal? "signature" with
     | Except.error _ => pure none
@@ -324,6 +336,7 @@ def fromJson? (json : Json) : Except String Bundle := do
             , tacticLib? := tactics? }
       , modelHash
       , generatedAt
+      , canonicalization
       , checks
       , signature? }
 

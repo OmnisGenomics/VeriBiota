@@ -50,6 +50,13 @@ structure CanonicalizationInfo where
   newlineTerminated : Bool := true
   deriving Repr
 
+/-- Canonicalization scheme used for all VeriBiota artifacts. -/
+def canonicalScheme : String := "veribiota-canon-v1"
+
+/-- Default canonicalization metadata applied to every artifact. -/
+def defaultCanonicalization : CanonicalizationInfo :=
+  { scheme := canonicalScheme, newlineTerminated := true }
+
 /-- Signature block shared by certificates and checks bundles. -/
 structure SignatureInfo where
   alg : String

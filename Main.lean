@@ -2,6 +2,7 @@ import Lean.Data.Json
 import Biosim.IO.Shared
 import Biosim.IO.Checks
 import Biosim.IO.Certificate
+import Biosim.IO.Importer
 import Biosim.Examples.CertificateDemo
 import Biosim.CLI.Verify
 
@@ -25,10 +26,18 @@ structure CliConfig where
   signKid? : Option String := none
   deriving Inhabited
 
+structure ImportConfig where
+  input? : Option FilePath := none
+  outDir : FilePath := "artifacts"
+  emitConfirmed : Bool := false
+  pretty : Bool := true
+  deriving Inhabited
+
 def usage : String :=
   String.intercalate "\n"
     [ "Usage:"
     , "  veribiota --emit-all [--out DIR] [--sig-mode MODE] [--sign-key PATH] [--sign-kid KID]"
+    , "  veribiota import --in MODEL.json --emit-all [--out DIR]"
     , "  veribiota verify (checks|cert) <path> --jwks JWKS [--sig-mode MODE] [--print-details]"
     , "  veribiota verify results <checks.json> <results.jsonl>"
     , "  veribiota --canon <artifact.json> [--out OUTPUT]"
@@ -41,6 +50,12 @@ def usage : String :=
     , "  --sign-key PATH            Ed25519 private key (required in signed modes)."
     , "  --sign-kid ID              Key identifier recorded in signatures."
     , "  --compact                  Emit minified JSON."
+    ]
+
+def importUsage : String :=
+  String.intercalate "\n"
+    [ "Model import usage:"
+    , "  veribiota import --in MODEL.json --emit-all [--out DIR] [--compact]"
     ]
 
 def verifyUsage : String :=
@@ -83,7 +98,10 @@ partial def parseArgsAux : CliConfig → Bool → List String →
   | _, _, "--sign-key" :: [] =>
       Except.error "Missing path after --sign-key"
   | cfg, showHelp, "--sign-kid" :: kid :: rest =>
-      parseArgsAux { cfg with signKid? := some kid } showHelp rest
+      if kid.trim.isEmpty then
+        Except.error "--sign-kid value cannot be empty"
+      else
+        parseArgsAux { cfg with signKid? := some kid } showHelp rest
   | _, _, "--sign-kid" :: [] =>
       Except.error "Missing value after --sign-kid"
   | _, _, "--out" :: [] =>
@@ -93,6 +111,35 @@ partial def parseArgsAux : CliConfig → Bool → List String →
 
 def parseArgs (args : List String) : Except String (CliConfig × Bool) :=
   parseArgsAux {} false args
+
+partial def parseImportArgsAux :
+    ImportConfig → List String → Except String ImportConfig
+  | cfg, [] =>
+      match cfg.input? with
+      | some _ => Except.ok cfg
+      | none => Except.error "Missing model input (--in PATH)"
+  | cfg, "--in" :: path :: rest =>
+      parseImportArgsAux { cfg with input? := some (FilePath.mk path) } rest
+  | _, "--in" :: [] =>
+      Except.error "Missing value after --in"
+  | cfg, "--emit-all" :: rest =>
+      parseImportArgsAux { cfg with emitConfirmed := true } rest
+  | cfg, "--emit-checks" :: rest =>
+      parseImportArgsAux { cfg with emitConfirmed := true } rest
+  | cfg, "--out" :: dir :: rest =>
+      parseImportArgsAux { cfg with outDir := FilePath.mk dir } rest
+  | _, "--out" :: [] =>
+      Except.error "Missing path after --out"
+  | cfg, "--compact" :: rest =>
+      parseImportArgsAux { cfg with pretty := false } rest
+  | cfg, arg :: rest =>
+      if cfg.input?.isNone then
+        parseImportArgsAux { cfg with input? := some (FilePath.mk arg) } rest
+      else
+        Except.error s!"Unknown import option '{arg}'"
+
+def parseImportArgs (args : List String) : Except String ImportConfig :=
+  parseImportArgsAux {} args
 
 partial def parseVerifyArgsAux (cfg : VerifyConfig) :
     List String → Except String VerifyConfig
@@ -168,7 +215,28 @@ def canonicalizeArtifact (input : FilePath) (output? : Option FilePath := none) 
 
 def describeSchema : IO Unit := do
   IO.println "veribiota.checks.v1"
-  IO.println "canonicalization: veribiota-canon-v1 (newlineTerminated)"
+  IO.println s!"canonicalization: {Biosim.IO.canonicalScheme} (newlineTerminated)"
+
+def runImport (cfg : ImportConfig) : IO UInt32 := do
+  if !cfg.emitConfirmed then
+    IO.eprintln "Refusing to overwrite artifacts without --emit-all."
+    IO.println importUsage
+    return 1
+  let some input := cfg.input?
+    | do
+        IO.eprintln "Missing model input (--in PATH)."
+        return 1
+  let spec ← Biosim.IO.Importer.fromFile input
+  match Biosim.IO.Importer.validate spec with
+  | Except.error err =>
+      IO.eprintln s!"Model validation failed: {err}"
+      return 1
+  | Except.ok _ => pure ()
+  let target := cfg.outDir / "models" / s!"{spec.id}.json"
+  let doc ← Biosim.IO.Model.save target spec cfg.pretty
+  IO.println s!"Imported model '{spec.id}' → {target}"
+  IO.println s!"Model hash: {doc.hash}"
+  return 0
 
 def verifyResults (checksPath resultsPath : FilePath) : IO UInt32 := do
   let checksPayload ← IO.FS.readFile checksPath
@@ -247,14 +315,22 @@ def runCli (args : List String) : IO UInt32 := do
             canonicalizeArtifact input out?
             pure 0
           catch err =>
-            IO.eprintln s!"{err}"
-            pure 1
+          IO.eprintln s!"{err}"
+          pure 1
   | "verify" :: "results" :: checks :: results :: trailing =>
       if trailing ≠ [] then
         IO.eprintln verifyUsage
         pure 1
       else
         verifyResults (FilePath.mk checks) (FilePath.mk results)
+  | "import" :: rest =>
+      match parseImportArgs rest with
+      | Except.error err =>
+          IO.eprintln err
+          IO.println importUsage
+          pure 1
+      | Except.ok cfg =>
+          runImport cfg
   | "verify" :: rest =>
       match parseVerifyArgs rest with
       | Except.error err =>
@@ -294,7 +370,11 @@ def runCli (args : List String) : IO UInt32 := do
               | none => envMode?
             let sigMode := chosenMode?.getD SignatureMode.unsigned
             let envKey? ← IO.getEnv "VERIBIOTA_SIG_KEY"
-            let envKid? ← IO.getEnv "VERIBIOTA_SIG_KID"
+            let envKid? :=
+              match ← IO.getEnv "VERIBIOTA_SIG_KID" with
+              | some kid =>
+                  if kid.trim.isEmpty then none else some kid
+              | none => none
             let signKey? :=
               match cfg.signKey? with
               | some k => some k
