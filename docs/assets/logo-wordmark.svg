@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" role="img" aria-label="VeriBiota wordmark">
+  <title>VeriBiota</title>
+  <defs>
+    <style>
+      .stroke { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .text { fill: currentColor; font: 700 18px/1.2 Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; letter-spacing: -0.2px; }
+    </style>
+  </defs>
+
+  <!-- DNA icon -->
+  <g transform="translate(4,4)">
+    <path class="stroke" d="M6 2c7 9 14 9 21 0"/>
+    <path class="stroke" d="M6 30c7-9 14-9 21 0"/>
+    <path class="stroke" d="M8 9l18 9"/>
+    <path class="stroke" d="M8 25l18-9"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(46,26)">
+    <text class="text">VeriBiota</text>
+  </g>
+</svg>

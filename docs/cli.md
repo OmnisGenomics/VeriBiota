@@ -30,13 +30,13 @@ lake update && lake build
 ./veribiota --emit-all --out build/artifacts
 
 # signed-soft (CI/staging):
-export BIOLEAN_SIG_MODE=signed-soft
-export BIOLEAN_SIG_KID=veribiota-prod-2025-q1
-export BIOLEAN_SIG_KEY="$(cat ~/veribiota-secrets/veribiota_ed25519.pem)"
+export VERIBIOTA_SIG_MODE=signed-soft
+export VERIBIOTA_SIG_KID=veribiota-prod-2025-q1
+export VERIBIOTA_SIG_KEY="$(cat ~/veribiota-secrets/veribiota_ed25519.pem)"
 ./veribiota --emit-all --out build/artifacts
 
 # signed-enforced (prod):
-export BIOLEAN_SIG_MODE=signed-enforced
+export VERIBIOTA_SIG_MODE=signed-enforced
 ./veribiota --emit-all --out build/artifacts
 ```
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VeriBiota logo">
+  <title>VeriBiota</title>
+  <defs>
+    <style>
+      .stroke { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <!-- Minimal DNA helix icon that inherits header text color via currentColor -->
+  <path class="stroke" d="M20 10c8 10 16 10 24 0"/>
+  <path class="stroke" d="M20 54c8-10 16-10 24 0"/>
+  <path class="stroke" d="M22 18l20 10"/>
+  <path class="stroke" d="M22 46l20-10"/>
+</svg>
