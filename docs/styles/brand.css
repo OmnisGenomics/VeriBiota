@@ -1,0 +1,35 @@
+/* Subtle lavender brand palette for Material */
+
+/* Light scheme */
+:root {
+  /* Lavender primary for header and accents */
+  --md-primary-fg-color: #E9E6F7;           /* soft lavender */
+  --md-primary-fg-color--light: #F4F2FB;    /* lighter variant */
+  --md-primary-fg-color--dark: #CFC9EC;     /* slightly darker */
+
+  /* Ensure readable text on light primary surfaces */
+  --md-primary-bg-color: #1a1a1a;           /* header text color */
+
+  /* Accent for links, hovers, and chips */
+  --md-accent-fg-color: #BFA8E8;            /* muted purple */
+  --md-accent-bg-color: #ffffff;
+  --md-accent-bg-color--light: rgba(255,255,255,0.70);
+}
+
+/* Dark scheme overrides (keep accessible contrast, purple accents) */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #8E7CC3;           /* desaturated purple for dark */
+  --md-primary-fg-color--light: #A894D5;
+  --md-primary-fg-color--dark: #685A95;
+
+  --md-accent-fg-color: #BFA8E8;
+}
+
+/* Optional: soften code selection & link hover under the lavender theme */
+:root {
+  --md-typeset-a-color: #7A6BB2;            /* link color in light mode */
+}
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #BFA8E8;            /* link color in dark mode */
+}
+

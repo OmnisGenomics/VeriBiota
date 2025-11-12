@@ -1,5 +1,5 @@
 # 🧬 VeriBiota  
-**Mathematically Proven Biology™**
+**Mathematically Proven Biology™** · [Docs Site](https://veribiota.github.io/VeriBiota/)
 
 VeriBiota transforms biological and biochemical models into cryptographically signed, formally verified artifacts. Every reaction, rate law, and invariant is backed by theorem-proven logic and a reproducible audit trail—turning biological simulation into a compliance-grade science.
 
@@ -98,7 +98,7 @@ make sign-soft
 > ```
 > The signing helper uses `VERIBIOTA_OPENSSL` whenever it is present.
 
-Docs: [`docs/cli.md`](docs/cli.md) · [`docs/model-ir.md`](docs/model-ir.md)
+Docs: https://veribiota.github.io/VeriBiota/ · [`docs/cli.md`](docs/cli.md) · [`docs/model-ir.md`](docs/model-ir.md)
 
 ---
 

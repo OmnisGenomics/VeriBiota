@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .s { fill: none; stroke: #7A6BB2; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <path class="s" d="M18 10c7 9 14 9 21 0"/>
+  <path class="s" d="M18 54c7-9 14-9 21 0"/>
+  <path class="s" d="M20 18l18 9"/>
+  <path class="s" d="M20 46l18-9"/>
+</svg>
