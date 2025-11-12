@@ -24,6 +24,12 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install OpenSSL 3 (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install openssl@3
+          echo "/opt/homebrew/opt/openssl@3/bin" >> $GITHUB_PATH
+
       - name: Install elan (Lean toolchain)
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf \
