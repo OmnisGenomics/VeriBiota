@@ -1,36 +1,101 @@
-/* Subtle lavender brand palette for Material */
+/* Sensory-first VeriBiota palette using lavender trust + coral energy.
+   We bias toward colors linked with trust (lavender), intelligence (deep navy),
+   and emotional warmth (soft coral) per color-psychology research. */
 
 /* Light scheme */
 :root {
-  /* Lavender primary for header and accents */
-  --md-primary-fg-color: #E9E6F7;           /* soft lavender */
-  --md-primary-fg-color--light: #F4F2FB;    /* lighter variant */
-  --md-primary-fg-color--dark: #CFC9EC;     /* slightly darker */
+  --veri-lavender: #d9d0ff;
+  --veri-iris: #7a6bb2;
+  --veri-midnight: #110a26;
+  --veri-coral: #ff9aa2;
+  --veri-sage: #c2f0da;
+  --veri-sun: #ffd082;
 
-  /* Ensure readable text on light primary surfaces */
-  --md-primary-bg-color: #1a1a1a;           /* header text color */
+  --md-primary-fg-color: var(--veri-lavender);
+  --md-primary-fg-color--light: #efe9ff;
+  --md-primary-fg-color--dark: #c2b1ff;
+  --md-primary-bg-color: var(--veri-midnight);
 
-  /* Accent for links, hovers, and chips */
-  --md-accent-fg-color: #BFA8E8;            /* muted purple */
+  --md-accent-fg-color: var(--veri-coral);
   --md-accent-bg-color: #ffffff;
-  --md-accent-bg-color--light: rgba(255,255,255,0.70);
+  --md-accent-bg-color--light: rgba(255, 255, 255, 0.7);
+
+  --md-typeset-a-color: var(--veri-iris);
+
+  /* Custom gradients for hero/feature callouts */
+  --veri-gradient: linear-gradient(135deg, rgba(217,208,255,0.95), rgba(255,188,199,0.9));
+  --veri-gradient-dark: linear-gradient(135deg, rgba(122,107,178,0.65), rgba(255,154,162,0.65));
 }
 
-/* Dark scheme overrides (keep accessible contrast, purple accents) */
+/* Dark scheme overrides (maintain luminous accents for emotional resonance) */
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #8E7CC3;           /* desaturated purple for dark */
-  --md-primary-fg-color--light: #A894D5;
-  --md-primary-fg-color--dark: #685A95;
-
-  --md-accent-fg-color: #BFA8E8;
+  --md-primary-fg-color: #7d70c6;
+  --md-primary-fg-color--light: #a696ff;
+  --md-primary-fg-color--dark: #4a3c7a;
+  --md-accent-fg-color: var(--veri-sun);
+  --md-typeset-a-color: var(--veri-lavender);
 }
 
-/* Optional: soften code selection & link hover under the lavender theme */
-:root {
-  --md-typeset-a-color: #7A6BB2;            /* link color in light mode */
+/* Hero header + primary CTA region */
+.md-header {
+  background-image: var(--veri-gradient);
+  box-shadow: inset 0 -1px 0 rgba(17, 10, 38, 0.1);
 }
-[data-md-color-scheme="slate"] {
-  --md-typeset-a-color: #BFA8E8;            /* link color in dark mode */
+[data-md-color-scheme="slate"] .md-header {
+  background-image: var(--veri-gradient-dark);
+}
+
+/* Page background with subtle vignette to keep focus on docs body */
+.md-main {
+  background: radial-gradient(circle at 10% 20%, rgba(255, 208, 130, 0.12), transparent 40%),
+              radial-gradient(circle at 90% 0%, rgba(217, 208, 255, 0.25), transparent 55%),
+              #fdfbff;
+}
+[data-md-color-scheme="slate"] .md-main {
+  background: radial-gradient(circle at 20% 0%, rgba(125, 112, 198, 0.3), transparent 40%),
+              radial-gradient(circle at 80% 10%, rgba(255, 154, 162, 0.2), transparent 55%),
+              #0d081a;
+}
+
+/* Emotional accent cards for blockquotes/admonitions */
+.md-typeset blockquote {
+  border-left: 4px solid var(--veri-iris);
+  background: rgba(217, 208, 255, 0.35);
+  border-radius: 0 12px 12px 0;
+  padding: 0.75rem 1rem;
+}
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  background: rgba(122, 107, 178, 0.25);
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 16px;
+  border-width: 1px;
+  border-color: rgba(17, 10, 38, 0.08);
+  background-image: radial-gradient(circle at top right, rgba(255, 154, 162, 0.15), transparent 35%);
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition,
+[data-md-color-scheme="slate"] .md-typeset details {
+  border-color: rgba(255, 208, 130, 0.25);
+  background-image: radial-gradient(circle at top left, rgba(255, 208, 130, 0.18), transparent 35%);
+}
+
+.md-button--primary {
+  background: linear-gradient(120deg, var(--veri-iris), var(--veri-coral));
+  color: #fff;
+  border: none;
+  box-shadow: 0 8px 24px rgba(122, 107, 178, 0.35);
+}
+.md-button--secondary {
+  background: rgba(17, 10, 38, 0.04);
+  border: 1px solid rgba(17, 10, 38, 0.1);
+  color: var(--veri-iris);
+}
+.md-button--primary:hover,
+.md-button--secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(255, 154, 162, 0.25);
 }
 
 /* Hide duplicate site name in header (keep current page title) */
