@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Always run lake from the repository root (directory of this script),
+# so callers can invoke `veribiota` from subdirectories.
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 if [ "$#" -eq 0 ]; then
   lake exe veribiota
 else
