@@ -7,11 +7,11 @@ JWKS=security/jwks.json
 .PHONY: emit sign-soft verify canon pilot-demo
 
 emit:
-	../../veribiota --emit-all --out $(ART)
+	../../veribiota --emit-all --out "$(PWD)/$(ART)"
 	sha256sum $(MODEL) $(CERT) $(CHECKS)
 
 sign-soft:
-	VERIBIOTA_SIG_MODE=signed-soft ../../veribiota --emit-all --out $(ART) \
+	VERIBIOTA_SIG_MODE=signed-soft ../../veribiota --emit-all --out "$(PWD)/$(ART)" \
 	  --sign-key "$$VERIBIOTA_SIG_KEY" --sign-kid "$$VERIBIOTA_SIG_KID"
 	sha256sum $(MODEL) $(CERT) $(CHECKS)
 
