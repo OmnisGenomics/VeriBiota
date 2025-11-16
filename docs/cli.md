@@ -1,6 +1,6 @@
-# VeriBiota CLI
+# VeriBiota CLI & Adapter
 
-## Install & Build
+## Install & Build (Lean CLI)
 ```bash
 elan toolchain install $(cat lean-toolchain)
 lake update && lake build
@@ -71,13 +71,11 @@ export VERIBIOTA_SIG_MODE=signed-enforced
 #   2 = checks-violation (positivity / invariant drift)
 #   3 = signature-mismatch (digest mismatch)
 #   4 = schema-error (invalid checks JSON)
-
-# Runtime enforcement
-# If the Rust helper (biosim-eval) is present, CLI enforces the exit codes above.
-# If not present, CLI prints a hint and falls back to lightweight checks (soft fallback).
-# `veribiota simulate …` now triggers the same verification automatically after each run.
-# See docs/simulator-integration.md for adapter options.
 ```
+
+If the Rust helper (`biosim-eval`) is present, the CLI enforces these exit codes;
+otherwise it prints a hint and falls back to lightweight checks. See
+`docs/simulator-integration.md` for adapter options.
 
 ## Simulate (demo)
 ```bash
@@ -95,9 +93,45 @@ cargo build --manifest-path engine/biosim-checks/Cargo.toml --bin biosim-eval
 ./target/debug/biosim-eval --json --checks build/artifacts/checks/sir-demo.json --results build/results/sir-sim.jsonl
 
 # Makefile shortcuts
-make simulate   # emit ODE trajectory + verify metadata
-make eval       # build biosim-eval and print text + JSON summaries
-make verify-results  # build biosim-eval if available, then run CLI verify (soft fallback)
-make check      # validate checks & certificate JSON against schemas
-# docs/simulator-integration.md covers CLI, FFI, and Python adapters.
+make simulate        # emit ODE trajectory + verify metadata
+make eval            # build biosim-eval and print text + JSON summaries
+make verify-results  # build biosim-eval if available, then run CLI verify
+make check           # validate checks & certificate JSON against schemas
 ```
+
+## Python adapter & JSON-only checks
+
+The Python package `veribiota` provides a lightweight, Lean-free adapter for
+structural checks and Lean suite generation.
+
+### Install
+From this repository:
+```bash
+python -m pip install .
+veribiota --help
+```
+
+### JSON-only checks (Tier 1)
+```bash
+veribiota check-json --input 'veribiota_work/*.dag.json'
+```
+
+This validates DAGs against the normalized EditDAG schema
+(`schema/veribiota.edit_dag.v1.json`) and enforces structural invariants
+(acyclicity, root uniqueness, depth monotonicity, probability conservation).
+No Lean or Lake is required.
+
+### Lean-aware checks & suite generation (Tier 2)
+```bash
+veribiota lean-check --input 'veribiota_work/*.dag.json' \
+  --out veribiota_work/
+
+veribiota generate-suite \
+  --input 'veribiota_work/*.dag.json' \
+  --project Helix \
+  --suite DAGs
+```
+
+`lean-check` emits `*.lean-check.json` summaries; `generate-suite` writes a Lean
+module under `Biosim.VeriBiota.<Project>.<Suite>` plus a `Generated` aggregator
+exposing `Generated.allDags`, which is then consumed by `lake exe veribiota-check`.

@@ -1,6 +1,7 @@
 # Verification Workflow
 
-A model’s journey from JSON to verified, signed artifacts and runtime checks.
+A model’s journey from JSON to verified, signed artifacts, runtime checks,
+and (optionally) EditDAG verification.
 
 ## 1) Author or import the model
 Start from your model JSON or import an example:
@@ -47,6 +48,50 @@ Runtime engines evaluate invariant drift and positivity against the signed check
 ./veribiota verify results build/artifacts/checks/sir-demo.json results.jsonl \
   --jwks security/jwks.json --print-details
 ```
+
+## 6) EditDAG verification tiers
+
+For tools that emit edit DAGs (e.g., CRISPR/prime editing workflows), VeriBiota
+provides a small, shared JSON schema plus a Python adapter and Lean entrypoint.
+
+- **Tier 0 – raw JSON**:
+  - Emit DAG JSON but skip structural checks entirely. Useful only during early
+    prototyping; not recommended for CI or “Verified by VeriBiota” claims.
+- **Tier 1 – JSON-only checks**:
+  - Schema: `schema/veribiota.edit_dag.v1.json`.
+  - Install the adapter: `python -m pip install .`
+  - Run: `veribiota check-json --input 'veribiota_work/*.dag.json'`
+  - Validates DAGs against the schema plus structural invariants:
+    acyclicity, unique root at depth 0, depth monotonicity, and probability
+    conservation on fanout and leaves. No Lean or Lake required.
+- **Tier 2 – JSON + Lean checks**:
+  - Generate a Lean suite from DAG JSON:
+    ```bash
+    veribiota generate-suite \
+      --input 'veribiota_work/*.dag.json' \
+      --project MySim \
+      --suite DAGs
+    lake build
+    lake exe veribiota-check
+    ```
+  - This ensures the generated `EditDAG` values type-check inside the
+    `Biosim.VeriBiota` library and are visible to Lean-level proofs.
+- **Reusable GitHub Action**:
+  - Any project can add:
+    ```yaml
+    - name: Run VeriBiota DAG checks
+      uses: omniscoder/VeriBiota/.github/actions/veribiota-check@v1
+      with:
+        project-name: MySim
+        dag-glob: veribiota_work/*.dag.json
+        veribiota-ref: v0.1.0
+    ```
+  - The action clones VeriBiota, installs Lean + the adapter, runs JSON-only
+    checks, generates the Lean suite, and executes `lake exe veribiota-check`.
+
+These tiers let consumers start at Tier 0 (chaos), add fast JSON sanity at Tier
+1, and graduate to full “Verified by VeriBiota” Lean-backed checks at Tier 2,
+without touching any Lean theory in their own repositories.
 
 ## Provenance chain
 ```

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "veribiota-example-project"
+version = "0.1.0"
+description = "Minimal example project showing how to integrate VeriBiota DAG checks."
+authors = [
+  { name = "VeriBiota Example Maintainers" }
+]
+requires-python = ">=3.10"
+dependencies = [
+  "veribiota>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+]
+

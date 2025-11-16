@@ -1,0 +1,77 @@
+name: "VeriBiota DAG checks"
+description: "Run VeriBiota structural checks and Lean integration on EditDAG JSONs."
+author: "VeriBiota developers"
+
+inputs:
+  project-name:
+    description: "Project name used for logging (e.g., Helix)."
+    required: false
+    default: "Project"
+  dag-glob:
+    description: "Glob (relative to the workflow workspace) for normalized EditDAG JSON files."
+    required: true
+  veribiota-ref:
+    description: "Git ref (branch, tag, or commit) of omniscoder/VeriBiota to use."
+    required: false
+    default: "main"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install Lean toolchain (elan)
+      shell: bash
+      run: |
+        set -euo pipefail
+        curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf \
+          | sh -s -- -y --default-toolchain=stable
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+    - name: Clone VeriBiota
+      shell: bash
+      run: |
+        set -euo pipefail
+        REF="${{ inputs.veribiota-ref }}"
+        if [ -z "$REF" ]; then
+          REF="main"
+        fi
+        git clone --depth 1 --branch "$REF" https://github.com/omniscoder/VeriBiota.git veribiota-src
+
+    - name: Prepare Lean cache
+      shell: bash
+      working-directory: veribiota-src
+      run: |
+        set -euo pipefail
+        lake update
+        lake exe cache get || true
+
+    - name: Install veribiota adapter (Python)
+      shell: bash
+      working-directory: veribiota-src
+      run: |
+        set -euo pipefail
+        python -m pip install --upgrade pip
+        python -m pip install .
+
+    - name: Run VeriBiota adapter (JSON checks + Lean suite generation)
+      shell: bash
+      working-directory: veribiota-src
+      run: |
+        set -euo pipefail
+        PROJECT="${{ inputs.project-name }}"
+        DAG_GLOB="${{ inputs.dag-glob }}"
+        echo "VeriBiota check: project=${PROJECT}, dags=${DAG_GLOB}"
+        veribiota check-json --input "../${DAG_GLOB}"
+        veribiota generate-suite --input "../${DAG_GLOB}" --project "${PROJECT}" --suite "DAGs" --verbose
+
+    - name: Build and run veribiota-check
+      shell: bash
+      working-directory: veribiota-src
+      run: |
+        set -euo pipefail
+        lake build
+        lake exe veribiota-check

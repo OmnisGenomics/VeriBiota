@@ -49,6 +49,17 @@ jobs:
       - name: Schema validation (checks + certificate)
         run: make check
 
+      - name: Setup Python for adapter smoke test
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: veribiota-adapter packaging smoke test
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install .
+          veribiota --help
+
   build-test:
     if: github.event_name == 'schedule'
     strategy:

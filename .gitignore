@@ -3,9 +3,13 @@ build/
 engine/biosim-checks/target/
 target/
 node_modules/
+venv/
 *.tmp
 .DS_Store
 site/
+
+# Generated Lean suites (EditDAG DAGs) – not committed
+**/Biosim/VeriBiota/*/*.lean
 
 # Local security material (never commit real keys or JWKS)
 security/jwks.json

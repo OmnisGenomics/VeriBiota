@@ -1,0 +1,21 @@
+name: veribiota-checks
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  veribiota-dag-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Run VeriBiota DAG checks
+        uses: omniscoder/VeriBiota/.github/actions/veribiota-check@v0.1.0
+        with:
+          project-name: Example
+          dag-glob: tests/dags/*.dag.json
+          veribiota-ref: v0.1.0
+

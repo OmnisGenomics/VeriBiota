@@ -1,0 +1,12 @@
+{
+  "version": "veribiota.edit_dag.v1",
+  "nodes": [
+    { "id": "n0", "depth": 0, "prob": 1.0 },
+    { "id": "n1", "depth": 1, "prob": 1.0 }
+  ],
+  "edges": [
+    { "src": "n0", "dst": "n1", "prob": 1.0, "event_kind": "cut" }
+  ],
+  "root": "n0"
+}
+

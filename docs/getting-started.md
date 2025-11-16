@@ -68,4 +68,20 @@ export VERIBIOTA_OPENSSL="$(brew --prefix openssl@3)/bin/openssl"
   --emit-all --out build/artifacts
 ```
 
-Next: learn the full Verification Workflow (docs/verification-workflow.md), or check the CLI reference (docs/cli.md).
+## Next steps
+
+- Learn the full Verification Workflow (docs/verification-workflow.md).
+- Check the CLI & adapter reference (docs/cli.md).
+- If your project emits edit DAGs, target the normalized schema
+  `veribiota.edit_dag.v1` (docs/schema/edit_dag.md) and wire CI to the
+  reusable GitHub Action:
+  ```yaml
+  - name: Run VeriBiota DAG checks
+    uses: omniscoder/VeriBiota/.github/actions/veribiota-check@v1
+    with:
+      project-name: MySim
+      dag-glob: veribiota_work/*.dag.json
+      veribiota-ref: v0.1.0
+  ```
+  For a concrete starting point, see the template layout under
+  `examples/veribiota-example-project` in this repository.

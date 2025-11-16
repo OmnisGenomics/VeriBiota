@@ -27,16 +27,23 @@ lake update && lake build
 
 Tip: For a full signing round‑trip with a disposable local key, see Getting Started (docs/getting-started.md).
 
+## Verification tiers
+
+- **Tier 0 – raw JSON**: emit model/trajectory/DAG JSON with no structural checks (not recommended for CI).
+- **Tier 1 – JSON-only checks**: run `veribiota-cli check-json` on `veribiota.edit_dag.v1` DAGs for fast structural sanity without Lean.
+- **Tier 2 – JSON + Lean**: generate a Lean EditDAG suite with `veribiota-cli generate-suite` and run `lake exe veribiota-check` (or the reusable GitHub Action) for proof-backed checks.
+
 ## Explore the docs
 - Why VeriBiota (docs/why.md)
 - Getting Started (docs/getting-started.md)
 - Verification Workflow (docs/verification-workflow.md)
 - Architecture (docs/architecture.md)
-- CLI Reference (docs/cli.md)
+- CLI & Adapter Reference (docs/cli.md)
 - Canonicalization & Signing (docs/canonicalization.md)
 - Model IR (docs/model-ir.md)
 - Invariants (docs/invariants.md)
 - Runtime Checks (docs/runtime_checks.md)
+- DAG Schema (docs/schema/edit_dag.md)
 - QA Checklist (docs/qa_checklist.md)
 - Roadmap (docs/roadmap.md)
 

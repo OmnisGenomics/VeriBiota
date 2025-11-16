@@ -17,3 +17,7 @@ lean_exe biosim_tests where
 lean_exe veribiota where
   root := `Main
   supportInterpreter := true
+
+lean_exe «veribiota-check» where
+  root := `Biosim.VeriBiota.CheckAll
+  supportInterpreter := true
