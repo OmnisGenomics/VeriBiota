@@ -40,6 +40,13 @@ Modern biology depends on simulation, but trust in those models is thin. VeriBio
 
 ---
 
+## 🔧 Engine shape (core vs surface)
+- **Core (Lean-only):** maintained by VeriBiota devs; stable theorem anchors like `VB-ALIGN-CORE-001`.
+- **Profiles (no-Lean):** named, versioned verification contracts with JSON schemas. First up: `global_affine_v1` (`schemas/align/global_affine_v1.schema.json`) for global affine alignment witnesses.
+- **Integrations:** CLI (`veribiota check alignment global_affine_v1 input.json [--compact]`) and Python (`veribiota.profile.check_alignment_global_affine_v1`), so most users just feed JSON and read verdicts.
+
+---
+
 ## 🧩 Architecture at a Glance
 ```
 Lean Proof Plane ──► Signed Certificate (JSON)
@@ -59,6 +66,29 @@ Rust/CUDA Engine ──► Verified Simulation Results
 ---
 
 ## 🧰 Quickstart
+### Profile quickstart (no Lean authoring)
+```bash
+lake build  # builds the veribiota CLI once
+
+cat > /tmp/align.json <<'EOF'
+{
+  "seqA": "A",
+  "seqB": "A",
+  "scoring": { "match": 2, "mismatch": -1, "gap_open": -2, "gap_extend": -1 },
+  "witness": { "score": 2, "trace": [ { "op": "M" } ] }
+}
+EOF
+
+./veribiota check alignment global_affine_v1 /tmp/align.json
+# {
+#   "profile": "global_affine_v1",
+#   "status": "passed",
+#   "theorems": ["VB-ALIGN-CORE-001", "VB-ALIGN-CORE-002"],
+#   ...
+# }
+```
+
+### Artifact pipeline (certificates + checks)
 ```bash
 # Build the toolchain
 elan toolchain install $(cat lean-toolchain)
@@ -73,6 +103,9 @@ lake update && lake build
   --jwks security/jwks.json --print-details
 ./veribiota verify cert build/artifacts/certificates/sir-demo.json \
   --jwks security/jwks.json --print-details
+
+# Build the runtime helper (required for results verification)
+cargo build --manifest-path engine/biosim-checks/Cargo.toml --bin biosim-eval --release
 ```
 
 ### Local signing quickstart

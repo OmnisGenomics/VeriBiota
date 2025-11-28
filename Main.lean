@@ -5,6 +5,7 @@ import Biosim.IO.Certificate
 import Biosim.IO.Importer
 import Biosim.Examples.CertificateDemo
 import Biosim.CLI.Verify
+import Biosim.CLI.Profile
 
 open Lean
 open System
@@ -43,6 +44,7 @@ def usage : String :=
     , "  veribiota import --in MODEL.json --emit-all [--out DIR]"
     , "  veribiota verify (checks|cert) <path> --jwks JWKS [--sig-mode MODE] [--print-details]"
     , "  veribiota verify results <checks.json> <results.jsonl>"
+    , "  veribiota check alignment global_affine_v1 <input.json> [--compact]"
     , "  veribiota --canon <artifact.json> [--out OUTPUT]"
     , "  veribiota --checks-schema"
     , "  veribiota --version"
@@ -219,8 +221,13 @@ def verifyResults (checksPath resultsPath : FilePath) : IO UInt32 := do
           , "--json" ]
         , stderr := .piped }
     if child.exitCode ≠ 0 then
-      IO.eprintln "biosim-eval failed; falling back to Lean-only verification."
+      IO.eprintln "biosim-eval failed; unable to verify results."
       IO.eprintln child.stderr
+      return (1 : UInt32)
+  else
+    IO.eprintln "biosim-eval not found (expected under target/{debug,release})."
+    IO.eprintln "Build it with cargo (engine/biosim-checks) before verifying results."
+    return (1 : UInt32)
   if processed = 0 then
     IO.eprintln "results file was empty"
     return (2 : UInt32)
@@ -544,7 +551,32 @@ def parseCanonCommand : List String → Except String (FilePath × Option FilePa
   | [] => Except.error canonUsage
 
 def runCli (args : List String) : IO UInt32 := do
+  let buildId := (← IO.getEnv "VERIBIOTA_BUILD_ID").getD "dev"
   match args with
+  | "check" :: "alignment" :: "global_affine_v1" :: input :: rest =>
+      let pretty? :=
+        match rest with
+        | [] => Except.ok true
+        | ["--compact"] => Except.ok false
+        | _ => Except.error Biosim.CLI.Profile.profileUsage
+      match pretty? with
+      | Except.ok pretty =>
+          Biosim.CLI.Profile.runGlobalAffineProfile (FilePath.mk input) pretty toolkitVersion buildId
+      | Except.error msg => do
+          IO.eprintln msg
+          pure 1
+  | "check" :: "edit" :: "edit_script_v1" :: input :: rest =>
+      let pretty? :=
+        match rest with
+        | [] => Except.ok true
+        | ["--compact"] => Except.ok false
+        | _ => Except.error Biosim.CLI.Profile.profileUsage
+      match pretty? with
+      | Except.ok pretty =>
+          Biosim.CLI.Profile.runEditScriptProfile (FilePath.mk input) pretty toolkitVersion buildId
+      | Except.error msg => do
+          IO.eprintln msg
+          pure 1
   | "--version" :: _ =>
       IO.println s!"veribiota {toolkitVersion} ({Lean.versionString})"
       pure 0

@@ -61,6 +61,11 @@ export VERIBIOTA_SIG_MODE=signed-enforced
 ```
 
 ## Results Verification
+Requires the Rust helper (`biosim-eval`). Build it once with:
+```bash
+cargo build --manifest-path engine/biosim-checks/Cargo.toml --bin biosim-eval --release
+```
+
 ```bash
 # newline-delimited snapshots (JSONL) -> drift/positivity checks
 ./veribiota verify results build/artifacts/checks/sir-demo.json results.jsonl \
@@ -73,8 +78,7 @@ export VERIBIOTA_SIG_MODE=signed-enforced
 #   4 = schema-error (invalid checks JSON)
 ```
 
-If the Rust helper (`biosim-eval`) is present, the CLI enforces these exit codes;
-otherwise it prints a hint and falls back to lightweight checks. See
+The CLI requires `biosim-eval` and enforces the exit codes above. See
 `docs/simulator-integration.md` for adapter options.
 
 ## Simulate (demo)

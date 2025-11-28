@@ -1,0 +1,12 @@
+{
+  "global_affine_v1": {
+    "schema_path": "schemas/align/global_affine_v1.schema.json",
+    "schema": "sha256:5df162b1da0cbf116fd88b1068d913fcc1f0dddcb63862f8126faaf72673dacd",
+    "theorems": ["VB_ALIGN_CORE_001", "VB_ALIGN_CORE_002"]
+  },
+  "edit_script_v1": {
+    "schema_path": "schemas/edit/edit_script_v1.schema.json",
+    "schema": "sha256:53f6e6632ce358503495e41ebd7aa0f54b359fb276fbd56053b50076fa5250c4",
+    "theorems": ["VB_EDIT_001"]
+  }
+}
