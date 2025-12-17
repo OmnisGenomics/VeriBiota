@@ -1,256 +1,129 @@
-# 🧬 VeriBiota™  
-**Mathematically Proven Biology™** · [Docs Site](https://veribiota.github.io/VeriBiota/)
-
+# VeriBiota
 [![Docs](https://img.shields.io/badge/docs-MkDocs%20Material-7A6BB2)](https://veribiota.github.io/VeriBiota/)
-[![Fast Gates](https://github.com/VeriBiota/VeriBiota/actions/workflows/ci.yml/badge.svg?label=fast-gates)](https://github.com/VeriBiota/VeriBiota/actions/workflows/ci.yml)
+[![CI](https://github.com/OmnisGenomics/VeriBiota/actions/workflows/ci.yml/badge.svg?label=ci)](https://github.com/OmnisGenomics/VeriBiota/actions/workflows/ci.yml)
 
-> **Fast Gates:** every PR runs `make verify-results` (runtime-backed checks) and `make check` (schema validation) before merge.
-[![Fast Gates](https://github.com/VeriBiota/VeriBiota/actions/workflows/ci.yml/badge.svg?label=fast-gates)](https://github.com/VeriBiota/VeriBiota/actions/workflows/ci.yml)
+VeriBiota is a toolchain for making biological / bioinformatics checks *re-runnable and hard to fake*.
 
-Schemas: `veribiota.model.v1` · `veribiota.checks.v1` · `veribiota.certificate.v1`  
-Canon: `veribiota-canon-v1`
+Inputs and outputs are JSON (with versioned schemas). Profiles are tied to theorem IDs in `profiles/manifest.json`; **some** of those IDs are backed by non‑placeholder Lean theorems today (see `Biosim/VeriBiota/Theorems.lean`), and the rest are **reserved anchors** while the checks are enforced by executable contracts + CI fixtures. When you need to move results between machines or teams, you can also sign emitted artifacts (Ed25519 + JWKS).
 
-VeriBiota transforms biological and biochemical models into cryptographically signed, formally verified artifacts. Every reaction, rate law, and invariant is backed by theorem-proven logic and a reproducible audit trail—turning biological simulation into a compliance-grade science.
+## What you can do today
+- Run **profile checks** from JSON (no Lean authoring required for most use-cases).
+- Emit a **canonical artifact bundle** (`model` / `certificate` / `checks`) under `build/artifacts/`.
+- Verify **schemas**, **signatures**, and (optionally) **results** in CI with deterministic exit codes.
 
----
+Proof status today:
+- **Non-placeholder theorem anchors:** `global_affine_v1`, `edit_script_v1`.
+- **Contract-checked + fixture-tested, but theorem anchors are placeholders:** `edit_script_normal_form_v1`, `prime_edit_plan_v1`, `pair_hmm_bridge_v1`, `vcf_normalization_v1`, `snapshot_signature_v1`.
 
-## 🚀 Mission
-**To make verified computation the default for life sciences.**  
-VeriBiota delivers the first open standard for Proof-Backed Biological Simulation by unifying:
+Surfaces that matter for compatibility:
+- Schemas: `veribiota.model.v1`, `veribiota.certificate.v1`, `veribiota.checks.v1`
+- Canonicalization policy: `veribiota-canon-v1`
 
-- **Lean 4 + mathlib** (formal proofs of species, reactions, invariants)  
-- **Deterministic JSON schemas** (`veribiota.model.v1`, `veribiota.certificate.v1`, `veribiota.checks.v1`)  
-- **Cryptographic signing & verification** (Ed25519 + JWKS)  
-- **Executable semantics** (Rust/CUDA runtime, in development)
+CI gate: every PR runs `make verify-results` (runtime-backed checks) and `make check` (schema validation).
 
-Result: every model is provable, auditable, and portable—from a graduate thesis to FDA submissions.
+## Quickstart (profile checks)
+Option A: use a release bundle (recommended for CI/users).
 
----
+- Download the `veribiota-…` release archive for your platform.
+- Extract it and run `./veribiota …` from the extracted directory (it includes `schemas/` + `profiles/manifest.json` for snapshot emission).
 
-## 🧠 Why It Matters
-**“We can’t reproduce what we can’t verify.”**  
-Modern biology depends on simulation, but trust in those models is thin. VeriBiota replaces ad-hoc tooling with a formal, signed standard.
+Option B: build from source.
 
-| Old Workflow                        | VeriBiota Upgrade                                  |
-| ----------------------------------- | -------------------------------------------------- |
-| Ad-hoc scripts & spreadsheets       | Deterministic, versioned schemas                   |
-| Trust-me simulations                | Cryptographically signed certificates              |
-| Peer review via screenshots         | Machine-checked Lean proofs                        |
-| Regulatory uncertainty              | Immutable, auditable verification bundles          |
-
----
-
-## 🔧 Engine shape (core vs surface)
-- **Core (Lean-only):** maintained by VeriBiota devs; stable theorem anchors like `VB-ALIGN-CORE-001`.
-- **Profiles (no-Lean):** named, versioned verification contracts with JSON schemas. First up: `global_affine_v1` (`schemas/align/global_affine_v1.schema.json`) for global affine alignment witnesses.
-- **Integrations:** CLI (`veribiota check alignment global_affine_v1 input.json [--compact]`) and Python (`veribiota.profile.check_alignment_global_affine_v1`), so most users just feed JSON and read verdicts.
-
----
-
-## 🧩 Architecture at a Glance
-```
-Lean Proof Plane ──► Signed Certificate (JSON)
-        │
-        ▼
-Rust/CUDA Engine ──► Verified Simulation Results
-```
-
-| Layer            | Technology                  | Purpose                                                      |
-| ---------------- | --------------------------- | ------------------------------------------------------------ |
-| Proof Plane      | Lean 4 + mathlib            | Defines species, reactions, invariants; emits signed proofs. |
-| Model IO         | JSON (`veribiota.model.v1`) | Canonicalizes + hashes every model.                          |
-| Signer           | Ed25519 / JWKS              | Attaches cryptographic authenticity.                         |
-| Runtime Engine   | Rust + CUDA (roadmap)       | Executes ODE/SSA simulations against Lean-proven invariants. |
-| Portal / CLI     | Lake + `veribiota`          | Emits, signs, and verifies bundles end-to-end.               |
-
----
-
-## 🧰 Quickstart
-### Profile quickstart (no Lean authoring)
 ```bash
-lake build  # builds the veribiota CLI once
-
-cat > /tmp/align.json <<'EOF'
-{
-  "seqA": "A",
-  "seqB": "A",
-  "scoring": { "match": 2, "mismatch": -1, "gap_open": -2, "gap_extend": -1 },
-  "witness": { "score": 2, "trace": [ { "op": "M" } ] }
-}
-EOF
-
-./veribiota check alignment global_affine_v1 /tmp/align.json
-# {
-#   "profile": "global_affine_v1",
-#   "status": "passed",
-#   "theorems": ["VB-ALIGN-CORE-001", "VB-ALIGN-CORE-002"],
-#   ...
-# }
-```
-
-### Artifact pipeline (certificates + checks)
-```bash
-# Build the toolchain
 elan toolchain install $(cat lean-toolchain)
 lake update && lake build
-
-# Import a canonical SIR model and emit the full bundle
-./veribiota import --in Biosim/Examples/Model/sir.model.json \
-  --emit-all --out build/artifacts
-
-# Verify signed outputs
-./veribiota verify checks build/artifacts/checks/sir-demo.json \
-  --jwks security/jwks.json --print-details
-./veribiota verify cert build/artifacts/certificates/sir-demo.json \
-  --jwks security/jwks.json --print-details
-
-# Build the runtime helper (required for results verification)
-cargo build --manifest-path engine/biosim-checks/Cargo.toml --bin biosim-eval --release
 ```
 
-### Local signing quickstart
-
-Leverage the new signing preflight guard to try the full signature round-trip with a disposable key:
+Run a profile check:
 
 ```bash
-openssl genpkey -algorithm ed25519 -out security/local-signing.key
-export VERIBIOTA_SIG_MODE=signed-soft
-export VERIBIOTA_SIG_KEY="$PWD/security/local-signing.key"
-export VERIBIOTA_SIG_KID="local-test"
+./veribiota check alignment global_affine_v1 examples/profiles/global_affine_v1/match.json
+```
 
-# derive the JWKS from the private key
-X="$(
-  openssl pkey -in "$VERIBIOTA_SIG_KEY" -pubout -outform DER \
-  | tail -c 32 \
-  | python3 -c 'import sys,base64;print(base64.urlsafe_b64encode(sys.stdin.buffer.read()).decode().rstrip("="))'
-)"
-jq -n --arg x "$X" --arg kid "$VERIBIOTA_SIG_KID" \
-  '{keys:[{kty:"OKP",crv:"Ed25519",kid:$kid,x:$x}]}' > security/jwks.json
+Expected shape (status must be `passed`):
 
+```json
+{
+  "profile": "global_affine_v1",
+  "status": "passed",
+  "theorems": ["VB_ALIGN_CORE_001", "VB_ALIGN_CORE_002"]
+}
+```
+
+Run the test suite used in CI:
+
+```bash
+lake exe biosim_tests
+```
+
+## Artifact bundle (models, certificates, checks)
+The demo pipeline emits a canonical bundle under `build/artifacts/`:
+
+```bash
+make emit
+make check
+```
+
+Verify signatures (expects `security/jwks.json`):
+
+```bash
+make verify
+```
+
+Verify results metadata (builds the Rust helper via Cargo if present):
+
+```bash
+make verify-results
+```
+
+## Signing and snapshots (optional)
+For local signing, set a key + `kid` and run the signing target:
+
+```bash
+export VERIBIOTA_SIG_KEY=/path/to/ed25519.pem
+export VERIBIOTA_SIG_KID=local-test
 make sign-soft
 ```
 
-`make sign-soft` now starts by running `scripts/sign_preflight.sh`, which verifies that the JWKS entry matches the private key and that any existing artifacts still advertise the canonicalization policy. If the preflight passes, the target re-emits the artifacts, signs them, prints SHA-256 digests, and immediately re-verifies the signatures.
+For snapshot signatures / attestation, start with `docs/SNAPSHOTS.md`.
 
-> **Tip:** `VERIBIOTA_SIG_KEY` may point to a key file or contain the raw PEM text. When the latter is detected, `scripts/sign_key_path.sh` will materialize a temporary file under `security/` and wire everything up automatically.
-
-> **macOS note:** Apple’s built-in LibreSSL lacks Ed25519 support. Install Homebrew’s OpenSSL 3 (`brew install openssl@3`) and point `VERIBIOTA_OPENSSL` at it:
-> ```bash
-> export VERIBIOTA_OPENSSL="$(brew --prefix openssl@3)/bin/openssl"
-> ```
-> The signing helper uses `VERIBIOTA_OPENSSL` whenever it is present.
-
-Docs: https://veribiota.github.io/VeriBiota/ · [`docs/cli.md`](docs/cli.md) · [`docs/model-ir.md`](docs/model-ir.md) · [`docs/simulator-integration.md`](docs/simulator-integration.md)
-Adapter pack: [`adapters/README.md`](adapters/README.md)
-Profile catalog: [`docs/PROFILE_SPEC.md`](docs/PROFILE_SPEC.md)
-Snapshots & attestation: [`docs/SNAPSHOTS.md`](docs/SNAPSHOTS.md) · [`docs/TIER0_COMPLIANCE.md`](docs/TIER0_COMPLIANCE.md) · [`docs/ATTESTED_PROFILES.md`](docs/ATTESTED_PROFILES.md)
-
----
-
-## 🔐 Verification Workflow
-1. **Model authoring** → canonical JSON (`veribiota.model.v1`)  
-2. **Proof & certification** → Lean theorems baked into `certificate.json`  
-3. **Cryptographic signing** → Ed25519 signature + SHA256 digest + JWKS metadata  
-4. **Verification** → anyone runs `./veribiota verify …` to confirm authenticity
-
-Every artifact carries a hashable provenance chain:
-```
-model.json → certificate.json → checks.json → signature → JWKS
-```
-
----
-
-## 🧾 Provenance & Compliance
-- Deterministic builds (`lake build` → byte-identical JSON)  
-- Canonicalization: `veribiota-canon-v1` (UTF-8, sorted fields, trailing newline)  
-- Digital signatures: Ed25519 (`signature.jws`) + JWKS registry (`security/jwks.json`)  
-- Tamper harness + schema validation baked into CI (`.github/workflows/ci.yml`)  
-- CI simulates results and (on Ubuntu) optionally evaluates drift/positivity via `biosim-eval`  
-- Ready for 21 CFR Part 11 / SOC 2 audit trails
-
-## ✅ Verification & Compliance
-Tier 0 profiles provide stable schemas, theorem anchors, golden fixtures, deterministic exit codes, and structured JSON errors. Attested profiles add snapshot signatures:
-
-- `--snapshot-out` emits `snapshot_signature_v1` documents binding input hash, schema hash/ID, theorem IDs, and build metadata.
-- Validator + workflow: `.github/scripts/validate_snapshots.py`, `.github/workflows/tier0_snapshots.yml`.
-- Current Tier 0 & attested profiles: `global_affine_v1`, `edit_script_v1`, `edit_script_normal_form_v1`, `prime_edit_plan_v1`, `pair_hmm_bridge_v1` (see `docs/ATTESTED_PROFILES.md`).
-- Examples for external users: `examples/veribiota-example-pipeline/`.
-
-## 🤝 Integration Services
-For labs/companies running CRISPR, prime editing, or genomics pipelines:
-
-- Profile mapping (alignment/VCF/CRISPR steps → VeriBiota profiles).
-- Tier 0 attestation (CI + snapshot signatures).
-- Tier 1 semantics (e.g., VCF normalization invariants).
-- Verification reports (theorem sets, schemas, CI configs) for audit/compliance.
-
-Reach out to scope a Tier 0/1 assessment of your pipeline.
-
----
-
-## 💼 For Enterprise & Research Partners
-- **Proof-as-a-Service** — Verified model certification + signed bundles  
-- **Enterprise License** — Private signer, audit ledger, SLA coverage  
-- **Training** — Formal methods bootcamps for computational biology teams  
-- **Runtime Integration** — GPU-accelerated verified simulations (Rust/CUDA roadmap)
-
-📧 partnerships@veribiota.ai
-
----
-
-## 🧭 Roadmap
-- ✅ **Open-core release (`v0.10.2-pilot`)** — full proof-to-certificate chain  
-- 🛠️ **Runtime engine (Rust/CUDA)** — verified ODE/SSA execution  
-- 🧾 **Audit ledger + portal** — hosted verification + immutable log  
-- 🧬 **Partner integrations** — pharma, synthetic biology, academic pilots
-
----
-
-## ⚖️ License
-- Open-core components (Lean proofs, CLI, schemas) — **Apache 2.0**  
-- Enterprise runtime, signer, and audit modules — **Commercial license**  
-- See `LICENSE` and `NOTICE` for terms and attribution
-
-> **Important:** VeriBiota is **research software** and is **not** a medical device.  
-> It is not intended for diagnosis, treatment, or clinical decision-making.
-
----
-
-## 🏁 Tagline
-**VeriBiota — Mathematically Proven Biology™**  
-*Where every model is reproducible, provable, and trusted.*
-
----
-
-## 📦 Releases
-
-We publish two tarballs on every `v*` tag:
-
-- `artifacts.tgz` — canonical model/certificate/checks from `build/artifacts/`
-- `pilot-demo-v1-artifacts.tgz` — frozen pilot bundle under `releases/pilot-demo-v1/build/artifacts/`
-
-Tag to release:
-```bash
-git tag v0.10.2-pilot
-git push origin v0.10.2-pilot
-```
-
-The release workflow builds, (optionally) signs with `VERIBIOTA_SIG_KEY`/`VERIBIOTA_JWKS_JSON`, and uploads both tarballs along with `LICENSE` and `NOTICE`.
-
----
-
-### Minisign sidecars (optional)
-For Unix-friendly detached signatures, you can create `*.minisig` next to each JSON. These sign the same canonical bytes used for JWS.
+Minisign detached signatures are also supported:
 
 ```bash
-# Sign (assumes VERIBIOTA_MINISIGN_SEC points to your .key)
 make minisign
-
-# Verify (assumes VERIBIOTA_MINISIGN_PUB points to your .pub)
 make verify-minisign
 ```
 
-Notes:
-- Canonical bytes: the signer script canonizes first (LF + trailing newline, sorted) and signs the `.canon.json` content.
-- Key storage: do not commit keys. Use `~/veribiota-secrets/` locally; CI uses GitHub Secrets.
-- Cross‑platform: minisign isn’t installed on Windows by default; keep it optional. Primary JWS/JWKS remains the source of truth.
+## Releases
+On `v*` tags, CI publishes:
+- **Prebuilt CLI bundles** (binary + `schemas/` + `profiles/manifest.json`) so `veribiota check … --snapshot-out …` works from the extracted directory.
+- Optional **artifact tarballs** (canonical JSON bundles) used for signing/verification demos.
+
+Tag to release:
+
+```bash
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
+## Docs
+- `docs/QUICKSTART.md` (the fastest “try it” path)
+- `docs/PROFILE_SPEC.md` (profiles, theorem IDs, fixtures)
+- `docs/SNAPSHOTS.md` (snapshot signatures / attestation)
+- `docs/TIER0_COMPLIANCE.md` (what “Tier 0” means here)
+- `docs/ATTESTED_PROFILES.md` (current attested profile list)
+- `CONTRIBUTING.md` (build, test, PR workflow)
+- `SECURITY.md` (vulnerability reporting)
+
+## Repo map
+- `Biosim/` — Lean library + theorems
+- `schemas/` — JSON Schemas (profile and artifact IO)
+- `profiles/` — profile manifests (schema IDs, theorem IDs, fixtures)
+- `python/` — Python helpers/bindings
+- `engine/` — Rust helper used for results evaluation (optional)
+- `examples/` — runnable examples and “external user” demos
+
+## License
+VeriBiota is licensed under Apache 2.0; see `LICENSE` and `NOTICE`.
+
+Important: VeriBiota is research software and is not a medical device. It is not intended for diagnosis, treatment, or clinical decision‑making.
