@@ -1,6 +1,6 @@
 # VeriBiota Quickstart
 
-Get from zero to a runnable profile check in minutes. Some profiles are backed by non‑placeholder Lean theorem anchors today (alignment + edit application); others are contract-checked and fixture-tested while their theorem IDs remain reserved anchors. For the full list, see [`docs/PROFILE_SPEC.md`](PROFILE_SPEC.md). For emitting provenance signatures, see [`docs/SNAPSHOTS.md`](SNAPSHOTS.md).
+Get from zero to a runnable profile check in minutes. Some profiles are backed by non‑placeholder Lean theorem anchors today (alignment + edit application + edit normalization + snapshot binding); others are contract-checked and fixture-tested while their theorem IDs remain reserved anchors. For the full list, see [`docs/PROFILE_SPEC.md`](PROFILE_SPEC.md). For emitting provenance records via `--snapshot-out`, see [`docs/SNAPSHOTS.md`](SNAPSHOTS.md).
 
 ## 0. Choose an install path
 
@@ -44,13 +44,18 @@ Expected shape (status must be `passed`):
   "status": "passed",
   "theorems": ["VB_ALIGN_CORE_001", "VB_ALIGN_CORE_002"],
   "instance": {
-    "dpScore": 2,
+    "seqA_length": 1,
+    "seqB_length": 1,
+    "trace_length": 1,
+    "dp_score": 2,
     "alignment_matches_spec": true
   },
   "engine": {
     "veribiota_version": "0.1.0",
-    "lean_version": "4.9.0"
-  }
+    "lean_version": "4.9.0",
+    "build_id": "dev"
+  },
+  "signature": null
 }
 ```
 
@@ -67,6 +72,14 @@ Try the edit-script checker:
 ```
 
 You should see `status: "passed"` with `VB_EDIT_001` in the theorem list.
+
+For normalized edit scripts, use:
+
+```bash
+./veribiota check edit edit_script_normal_form_v1 examples/veribiota-example-pipeline/ci_inputs/edit_script_normal_form_v1.json
+```
+
+You should see `VB_EDIT_001` and `VB_EDIT_002`, plus `normal_form: true` in the instance summary.
 
 ## 4. What “success” looks like
 

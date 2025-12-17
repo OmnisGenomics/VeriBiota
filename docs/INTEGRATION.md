@@ -12,6 +12,10 @@ Profiles:
 
 - `global_affine_v1`
 - `edit_script_v1`
+- `edit_script_normal_form_v1`
+- `prime_edit_plan_v1`
+- `pair_hmm_bridge_v1`
+- `vcf_normalization_v1`
 
 Each verdict JSON includes `profile_version`, `theorems`, and an `engine` block (`veribiota_version`, `lean_version`, `build_id`).
 
@@ -20,10 +24,10 @@ Each verdict JSON includes `profile_version`, `theorems`, and an `engine` block 
 ```yaml
 - name: Download VeriBiota
   run: |
-    VER=0.1.0
+    VERIBIOTA_TAG=v0.2.0   # TODO: pin to the release you adopt
     PLATFORM=linux-amd64
-    BUNDLE="veribiota-v${VER}-${PLATFORM}"
-    curl -L "https://github.com/<org>/VeriBiota/releases/download/v${VER}/${BUNDLE}.tar.gz" -o "${BUNDLE}.tar.gz"
+    BUNDLE="veribiota-${VERIBIOTA_TAG}-${PLATFORM}"
+    curl -L "https://github.com/OmnisGenomics/VeriBiota/releases/download/${VERIBIOTA_TAG}/${BUNDLE}.tar.gz" -o "${BUNDLE}.tar.gz"
     tar -xzf "${BUNDLE}.tar.gz"
     chmod +x "${BUNDLE}/veribiota"
     echo "VERIBIOTA_EXE=$PWD/${BUNDLE}/veribiota" >> $GITHUB_ENV

@@ -12,7 +12,12 @@ Tests/tmp/
 *.egg-info/
 
 # Generated Lean suites (EditDAG DAGs) – not committed
-**/Biosim/VeriBiota/*/*.lean
+Biosim/VeriBiota/*/*.lean
+!Biosim/VeriBiota/Alignment/*.lean
+!Biosim/VeriBiota/Edit/*.lean
+!Biosim/VeriBiota/HMM/*.lean
+!Biosim/VeriBiota/Prime/*.lean
+!Biosim/VeriBiota/VCF/*.lean
 !Biosim/VeriBiota/Provenance/*.lean
 
 # Local security material (never commit real keys or JWKS)

@@ -6,13 +6,13 @@ This catalog defines what VeriBiota profiles judge across the stack. Profiles ar
 |------------------------------|------------------------------------------|---------------|--------------------|
 | global_affine_v1             | Implemented (proof-backed anchors)       | alignment     | OGN, Helix         |
 | edit_script_v1               | Implemented (proof-backed anchors)       | edit          | Helix, OGN         |
-| edit_script_normal_form_v1   | Implemented (contract-checked; anchors reserved) | edit          | Helix              |
+| edit_script_normal_form_v1   | Implemented (proof-backed anchors)       | edit          | Helix              |
 | prime_edit_plan_v1           | Implemented (contract-checked; anchors reserved) | CRISPR/Prime  | Helix              |
 | pair_hmm_bridge_v1           | Implemented (contract-checked; anchors reserved) | HMM/variant   | OGN                |
 | read_set_conservation_v1     | Schema/manifest only (no `check` route yet)      | pipeline      | OGN                |
 | vcf_normalization_v1         | Tier 1 (contract-checked; anchors reserved)      | variant       | OGN, external      |
 | offtarget_score_sanity_v1    | Schema/manifest only (no `check` route yet)      | CRISPR        | Helix              |
-| snapshot_signature_v1        | Emitted artifact schema (anchors reserved)        | provenance    | Helix, VeriBiota   |
+| snapshot_signature_v1        | Emitted provenance record (proof-backed anchor)  | provenance    | Helix, VeriBiota   |
 
 Proof status note: “proof-backed anchors” means the referenced theorem IDs are non-placeholder Lean theorems in `Biosim/VeriBiota/Theorems.lean`. “anchors reserved” means the profile is implemented and tested, but one or more referenced theorem IDs are still placeholders today.
 
@@ -65,11 +65,9 @@ Proof status note: “proof-backed anchors” means the referenced theorem IDs a
   - Final result equality: applying edits left-to-right yields exactly `seqB`.
   - Basic coherence: no degenerate no-op edits (unless later normalized); no overlapping ambiguous edits.
 - **Instance summary**: `seqA_length`, `seqB_length`, `edit_count`, and `applied_ok` boolean.
-- **Theorem anchors**: `VB_EDIT_001` – edit script application is total and well-defined; future `VB_EDIT_002` – normalization theorem.
+- **Theorem anchors**: `VB_EDIT_001` – edit script application is total and well-defined.
 
-## Implemented profiles with reserved theorem anchors
-
-### 3. edit_script_normal_form_v1 (Status: Implemented, anchors reserved)
+### 3. edit_script_normal_form_v1 (Status: Implemented, proof-anchored)
 
 - **Purpose**: Provide a canonical normalized form so different tools agree on “the same edit”.
 - **Intended consumers**: Helix planner; any diff/patch layer in OGN; future audit/tracking.
@@ -78,7 +76,9 @@ Proof status note: “proof-backed anchors” means the referenced theorem IDs a
   - Normalization correctness: `applyEdits(seqA, edits) = applyEdits(seqA, normalized_edits) = seqB`.
   - Normal form invariants: no adjacent merges possible; minimal representation under chosen ordering (e.g., leftmost, shortest); no redundant `sub` that is a match.
   - Idempotence: re-normalizing `normalized_edits` yields the same script.
-- **Theorem anchors**: `VB_EDIT_002` – reserved anchor for normalization preserves semantics and is idempotent.
+- **Theorem anchors**: `VB_EDIT_001` – base script correctness; `VB_EDIT_002` – normalization preserves semantics and is idempotent.
+
+## Implemented profiles with reserved theorem anchors
 
 ### 4. prime_edit_plan_v1 (Status: Implemented, anchors reserved)
 
@@ -138,15 +138,15 @@ Proof status note: “proof-backed anchors” means the referenced theorem IDs a
   - Basic consistency: no NaNs, infinities, or out-of-range values.
 - **Theorem anchors (planned)**: `VB_OFF_001` – monotonicity lemma over discrete mismatch counts.
 
-### 9. snapshot_signature_v1 (Helix/VeriBiota artifact integrity)
+### 9. snapshot_signature_v1 (Provenance binding)
 
-- **Purpose**: Verify that a Helix/VeriBiota snapshot artifact (EVS, edit plan, etc.) is structurally sound and correctly signed/hash-linked.
-- **Inputs**: `snapshot_json` artifact; `signature_block` (hash, optional signature, theorem IDs, version).
+- **Purpose**: Emit a provenance record binding a verification run to its input hash, schema hash/id, theorem IDs, and build metadata.
+- **Important**: despite the name, `snapshot_signature_v1` is **not** a cryptographic signature. Cryptographic signing is handled separately (Ed25519/JWS on checks/certificates).
+- **Inputs**: `snapshot_profile`, `snapshot_hash`, `schema_hash`, `schema_id`, `theorem_ids`, build/version/timestamp, plus optional `instance_summary` and provenance metadata.
 - **Verified properties**:
-  - Schema correctness: snapshot conforms to its EVS or plan schema.
-  - Hash integrity: embedded hash corresponds to the JSON content in a canonical representation.
-  - Proof linkage: snapshot declares the VeriBiota theorems or profiles it depends on, matching manifest versions.
-- **Theorem anchors (planned)**: `VB_SIG_001` – hash correctness and reproducibility on canonical form.
+  - Binding: the emitted document’s `schema_hash`, `schema_id`, and `theorem_ids` mirror the manifest entry used for the run.
+  - Hash recording: the emitted `snapshot_hash` records the tool-computed `sha256:<hex>` digest over the exact input bytes supplied for verification.
+- **Theorem anchors**: `VB_SIG_001` – snapshot signature binds hash + manifest metadata (implemented).
 
 ## How to Use This Spec
 

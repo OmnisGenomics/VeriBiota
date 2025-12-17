@@ -65,6 +65,7 @@ nav:
       - Simulator Integration: simulator-integration.md
       - EditDAG Schema: schema/edit_dag.md
   - Integrations:
+      - CI Adoption Kit: CI_ADOPTION_KIT.md
       - Integration Guide: INTEGRATION.md
       - Helix/OGN: HELIX_VERIFICATION.md
   - Examples: examples.md

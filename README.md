@@ -7,7 +7,7 @@ VeriBiota is a verification toolchain for biological / bioinformatics computatio
 It combines:
 - **Profiles**: tiered checkers for specific domains (alignment, edit scripts, prime edit plans, Pair-HMM bridges, VCF normalization).
 - **Artifacts**: canonical `model` / `certificate` / `checks` JSON bundles.
-- **Provenance**: optional snapshot signatures and Ed25519 (JWS) signing verified via JWKS.
+- **Provenance**: `snapshot_signature_v1` provenance records (hash/manifest binding; not cryptographic) plus optional Ed25519 (JWS) signing verified via JWKS.
 - **Runtime enforcement**: a Rust evaluator (`biosim-eval`) plus adapters for integrating invariant checks into engines.
 - **EditDAG integration**: a Lean-free Python adapter for JSON-only checks + Lean suite generation, plus a reusable GitHub Action.
 
@@ -29,9 +29,9 @@ Note: both CLIs are named `veribiota`. In a checkout, use `./veribiota` for the 
 - `veribiota check vcf vcf_normalization_v1`
 
 Each route:
-- Validates input against its JSON Schema (`schemas/.../*.schema.json`).
+- Validates input against the profile contract (typed decoding + executable checks). Schemas are published/hashed for determinism and provenance.
 - Emits a machine-readable JSON verdict + deterministic exit code.
-- Optionally emits a `snapshot_signature_v1` provenance document via `--snapshot-out`.
+- Optionally emits a `snapshot_signature_v1` provenance document via `--snapshot-out` (not a cryptographic signature).
 
 Profiles listed but not yet routed in `veribiota check`: `read_set_conservation_v1`, `offtarget_score_sanity_v1` (schema/manifest only).
 
@@ -56,7 +56,7 @@ Canonicalization scheme: `veribiota-canon-v1`
 ## Proof + attestation status
 Profiles are tied to theorem IDs in `profiles/manifest.json`, and registered in `Biosim/VeriBiota/Theorems.lean`. Some theorem IDs are proof-backed today; others are reserved anchors while checks are enforced by executable contracts + CI fixtures.
 
-- Proof-backed anchors today: `global_affine_v1`, `edit_script_v1`
+- Proof-backed anchors today: `global_affine_v1`, `edit_script_v1`, `edit_script_normal_form_v1`, `snapshot_signature_v1` (binding)
 - Snapshot-attested Tier 0 status: `docs/ATTESTED_PROFILES.md`
 
 ## Quickstart
