@@ -4,7 +4,7 @@ Tier 0 compliance defines the minimum guarantees VeriBiota provides for a verifi
 
 - Stable, documented JSON schema.
 - Registered theorem set in the VeriBiota theorem registry.
-- CLI entrypoint that validates instances against the schema and proof obligations.
+- CLI entrypoint that checks instances against the profile contract (schema-aligned) and emits deterministic verdicts + theorem IDs.
 - Golden fixtures and tests that exercise success/failure cases, including malformed input.
 - Defined exit code semantics and structured JSON output (success and error).
 
@@ -24,7 +24,7 @@ Profiles that:
 - Have theorem IDs registered in `Biosim/VeriBiota/Theorems.lean` (some IDs may be **reserved anchors** until their non-placeholder proofs land).
 - Have a CLI checker and tests covering valid, failing, and malformed instances with exit-code assertions.
 
-Tier 0 provides **deterministic contract checking** and robustness guarantees for individual profile instances (schema validation, stable verdict shape, exit codes, fixtures, snapshot signatures). Whether a profile’s theorem IDs are backed by non-placeholder Lean theorems is tracked separately and is part of the product honesty story.
+Tier 0 provides **deterministic contract checking** and robustness guarantees for individual profile instances (schema/manifest pinning, stable verdict shape, exit codes, fixtures, snapshot signatures). Whether a profile’s theorem IDs are backed by non-placeholder Lean theorems is tracked separately and is part of the product honesty story.
 
 ### Tier 1 (semantic)
 
@@ -46,7 +46,7 @@ The current Tier 0 set is maintained in `docs/PROFILE_SPEC.md` and `profiles/man
 - `prime_edit_plan_v1` — prime editing plan structure, including pegRNA and nicking design planning.
 - `pair_hmm_bridge_v1` — bridge between alignment-style scoring and Pair-HMM likelihoods.
 
-As of the current repo state, only `global_affine_v1` and `edit_script_v1` have non-placeholder theorem anchors; the other Tier 0 profiles are contract-checked and fixture-tested while their theorem IDs remain reserved anchors.
+As of the current repo state, `global_affine_v1`, `edit_script_v1`, and `edit_script_normal_form_v1` have non-placeholder theorem anchors; the other Tier 0 profiles are contract-checked and fixture-tested while their theorem IDs remain reserved anchors.
 
 ---
 
@@ -55,6 +55,7 @@ As of the current repo state, only `global_affine_v1` and `edit_script_v1` have 
 For Tier 0 profiles, VeriBiota guarantees:
 
 - **Schema correctness** — each profile has a JSON schema that defines valid instances; the CLI validates inputs before semantic checks.
+- **Schema pinning** — each profile has a JSON schema with a pinned SHA-256 hash in `profiles/manifest.json` for reproducibility; the CLI enforces a schema-aligned contract via typed decoding + executable checks.
 - **Theorem-anchored checking** — every Tier 0 profile is anchored to theorem IDs in `Biosim/VeriBiota/Theorems.lean`, tied via `profiles/manifest.json`.
 - **Truth in advertising** — “theorem anchored” means “anchored to theorem IDs”; “proof-backed” means those theorem IDs are non-placeholder Lean theorems (see `Biosim/VeriBiota/Theorems.lean`).
 - **Deterministic exit codes**

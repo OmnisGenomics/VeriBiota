@@ -25,7 +25,7 @@ Important: **attested** here means “snapshot-attested” (provenance). It does
 |----------------------------|------|--------------------------|----------------------------------|
 | global_affine_v1           | 0    | yes                      | yes                              |
 | edit_script_v1             | 0    | yes                      | yes                              |
-| edit_script_normal_form_v1 | 0    | yes                      | no (placeholder anchors today)   |
+| edit_script_normal_form_v1 | 0    | yes                      | yes                              |
 | prime_edit_plan_v1         | 0    | yes                      | no (placeholder anchors today)   |
 | pair_hmm_bridge_v1         | 0    | yes                      | no (placeholder anchors today)   |
 | vcf_normalization_v1       | 1    | yes (in progress)        | no (placeholder anchors today)   |
