@@ -20,11 +20,11 @@ lake update && lake build
 # 2) Emit a complete demo bundle (model + certificate + checks)
 ./veribiota --emit-all --out build/artifacts
 
-# 3) Verify signed artifacts with your JWKS
+# 3) Verify emitted artifacts (unsigned by default)
 ./veribiota verify checks build/artifacts/checks/sir-demo.json \
-  --jwks security/jwks.json --print-details
+  --sig-mode unsigned --print-details
 ./veribiota verify cert   build/artifacts/certificates/sir-demo.json \
-  --jwks security/jwks.json --print-details
+  --sig-mode unsigned --print-details
 ```
 
 Tip: For a full signing round‑trip with a disposable local key, see Getting Started (docs/getting-started.md).
@@ -41,6 +41,7 @@ Tip: For a full signing round‑trip with a disposable local key, see Getting St
 - Verification Workflow (docs/verification-workflow.md)
 - Architecture (docs/architecture.md)
 - CLI & Adapter Reference (docs/cli.md)
+- Failure Modes & Exit Codes (docs/FAILURE_MODES.md)
 - Canonicalization & Signing (docs/canonicalization.md)
 - Model IR (docs/model-ir.md)
 - Invariants (docs/invariants.md)

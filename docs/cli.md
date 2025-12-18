@@ -7,6 +7,8 @@ This repository ships two entrypoints:
 
 If you install the Python package, use `./veribiota` for the Lean CLI examples below to avoid name conflicts.
 
+For stable exit codes and how failures surface in CI, see [`docs/FAILURE_MODES.md`](FAILURE_MODES.md).
+
 ## Install & Build (Lean CLI)
 ```bash
 elan toolchain install $(cat lean-toolchain)
@@ -67,6 +69,13 @@ export VERIBIOTA_SIG_KEY=~/veribiota-secrets/veribiota_ed25519.pem
   --jwks security/jwks.json --print-details
 ./veribiota verify cert   build/artifacts/certificates/sir-demo.json \
   --jwks security/jwks.json --print-details
+```
+
+If you emitted **unsigned** artifacts (default), verify in unsigned mode:
+
+```bash
+./veribiota verify checks build/artifacts/checks/sir-demo.json --sig-mode unsigned
+./veribiota verify cert   build/artifacts/certificates/sir-demo.json --sig-mode unsigned
 ```
 
 ## Results Verification
