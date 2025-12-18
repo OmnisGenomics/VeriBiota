@@ -24,14 +24,14 @@ Important: **attested** here means “snapshot-attested” (provenance). It does
 | Profile                    | Tier | Snapshot-attested in CI? | Non-placeholder theorem anchors? |
 |----------------------------|------|--------------------------|----------------------------------|
 | global_affine_v1           | 0    | yes                      | yes                              |
-| edit_script_v1             | 0    | yes                      | yes                              |
+| edit_script_v1             | 0    | no (not wired in CI yet) | yes                              |
 | edit_script_normal_form_v1 | 0    | yes                      | yes                              |
 | prime_edit_plan_v1         | 0    | yes                      | no (placeholder anchors today)   |
 | pair_hmm_bridge_v1         | 0    | yes                      | no (placeholder anchors today)   |
-| vcf_normalization_v1       | 1    | yes (in progress)        | no (placeholder anchors today)   |
+| vcf_normalization_v1       | 1    | yes                      | no (placeholder anchors today)   |
 
-Update this table as you wire CI signatures for each profile.
+Source of truth for snapshot-attested runs: `.github/workflows/tier0_snapshots.yml`.
 
 ## Pitch line
 
-“We move your critical alignment/edit/HMM components to snapshot-attested Tier 0: schema-validated, contract-checked, and snapshot-signed in CI.”
+“We move your critical alignment/edit/HMM components to snapshot-attested Tier 0: schema-pinned, contract-checked, and snapshot-attested in CI.”
