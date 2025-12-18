@@ -46,6 +46,8 @@ extra_css:
 
 nav:
   - Home: index.md
+  - Releases:
+      - v0.2.1 Announcement: releases/v0.2.1.md
   - Quickstart: QUICKSTART.md
   - Why VeriBiota: why.md
   - Getting Started: getting-started.md
