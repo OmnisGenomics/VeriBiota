@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-
+      - name: Install checksum utilities
+        run: sudo apt-get update && sudo apt-get install -y coreutils
       - name: Install Lean and build VeriBiota
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
