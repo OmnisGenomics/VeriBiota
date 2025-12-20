@@ -56,7 +56,9 @@ jobs:
         run: |
           set -euo pipefail
           cargo build --manifest-path engine/biosim-checks/Cargo.toml
-
+      - name: Install ccache
+        run: sudo apt-get update && sudo apt-get install -y ccache
+        
       - name: Cache ccache
         if: matrix.language == 'c-cpp'
         uses: actions/cache@v4
