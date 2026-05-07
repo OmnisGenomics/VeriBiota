@@ -2,6 +2,8 @@
 artifacts/
 build/
 dist/
+.agent/*.log
+.agent/state.json
 engine/biosim-checks/target/
 target/
 node_modules/
