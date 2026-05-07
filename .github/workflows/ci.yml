@@ -49,6 +49,9 @@ jobs:
       - name: Fast validation
         run: make validate-fast
 
+      - name: Rust runtime validation
+        run: make validate-rust
+
       - name: Verify results (soft fallback with runtime if available)
         run: make verify-results
 
