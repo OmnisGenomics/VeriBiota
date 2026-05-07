@@ -16,22 +16,30 @@ jobs:
       - uses: actions/checkout@v6
       - name: Install checksum utilities
         run: sudo apt-get update && sudo apt-get install -y coreutils
-      - name: Install Lean and build VeriBiota
+      - name: Install Lean
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
-          export PATH="$HOME/.elan/bin:$PATH"
+
+      - name: Cache Lake artifacts
+        uses: actions/cache@v5
+        with:
+          path: .lake
+          key: lake-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.lean', 'lake-manifest.json') }}
+          restore-keys: |
+            lake-${{ runner.os }}-
+
+      - name: Build VeriBiota
+        run: |
           lake update
+          lake exe cache get
           lake build
 
       - name: Run Tier 0 tests
-        run: |
-          export PATH="$HOME/.elan/bin:$PATH"
-          lake exe biosim_tests
+        run: lake exe biosim_tests
 
       - name: Run Tier 0 checks and emit signatures
         run: |
-          export PATH="$HOME/.elan/bin:$PATH"
           mkdir -p ci_signatures
           jq .input Tests/profiles/global_affine_v1/match_pass.json \
             | ./veribiota check alignment global_affine_v1 - --snapshot-out ci_signatures/global_affine_v1.sig.json --compact
@@ -48,6 +56,5 @@ jobs:
 
       - name: Validate snapshot signatures
         run: |
-          export PATH="$HOME/.elan/bin:$PATH"
           python3 -m pip install --quiet jsonschema
           python3 .github/scripts/validate_snapshots.py ci_signatures
