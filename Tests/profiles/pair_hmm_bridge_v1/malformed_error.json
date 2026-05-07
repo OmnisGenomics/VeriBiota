@@ -1,0 +1,36 @@
+{
+  "input": {
+    "seqA": "A",
+    "seqB": "A",
+    "dp_scoring": { "match": 2, "mismatch": -1, "gap_open": -2, "gap_extend": -1 },
+    "hmm_params": {
+      "transition": {
+        "match_to_match": -0.1,
+        "match_to_ins": -0.2,
+        "match_to_del": -0.2,
+        "ins_to_match": -0.3,
+        "ins_to_ins": -0.4,
+        "del_to_match": -0.3,
+        "del_to_del": -0.4
+      },
+      "emission": { "match": -0.1, "mismatch": -1.0, "gap": -0.5 }
+    },
+    "dp_score": 2.0
+  },
+  "expected": {
+    "theorems": ["VB_HMM_001", "VB_HMM_002"],
+    "status": "error",
+    "signature": null,
+    "profile_version": "1.0.0",
+    "profile": "pair_hmm_bridge_v1",
+    "instance": {
+      "error": "missing or invalid field 'hmm_score'"
+    },
+    "engine": {
+      "veribiota_version": "0.1.0",
+      "lean_version": "4.9.0",
+      "build_id": "dev"
+    }
+  },
+  "exit": 1
+}

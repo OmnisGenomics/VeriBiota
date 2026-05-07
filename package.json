@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check": "npm run check:tasks && npm run check:profiles",
+    "check:profiles": "node scripts/validateProfiles.mjs",
     "check:tasks": "node scripts/validateTasks.mjs"
   },
   "devDependencies": {
