@@ -39,7 +39,7 @@ void veribiota_checks_free(void);
 
 ## Expectations for v0.1.x
 
-> **Status:** the `engine/biosim-checks` crate now enforces signed modes (`SigMode::SignedSoft` / `SigMode::SignedEnforced`) by validating JWS against JWKS, recomputing `payloadHash`, and parsing the unsigned payload from the signature. Linear invariants respect declared species ordering (or fall back to S/I/R) and support non-zero baselines.
+> **Status:** the `engine/biosim-checks` crate now enforces signed modes (`SigMode::SignedSoft` / `SigMode::SignedEnforced`) by validating JWS against JWKS, checking signature `alg`/`kid` metadata, recomputing `payloadHash`, and parsing the unsigned payload from the signature. Linear invariants respect declared species ordering (or fall back to S/I/R) and support non-zero baselines.
 
 1. **Signature verification** – pass `sig_mode=1|2` with a JWKS JSON string; the helper rejects missing/invalid signatures or payload hashes. Use `sig_mode=0` for unsigned inputs.
 2. **Evaluate per snapshot** – SSA runs should call once per event; ODE runs can downsample as long as `strict=true` checks halt immediately when violated.
@@ -65,5 +65,5 @@ tally: any_neg=false violated=false max_abs_drift=0.000000 max_rel_drift=0.00000
 ```
 
 Notes:
-- The helper reads either `conc` or `counts` arrays per snapshot and respects strict linear invariant tolerances.
+- The helper reads either `conc` or `counts` arrays per snapshot and evaluates strict linear invariant tolerances against each invariant's declared `baseline`.
 - It’s a convenience tool for demos and local runs; production engines should link the FFI or embed an equivalent implementation.
