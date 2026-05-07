@@ -82,6 +82,9 @@ jobs:
           python -m pip install .
           veribiota --help
 
+      - name: Python adapter validation
+        run: make validate-python
+
   build-test:
     if: github.event_name == 'schedule'
     strategy:

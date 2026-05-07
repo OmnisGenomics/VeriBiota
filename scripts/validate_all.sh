@@ -84,6 +84,19 @@ validate_rust() {
       --trajectory examples/trajectory.counts.violation.jsonl
 }
 
+validate_python() {
+  local python_bin
+  if command -v python >/dev/null 2>&1; then
+    python_bin=python
+  elif command -v python3 >/dev/null 2>&1; then
+    python_bin=python3
+  else
+    printf '[validate] missing required command: python or python3\n' >&2
+    exit 127
+  fi
+  run "$python_bin" -m unittest discover -s tests/python -p 'test_*.py'
+}
+
 validate_lean() {
   need lake
   run lake build
@@ -97,16 +110,20 @@ case "$tier" in
   rust)
     validate_rust
     ;;
+  python)
+    validate_python
+    ;;
   lean)
     validate_lean
     ;;
   all)
     validate_fast
+    validate_python
     validate_rust
     validate_lean
     ;;
   *)
-    printf 'usage: %s [fast|rust|lean|all]\n' "$0" >&2
+    printf 'usage: %s [fast|python|rust|lean|all]\n' "$0" >&2
     exit 2
     ;;
 esac

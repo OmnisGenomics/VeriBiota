@@ -59,6 +59,8 @@ The tiers are intentionally explicit:
 
 - `make validate-fast` runs task/profile JSON checks and Rust formatting when
   Cargo is installed.
+- `make validate-python` runs the standard-library Python unit tests for
+  VeriBundle and EditDAG adapter validation.
 - `make validate-rust` runs the Rust runtime test suite for `biosim-checks` with
   `CARGO_TARGET_DIR` defaulting to `/tmp/veribiota-rust-target`. The script
   isolates per-manifest build outputs below that root so independent lockfiles
@@ -67,7 +69,7 @@ The tiers are intentionally explicit:
   against concentration/count pass trajectories and a count violation trajectory
   that must exit with code `2`.
 - `make validate-lean` runs `lake build` and `lake exe biosim_tests`.
-- `make validate-all` runs fast, Rust, and Lean validation in sequence.
+- `make validate-all` runs fast, Python, Rust, and Lean validation in sequence.
 
 For nontrivial changes, use the narrowest tier that covers the touched surface,
 then run `make validate-all` before a release candidate or CI policy change.
