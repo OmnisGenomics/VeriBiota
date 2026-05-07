@@ -6,7 +6,7 @@ JWKS=security/jwks.json
 DEFAULT_OPENSSL=$(shell /usr/bin/env bash -lc 'if [[ -x "/opt/homebrew/opt/openssl@3/bin/openssl" ]]; then echo /opt/homebrew/opt/openssl@3/bin/openssl; else command -v openssl; fi')
 OPENSSL_BIN?=$(DEFAULT_OPENSSL)
 
-.PHONY: emit sign-soft verify canon pilot-demo verify-results check check-profiles validate validate-fast validate-python validate-rust validate-lean validate-all
+.PHONY: emit sign-soft verify canon pilot-demo verify-results check check-profiles validate validate-fast validate-python validate-rust validate-lean validate-all validate-repo
 
 emit:
 	./veribiota --emit-all --out $(ART)
@@ -83,6 +83,9 @@ validate-lean:
 
 validate-all:
 	./scripts/validate_all.sh all
+
+validate-repo:
+	./scripts/validate_repo.sh
 
 MINISIGN_SEC?=$(VERIBIOTA_MINISIGN_SEC)
 MINISIGN_PUB?=$(VERIBIOTA_MINISIGN_PUB)
