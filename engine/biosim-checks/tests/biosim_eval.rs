@@ -38,7 +38,8 @@ fn write_case(name: &str, results_jsonl: &str) -> (PathBuf, PathBuf) {
                     "proofId": "demo.mass",
                     "weights": { "S": 1, "I": 1, "R": 1 },
                     "tolerance": { "mode": "absolute", "value": 0.5 },
-                    "strict": true
+                    "strict": true,
+                    "baseline": 100.0
                 }
             ]
         })
@@ -103,6 +104,28 @@ fn json_summary_reports_contract_violations() {
     assert_eq!(summary["any_neg"], true);
     assert_eq!(summary["violated"], true);
     assert_eq!(summary["max_abs_drift"], 2.0);
+}
+
+#[test]
+fn json_summary_uses_declared_baseline() {
+    let (checks_path, results_path) = write_case(
+        "declared-baseline",
+        r#"{"t":0.0,"counts":[95,0,0],"modelHash":"sha256:test"}
+{"t":1.0,"counts":[95,0,0],"modelHash":"sha256:test"}
+"#,
+    );
+
+    let output = run_eval_json(&checks_path, &results_path);
+    assert!(
+        output.status.success(),
+        "stderr: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+
+    let summary: Value = serde_json::from_slice(&output.stdout).expect("parse JSON summary");
+    assert_eq!(summary["any_neg"], false);
+    assert_eq!(summary["violated"], true);
+    assert_eq!(summary["max_abs_drift"], 5.0);
 }
 
 #[test]

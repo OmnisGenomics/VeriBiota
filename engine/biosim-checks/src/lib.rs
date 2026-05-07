@@ -258,7 +258,6 @@ impl Evaluator {
 
     pub fn evaluate_jsonl<R: BufRead>(&self, reader: R) -> Result<EvaluationSummary> {
         let mut summary = EvaluationSummary::default();
-        let mut base_vals: Vec<f64> = Vec::new();
 
         for (line_no, line) in reader.lines().enumerate() {
             let line = line?;
@@ -292,26 +291,13 @@ impl Evaluator {
             }
 
             if !self.inner.invariants.is_empty() {
-                if base_vals.is_empty() {
-                    base_vals = self
-                        .inner
-                        .invariants
-                        .iter()
-                        .map(|inv| {
-                            inv.weights
-                                .iter()
-                                .map(|(i, a)| values.get(*i).copied().unwrap_or(0.0) * a)
-                                .sum()
-                        })
-                        .collect();
-                }
-                for (idx, inv) in self.inner.invariants.iter().enumerate() {
+                for inv in &self.inner.invariants {
                     let curr: f64 = inv
                         .weights
                         .iter()
                         .map(|(i, a)| values.get(*i).copied().unwrap_or(0.0) * a)
                         .sum();
-                    let base = base_vals[idx];
+                    let base = inv.baseline;
                     let abs = (curr - base).abs();
                     let rel = if base.abs() > 1e-12 {
                         abs / base.abs()

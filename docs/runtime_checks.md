@@ -65,5 +65,5 @@ tally: any_neg=false violated=false max_abs_drift=0.000000 max_rel_drift=0.00000
 ```
 
 Notes:
-- The helper reads either `conc` or `counts` arrays per snapshot and respects strict linear invariant tolerances.
+- The helper reads either `conc` or `counts` arrays per snapshot and evaluates strict linear invariant tolerances against each invariant's declared `baseline`.
 - It’s a convenience tool for demos and local runs; production engines should link the FFI or embed an equivalent implementation.
