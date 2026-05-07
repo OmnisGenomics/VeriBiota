@@ -46,6 +46,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci || true
 
+      - name: Fast validation
+        run: make validate-fast
+
       - name: Verify results (soft fallback with runtime if available)
         run: make verify-results
 
