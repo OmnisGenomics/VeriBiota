@@ -18,12 +18,17 @@
       "tolerance": 0
     },
     {
+      "type": "positivity_counts",
+      "species": ["S", "I", "R"]
+    },
+    {
       "type": "lin_invariant",
       "name": "total_population",
       "proofId": "examples.total_population",
       "weights": {"S": 1, "I": 1, "R": 1},
       "tolerance": {"mode": "absolute", "value": 1e-9},
-      "strict": true
+      "strict": true,
+      "baseline": 1000.0
     }
   ]
 }

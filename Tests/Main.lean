@@ -413,6 +413,29 @@ private def snapshotSignatureTest : IO Unit := do
   | Except.ok (Json.obj _) => pure ()
   | _ => throw <| IO.userError "Snapshot missing instance_summary object"
 
+private def snapshotSignatureStdinTest : IO Unit := do
+  let tmpDir := FilePath.mk "Tests/tmp/snapshot-signature-stdin"
+  IO.FS.createDirAll tmpDir
+  let fixturePath := FilePath.mk "Tests/profiles/global_affine_v1/match_pass.json"
+  let fixtureJson ← readJson fixturePath
+  let inputJson ←
+    match fixtureJson.getObjVal? "input" with
+    | Except.ok v => pure v
+    | Except.error err => throw <| IO.userError s!"Fixture missing input: {err}"
+  let inputPath := tmpDir / "input.json"
+  IO.FS.writeFile inputPath (inputJson.pretty 2)
+  let sigPath := tmpDir / "signature.json"
+  let cmd :=
+    s!"cat {inputPath.toString} | ./veribiota check alignment global_affine_v1 - --snapshot-out {sigPath.toString}"
+  let child ← IO.Process.output { cmd := "bash", args := #["-lc", cmd], stderr := .piped }
+  assertEq child.exitCode.toNat 0 s!"Snapshot signature stdin run failed: {child.stderr}"
+  let sigExists ← sigPath.pathExists
+  assertM sigExists s!"Snapshot signature not written to {sigPath}"
+  let sigJson ← readJson sigPath
+  let snapshotHash ← getStringField sigJson "snapshot_hash"
+  let expectedHash := s!"sha256:{← Biosim.IO.sha256Hex inputPath}"
+  assertEq snapshotHash expectedHash "Stdin snapshot hash mismatch"
+
 private def assertJsonEq (expected actual : Json) (ctx : String) : IO Unit := do
   let expStr := expected.compress
   let actStr := actual.compress
@@ -607,6 +630,7 @@ def run : IO Unit := do
   largeModelTest
   schemaManifestGuard
   snapshotSignatureTest
+  snapshotSignatureStdinTest
   runProfileGoldenSuite "global_affine_v1" ["check", "alignment", "global_affine_v1"]
     (FilePath.mk "Tests/profiles/global_affine_v1")
   runProfileGoldenSuite "edit_script_v1" ["check", "edit", "edit_script_v1"]

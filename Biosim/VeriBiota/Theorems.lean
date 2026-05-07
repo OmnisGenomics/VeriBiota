@@ -1,6 +1,7 @@
 import Biosim.VeriBiota.Alignment.GlobalAffineV1
 import Biosim.VeriBiota.Edit.EditScriptV1
 import Biosim.VeriBiota.Edit.EditScriptNormalFormV1
+import Biosim.VeriBiota.HMM.PairHMMBridgeV1
 import Biosim.VeriBiota.Provenance.SnapshotSignatureV1
 
 namespace Biosim
@@ -56,12 +57,24 @@ theorem VB_EDIT_002 :
 theorem VB_PE_001 : True := trivial
 
 /-- VB_HMM_001:
-    Placeholder anchor for mapping between DP gap penalties and Pair-HMM parameters. -/
-theorem VB_HMM_001 : True := trivial
+    The PairHMM bridge profile's DP score is bound to the global-affine DP spec
+    within the profile's explicit deterministic tolerance. -/
+theorem VB_HMM_001 (inst : HMM.PairHMMBridgeV1.Instance) :
+    HMM.PairHMMBridgeV1.SpecHolds inst →
+      Float.abs
+        (inst.dpScore -
+          Float.ofInt
+            (Alignment.GlobalAffineV1.specGlobalAffine inst.seqA inst.seqB inst.dpScoring)) ≤
+        HMM.PairHMMBridgeV1.scoreEpsilon := by
+  exact HMM.PairHMMBridgeV1.dpScore_matches_globalAffine_spec inst
 
 /-- VB_HMM_002:
-    Placeholder anchor for small-instance equivalence between DP and Pair-HMM scores. -/
-theorem VB_HMM_002 : True := trivial
+    The PairHMM bridge profile's reported HMM score agrees with the reported DP
+    score within the profile's explicit deterministic tolerance. -/
+theorem VB_HMM_002 (inst : HMM.PairHMMBridgeV1.Instance) :
+    HMM.PairHMMBridgeV1.SpecHolds inst →
+      Float.abs (inst.dpScore - inst.hmmScore) ≤ HMM.PairHMMBridgeV1.scoreEpsilon := by
+  exact HMM.PairHMMBridgeV1.hmmScore_matches_dpScore inst
 
 /-- VB_PIPE_001:
     Placeholder anchor for multiset preservation under pure reordering in pipelines. -/
