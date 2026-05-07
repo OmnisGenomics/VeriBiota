@@ -1,0 +1,114 @@
+{
+  "$schema": "../schemas/profile_status.schema.json",
+  "generated_from": [
+    "profiles/manifest.json",
+    "Biosim/VeriBiota/Theorems.lean",
+    "Tests/profiles"
+  ],
+  "profiles": {
+    "global_affine_v1": {
+      "tier": "tier0",
+      "schema_path": "schemas/align/global_affine_v1.schema.json",
+      "schema_sha256": "sha256:5df162b1da0cbf116fd88b1068d913fcc1f0dddcb63862f8126faaf72673dacd",
+      "cli_route": ["check", "alignment", "global_affine_v1"],
+      "theorem_ids": ["VB_ALIGN_CORE_001", "VB_ALIGN_CORE_002"],
+      "proof_status": "proof_backed",
+      "proof_scope": "Global affine DP score and witness trace correctness under the profile contract.",
+      "snapshot_support": true,
+      "fixture_dir": "Tests/profiles/global_affine_v1",
+      "fixture_coverage": { "pass": 3, "fail": 1, "malformed": 1 }
+    },
+    "edit_script_v1": {
+      "tier": "tier0",
+      "schema_path": "schemas/edit/edit_script_v1.schema.json",
+      "schema_sha256": "sha256:53f6e6632ce358503495e41ebd7aa0f54b359fb276fbd56053b50076fa5250c4",
+      "cli_route": ["check", "edit", "edit_script_v1"],
+      "theorem_ids": ["VB_EDIT_001"],
+      "proof_status": "proof_backed",
+      "proof_scope": "Applying the edit script to the source sequence yields the target sequence when the profile contract holds.",
+      "snapshot_support": true,
+      "fixture_dir": "Tests/profiles/edit_script_v1",
+      "fixture_coverage": { "pass": 2, "fail": 1, "malformed": 1 }
+    },
+    "edit_script_normal_form_v1": {
+      "tier": "tier0",
+      "schema_path": "schemas/edit/edit_script_normal_form_v1.schema.json",
+      "schema_sha256": "sha256:7c03d1be3f53c90bbf777e048e9e60b14bd1d23568e51cdf935f5b56b76176f6",
+      "cli_route": ["check", "edit", "edit_script_normal_form_v1"],
+      "theorem_ids": ["VB_EDIT_001", "VB_EDIT_002"],
+      "proof_status": "proof_backed",
+      "proof_scope": "Edit normalization preserves edit semantics and is idempotent.",
+      "snapshot_support": true,
+      "fixture_dir": "Tests/profiles/edit_script_normal_form_v1",
+      "fixture_coverage": { "pass": 1, "fail": 1, "malformed": 1 }
+    },
+    "prime_edit_plan_v1": {
+      "tier": "tier0",
+      "schema_path": "schemas/prime/prime_edit_plan_v1.schema.json",
+      "schema_sha256": "sha256:865cd356818843f5551fc63aaccd557c51ccda97fefe7b91ab7e92ec7a835368",
+      "cli_route": ["check", "prime", "prime_edit_plan_v1"],
+      "theorem_ids": ["VB_PE_001", "VB_EDIT_001"],
+      "proof_status": "partial",
+      "proof_scope": "VB_EDIT_001 is proof-backed for base edit-script application. VB_PE_001 remains reserved for future proof-backed simulated plan-to-edit linkage.",
+      "snapshot_support": true,
+      "fixture_dir": "Tests/profiles/prime_edit_plan_v1",
+      "fixture_coverage": { "pass": 1, "fail": 1, "malformed": 1 },
+      "notes": "Proof coverage is intentionally tracked as incomplete."
+    },
+    "pair_hmm_bridge_v1": {
+      "tier": "tier0",
+      "schema_path": "schemas/hmm/pair_hmm_bridge_v1.schema.json",
+      "schema_sha256": "sha256:e6984969812aa5b76e4167b6e9c2aacb9f2f8ecbcf4d342fe403bbba2f565c83",
+      "cli_route": ["check", "hmm", "pair_hmm_bridge_v1"],
+      "theorem_ids": ["VB_HMM_001", "VB_HMM_002"],
+      "proof_status": "proof_backed",
+      "proof_scope": "VB_HMM_001 binds the reported DP score to the global-affine spec within the explicit profile tolerance. VB_HMM_002 binds the reported HMM score to the reported DP score within the same tolerance. This is proof-backed contract coverage, not a full floating-point HMM semantics proof.",
+      "snapshot_support": true,
+      "fixture_dir": "Tests/profiles/pair_hmm_bridge_v1",
+      "fixture_coverage": { "pass": 1, "fail": 1, "malformed": 1 },
+      "notes": "Next proof target: add a stronger exact/log-space witness-to-score bridge theorem beyond the current tolerance contract."
+    },
+    "read_set_conservation_v1": {
+      "tier": "schema_only",
+      "schema_path": "schemas/pipeline/read_set_conservation_v1.schema.json",
+      "schema_sha256": "sha256:f91e45d0beeeae992fafdead78bfe5369913b1b19b95dfc22ed10909f21e74de",
+      "theorem_ids": ["VB_PIPE_001", "VB_PIPE_002"],
+      "proof_status": "reserved_anchor",
+      "proof_scope": "Schema and manifest registration only; no routed checker yet.",
+      "snapshot_support": false,
+      "fixture_coverage": { "pass": 0, "fail": 0, "malformed": 0 }
+    },
+    "vcf_normalization_v1": {
+      "tier": "tier1",
+      "schema_path": "schemas/variant/vcf_normalization_v1.schema.json",
+      "schema_sha256": "sha256:1144c7a634c72f63da7241cb3c5c8b8d5f70ff40a7845501b4a7546a19e2cd06",
+      "cli_route": ["check", "vcf", "vcf_normalization_v1"],
+      "theorem_ids": ["VB_VCF_001", "VB_VCF_002"],
+      "proof_status": "reserved_anchor",
+      "proof_scope": "Contract-checked VCF normalization semantics with reserved anchors for preservation and uniqueness/idempotence proofs.",
+      "snapshot_support": true,
+      "fixture_dir": "Tests/profiles/vcf_normalization_v1",
+      "fixture_coverage": { "pass": 2, "fail": 1, "malformed": 1 }
+    },
+    "offtarget_score_sanity_v1": {
+      "tier": "schema_only",
+      "schema_path": "schemas/crispr/offtarget_score_sanity_v1.schema.json",
+      "schema_sha256": "sha256:0ccd1b0cc3fe39d84ef9d722905f45f492977cd033b8e0c11e37e8b276c2db79",
+      "theorem_ids": ["VB_OFF_001"],
+      "proof_status": "reserved_anchor",
+      "proof_scope": "Schema and manifest registration only; no routed checker yet.",
+      "snapshot_support": false,
+      "fixture_coverage": { "pass": 0, "fail": 0, "malformed": 0 }
+    },
+    "snapshot_signature_v1": {
+      "tier": "provenance",
+      "schema_path": "schemas/provenance/snapshot_signature_v1.schema.json",
+      "schema_sha256": "sha256:fb518c08a7e889c647fe749bb69579b451a87d9183aa1dfc4ebd2528b0215da5",
+      "theorem_ids": ["VB_SIG_001"],
+      "proof_status": "proof_backed",
+      "proof_scope": "Snapshot signatures bind result metadata to schema, theorem ids, and manifest-registered hashes.",
+      "snapshot_support": false,
+      "fixture_coverage": { "pass": 0, "fail": 0, "malformed": 0 }
+    }
+  }
+}
