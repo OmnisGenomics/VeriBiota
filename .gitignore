@@ -1,5 +1,6 @@
 .lake/
 build/
+dist/
 engine/biosim-checks/target/
 target/
 node_modules/
