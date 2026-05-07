@@ -36,6 +36,26 @@ run_with_timeout() {
   fi
 }
 
+expect_status_with_timeout() {
+  local expected="$1"
+  shift
+  local status=0
+  set +e
+  if command -v timeout >/dev/null 2>&1; then
+    log "expect ${expected}: timeout ${timeout_s} $*"
+    timeout "$timeout_s" "$@"
+  else
+    log "expect ${expected}: $*"
+    "$@"
+  fi
+  status=$?
+  set -e
+  if [[ "$status" -ne "$expected" ]]; then
+    printf '[validate] expected exit %s, got %s: %s\n' "$expected" "$status" "$*" >&2
+    exit 1
+  fi
+}
+
 validate_fast() {
   need npm
   run npm run check
@@ -59,6 +79,9 @@ validate_rust() {
   CARGO_TARGET_DIR="$adapter_target" run_with_timeout \
     cargo run --manifest-path adapters/rust/Cargo.toml --quiet -- \
       --trajectory examples/trajectory.counts.jsonl
+  CARGO_TARGET_DIR="$adapter_target" expect_status_with_timeout 2 \
+    cargo run --manifest-path adapters/rust/Cargo.toml --quiet -- \
+      --trajectory examples/trajectory.counts.violation.jsonl
 }
 
 validate_lean() {

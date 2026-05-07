@@ -7,6 +7,8 @@ under `examples/`:
 - `examples/checks.mass.json` – tiny checks spec (positivity + total-mass).
 - `examples/trajectory.sample.jsonl` – three-step concentration trajectory.
 - `examples/trajectory.counts.jsonl` – three-step integer-count trajectory.
+- `examples/trajectory.counts.violation.jsonl` – synthetic negative-path fixture
+  that must exit with code 2.
 - `examples/species.example.json` – canonical ordering (`["S","I","R"]`).
 
 ## C++ (CMake)

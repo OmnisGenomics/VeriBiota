@@ -64,7 +64,8 @@ The tiers are intentionally explicit:
   isolates per-manifest build outputs below that root so independent lockfiles
   cannot reuse stale artifacts. `VERIBIOTA_VALIDATE_TIMEOUT` defaults to `180s`
   when GNU `timeout` exists. The tier then runs the in-process Rust adapter demo
-  against the concentration and count sample trajectories.
+  against concentration/count pass trajectories and a count violation trajectory
+  that must exit with code `2`.
 - `make validate-lean` runs `lake build` and `lake exe biosim_tests`.
 - `make validate-all` runs fast, Rust, and Lean validation in sequence.
 
