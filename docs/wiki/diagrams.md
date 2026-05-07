@@ -3,7 +3,7 @@ page_id: diagrams
 page_type: diagrams
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.870Z
+updated_at: 2026-05-07T04:45:24.254Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.870Z
 
 ```json
 {
-  "freshnessKey": "f4c45c71de612253f7a900e2a8a1eb7cdf2ece64",
+  "freshnessKey": "9254efc25b56fc87e1d6933467d910d941fe804a",
   "plannerReason": "Generated to provide a compact architecture and dependency overview.",
   "changedPaths": [],
   "dependencyPaths": [],
@@ -30,9 +30,9 @@ Generated 4 diagrams.
 ## Diagram Navigation
 
 - [Component Overview](#component-overview) (component-overview; 9 nodes; 8 edges; omitted 28 nodes / 28 edges)
-- [Dependency Graph](#dependency-graph) (dependency-graph; 19 nodes; 16 edges; omitted 0 nodes / 316 edges)
+- [Dependency Graph](#dependency-graph) (dependency-graph; 18 nodes; 16 edges; omitted 0 nodes / 324 edges)
 - [Directory Map](#directory-map) (directory-map; 11 nodes; 10 edges; omitted 7 nodes / 7 edges)
-- [Subsystem Clusters](#subsystem-clusters) (component-overview; 6 nodes; 4 edges; omitted 0 nodes / 227 edges)
+- [Subsystem Clusters](#subsystem-clusters) (component-overview; 6 nodes; 4 edges; omitted 0 nodes / 235 edges)
 
 ## Related Pages
 
@@ -156,14 +156,14 @@ Interpretation note:
 - Interpretation: use this graph to spot concentrated dependency hubs and outward package pressure across the repository. Favor it when you need to reason about coupling, likely blast radius, or external dependency concentration.
 
 Rendered surface:
-- rendered nodes: 19, rendered edges: 16
+- rendered nodes: 18, rendered edges: 16
 
 Node mix:
-- symbol: 19
+- symbol: 18
 
 Omitted surface:
 - omitted nodes: 0
-- omitted edges: 316
+- omitted edges: 324
 
 ```mermaid
 graph LR
@@ -172,17 +172,17 @@ graph LR
   symbol__github_scripts_validate_snapshots_py_main_57 --> symbol__github_scripts_validate_snapshots_py_load_schema_25
   symbol__github_scripts_validate_snapshots_py_main_57 --> symbol__github_scripts_validate_snapshots_py_validate_signature_42
   symbol__github_scripts_validate_snapshots_py_validate_signature_42 --> symbol_scripts_schemaValidate_mjs_load_14
-  symbol__github_scripts_validate_snapshots_py_validate_signature_42 --> symbol_scripts_validateTasks_mjs_validate_16
   symbol_adapters_python_demo_py_main_22 --> symbol_adapters_python_demo_py_load_trajectory_14
   symbol_adapters_python_demo_py_main_22 --> symbol_adapters_python_veribiota_adapter_py_eval_stream_48
   symbol_adapters_python_demo_py_main_22 --> symbol_adapters_python_veribiota_adapter_py_init_checks_41
   symbol_adapters_python_veribiota_adapter_py_eval_stream_48 --> symbol_adapters_python_veribiota_adapter_py_Outcome_25
   symbol_adapters_python_veribiota_adapter_py_eval_stream_48 --> symbol_adapters_python_veribiota_adapter_py_Snapshot_15
   symbol_adapters_rust_src_main_rs_main_41 --> symbol_adapters_rust_src_main_rs_load_args_19
-  symbol_adapters_rust_src_main_rs_main_41 --> symbol_engine_biosim_checks_src_lib_rs_evaluate_conc_215
-  symbol_adapters_rust_src_main_rs_main_41 --> symbol_engine_biosim_checks_src_lib_rs_from_json_209
-  symbol_engine_biosim_checks_src_bin_eval_rs_evaluate_93 --> symbol_engine_biosim_checks_src_bin_eval_rs_to_vec_f64_51
-  symbol_engine_biosim_checks_src_bin_eval_rs_evaluate_93 --> symbol_engine_biosim_checks_src_bin_eval_rs_weights_from_json_68
+  symbol_adapters_rust_src_main_rs_main_41 --> symbol_engine_biosim_checks_src_lib_rs_evaluate_conc_241
+  symbol_adapters_rust_src_main_rs_main_41 --> symbol_engine_biosim_checks_src_lib_rs_from_json_235
+  symbol_engine_biosim_checks_src_bin_eval_rs_main_6 --> symbol_engine_biosim_checks_src_lib_rs_evaluate_jsonl_259
+  symbol_engine_biosim_checks_src_bin_eval_rs_main_6 --> symbol_engine_biosim_checks_src_lib_rs_from_json_235
+  symbol_engine_biosim_checks_src_lib_rs_evaluate_conc_241 --> symbol_engine_biosim_checks_src_lib_rs_evaluate_65
 
 ```
 
@@ -197,7 +197,6 @@ digraph RepoIntel {
   "symbol:.github/scripts/validate_snapshots.py:main:57" [label="main", shape=box];
   "symbol:.github/scripts/validate_snapshots.py:find_repo_root:31" [label="find_repo_root", shape=box];
   "symbol:.github/scripts/validate_snapshots.py:validate_signature:42" [label="validate_signature", shape=box];
-  "symbol:scripts/validateTasks.mjs:validate:16" [label="validate", shape=box];
   "symbol:adapters/python/demo.py:main:22" [label="main", shape=box];
   "symbol:adapters/python/demo.py:load_trajectory:14" [label="load_trajectory", shape=box];
   "symbol:adapters/python/veribiota_adapter.py:eval_stream:48" [label="eval_stream", shape=box];
@@ -206,33 +205,33 @@ digraph RepoIntel {
   "symbol:adapters/python/veribiota_adapter.py:Snapshot:15" [label="Snapshot", shape=box];
   "symbol:adapters/rust/src/main.rs:main:41" [label="main", shape=box];
   "symbol:adapters/rust/src/main.rs:load_args:19" [label="load_args", shape=box];
-  "symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:215" [label="evaluate_conc", shape=box];
-  "symbol:engine/biosim-checks/src/lib.rs:from_json:209" [label="from_json", shape=box];
-  "symbol:engine/biosim-checks/src/bin/eval.rs:evaluate:93" [label="evaluate", shape=box];
-  "symbol:engine/biosim-checks/src/bin/eval.rs:to_vec_f64:51" [label="to_vec_f64", shape=box];
-  "symbol:engine/biosim-checks/src/bin/eval.rs:weights_from_json:68" [label="weights_from_json", shape=box];
+  "symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:241" [label="evaluate_conc", shape=box];
+  "symbol:engine/biosim-checks/src/lib.rs:from_json:235" [label="from_json", shape=box];
+  "symbol:engine/biosim-checks/src/bin/eval.rs:main:6" [label="main", shape=box];
+  "symbol:engine/biosim-checks/src/lib.rs:evaluate_jsonl:259" [label="evaluate_jsonl", shape=box];
+  "symbol:engine/biosim-checks/src/lib.rs:evaluate:65" [label="evaluate", shape=box];
   "symbol:.github/scripts/validate_snapshots.py:load_schema:25" -> "symbol:scripts/schemaValidate.mjs:load:14" [label="calls"];
   "symbol:.github/scripts/validate_snapshots.py:main:57" -> "symbol:.github/scripts/validate_snapshots.py:find_repo_root:31" [label="calls"];
   "symbol:.github/scripts/validate_snapshots.py:main:57" -> "symbol:.github/scripts/validate_snapshots.py:load_schema:25" [label="calls"];
   "symbol:.github/scripts/validate_snapshots.py:main:57" -> "symbol:.github/scripts/validate_snapshots.py:validate_signature:42" [label="calls"];
   "symbol:.github/scripts/validate_snapshots.py:validate_signature:42" -> "symbol:scripts/schemaValidate.mjs:load:14" [label="calls"];
-  "symbol:.github/scripts/validate_snapshots.py:validate_signature:42" -> "symbol:scripts/validateTasks.mjs:validate:16" [label="calls"];
   "symbol:adapters/python/demo.py:main:22" -> "symbol:adapters/python/demo.py:load_trajectory:14" [label="calls"];
   "symbol:adapters/python/demo.py:main:22" -> "symbol:adapters/python/veribiota_adapter.py:eval_stream:48" [label="calls"];
   "symbol:adapters/python/demo.py:main:22" -> "symbol:adapters/python/veribiota_adapter.py:init_checks:41" [label="calls"];
   "symbol:adapters/python/veribiota_adapter.py:eval_stream:48" -> "symbol:adapters/python/veribiota_adapter.py:Outcome:25" [label="calls"];
   "symbol:adapters/python/veribiota_adapter.py:eval_stream:48" -> "symbol:adapters/python/veribiota_adapter.py:Snapshot:15" [label="calls"];
   "symbol:adapters/rust/src/main.rs:main:41" -> "symbol:adapters/rust/src/main.rs:load_args:19" [label="calls"];
-  "symbol:adapters/rust/src/main.rs:main:41" -> "symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:215" [label="calls"];
-  "symbol:adapters/rust/src/main.rs:main:41" -> "symbol:engine/biosim-checks/src/lib.rs:from_json:209" [label="calls"];
-  "symbol:engine/biosim-checks/src/bin/eval.rs:evaluate:93" -> "symbol:engine/biosim-checks/src/bin/eval.rs:to_vec_f64:51" [label="calls"];
-  "symbol:engine/biosim-checks/src/bin/eval.rs:evaluate:93" -> "symbol:engine/biosim-checks/src/bin/eval.rs:weights_from_json:68" [label="calls"];
+  "symbol:adapters/rust/src/main.rs:main:41" -> "symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:241" [label="calls"];
+  "symbol:adapters/rust/src/main.rs:main:41" -> "symbol:engine/biosim-checks/src/lib.rs:from_json:235" [label="calls"];
+  "symbol:engine/biosim-checks/src/bin/eval.rs:main:6" -> "symbol:engine/biosim-checks/src/lib.rs:evaluate_jsonl:259" [label="calls"];
+  "symbol:engine/biosim-checks/src/bin/eval.rs:main:6" -> "symbol:engine/biosim-checks/src/lib.rs:from_json:235" [label="calls"];
+  "symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:241" -> "symbol:engine/biosim-checks/src/lib.rs:evaluate:65" [label="calls"];
 }
 
 ```
 
 Structured graph:
-- nodes: 19
+- nodes: 18
 - edges: 16
 
 Layout:
@@ -241,11 +240,11 @@ Layout:
 
 Simplification:
 - simplified: yes
-- rendered nodes: 19
+- rendered nodes: 18
 - rendered edges: 16
 - omitted nodes: 0
-- omitted edges: 316
-- Omitted 316 lower-priority dependency edges to avoid an unreadable graph.
+- omitted edges: 324
+- Omitted 324 lower-priority dependency edges to avoid an unreadable graph.
 - Kept a rank-ordered sample of stronger edges and switched to a left-to-right layout for denser graphs.
 
 Why these edges:
@@ -254,11 +253,11 @@ Why these edges:
 - symbol:.github/scripts/validate_snapshots.py:main:57 calls symbol:.github/scripts/validate_snapshots.py:load_schema:25 via .github/scripts/validate_snapshots.py.
 - symbol:.github/scripts/validate_snapshots.py:main:57 calls symbol:.github/scripts/validate_snapshots.py:validate_signature:42 via .github/scripts/validate_snapshots.py.
 - symbol:.github/scripts/validate_snapshots.py:validate_signature:42 calls symbol:scripts/schemaValidate.mjs:load:14 via .github/scripts/validate_snapshots.py.
-- symbol:.github/scripts/validate_snapshots.py:validate_signature:42 calls symbol:scripts/validateTasks.mjs:validate:16 via .github/scripts/validate_snapshots.py.
 - symbol:adapters/python/demo.py:main:22 calls symbol:adapters/python/demo.py:load_trajectory:14 via adapters/python/demo.py.
 - symbol:adapters/python/demo.py:main:22 calls symbol:adapters/python/veribiota_adapter.py:eval_stream:48 via adapters/python/demo.py.
 - symbol:adapters/python/demo.py:main:22 calls symbol:adapters/python/veribiota_adapter.py:init_checks:41 via adapters/python/demo.py.
 - symbol:adapters/python/veribiota_adapter.py:eval_stream:48 calls symbol:adapters/python/veribiota_adapter.py:Outcome:25 via adapters/python/veribiota_adapter.py.
+- symbol:adapters/python/veribiota_adapter.py:eval_stream:48 calls symbol:adapters/python/veribiota_adapter.py:Snapshot:15 via adapters/python/veribiota_adapter.py.
 
 <details>
 <summary>Citations:</summary>
@@ -405,7 +404,7 @@ Node mix:
 
 Omitted surface:
 - omitted nodes: 0
-- omitted edges: 227
+- omitted edges: 235
 
 ```mermaid
 graph LR
@@ -415,10 +414,10 @@ graph LR
   end
   subgraph group_engine["engine/"]
     subsystem_engine["engine"]
+    subsystem_tests["tests"]
   end
   subgraph group_examples["examples/"]
     subsystem_examples["examples"]
-    subsystem_tests["tests"]
   end
   subgraph group_package_json["package.json/"]
     subsystem_external["external"]
@@ -465,8 +464,8 @@ Simplification:
 - rendered nodes: 6
 - rendered edges: 4
 - omitted nodes: 0
-- omitted edges: 227
-- Collapsed 227 additional subsystem edges from the rendered view.
+- omitted edges: 235
+- Collapsed 235 additional subsystem edges from the rendered view.
 - Grouped subsystem nodes by dominant path segment across 4 hierarchy buckets before rendering edges.
 - Added band-order guide links so large hierarchy groups stay visually ordered before cross-subsystem edges are rendered.
 - Used a left-to-right hierarchy-banded layout so dominant path groups stay ordered and visually clustered.

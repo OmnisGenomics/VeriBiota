@@ -3,7 +3,7 @@ page_id: component-component:docs
 page_type: component
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.799Z
+updated_at: 2026-05-07T04:45:24.180Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.799Z
 
 ```json
 {
-  "freshnessKey": "3d719fae6105730212bce9c32e22dcdf0d13052f",
+  "freshnessKey": "5bc674ca286e4a5e5ab14be19826df38de380e47",
   "plannerReason": "Generated because the component was ranked as significant for repo navigation.",
   "changedPaths": [
     "adapters/README.md",
@@ -351,7 +351,7 @@ Nearby verification surfaces:
 - Run `make` (build) from `.`.
 - Run `veribiota` (run) from `.`.
 - Run `python -m pytest` (test) from `.`.
-- Run `npm run check:tasks` (check:tasks) from `.`.
+- Run `npm run check` (check) from `.`.
 
 <details>
 <summary>Supporting citations:</summary>
@@ -398,7 +398,7 @@ Suggested verification steps:
 - Run `make` (build) from `.`.
 - Run `veribiota` (run) from `.`.
 - Run `python -m pytest` (test) from `.`.
-- Run `npm run check:tasks` (check:tasks) from `.`.
+- Run `npm run check` (check) from `.`.
 
 <details>
 <summary>Supporting citations:</summary>
@@ -442,6 +442,8 @@ Suggested verification steps:
 - `make` (build)
 - `veribiota` (run)
 - `python -m pytest` (test)
+- `npm run check` (check)
+- `npm run check:profiles` (check:profiles)
 - `npm run check:tasks` (check:tasks)
 
 <details>

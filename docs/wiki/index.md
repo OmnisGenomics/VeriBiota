@@ -3,7 +3,7 @@ page_id: index
 page_type: index
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.863Z
+updated_at: 2026-05-07T04:45:24.247Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.863Z
 
 ```json
 {
-  "freshnessKey": "2c602964101a66096fdfe0a7e8687e250c118c6b",
+  "freshnessKey": "9c9bcf3dd65ae36a21147923b38c5f8dcffc7986",
   "plannerReason": "Service template selected because deterministic evidence suggests a runnable application or service surface. The generic runtime page is suppressed because start-here now covers startup orientation more directly, while playbook keeps validation guidance separate. The generic components navigation section is demoted to an appendix because change-guide plus component pages provide the stronger explanation-first edit path for this service-shaped repository.",
   "changedPaths": [
     "adapters/README.md",
@@ -29,8 +29,8 @@ updated_at: 2026-05-07T01:35:21.863Z
     "adapters/rust/src/main.rs",
     "examples/veribiota-example-project/.github/workflows/veribiota.yml",
     "examples/veribiota-example-project/pyproject.toml",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
-    "Tests/golden/checks_min.json",
     "engine/biosim-checks/src/lib.rs",
     "engine/biosim-checks/Cargo.lock",
     "engine/biosim-checks/ffi/lib.c",
@@ -67,8 +67,8 @@ updated_at: 2026-05-07T01:35:21.863Z
     "README.md",
     "releases/pilot-demo-v1/README_pilot.md",
     "schema/README.md",
+    "Tests/golden/checks_min.json",
     "Tests/Main.lean",
-    "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
     "pyproject.toml"
   ],
   "dependencyPaths": [
@@ -87,8 +87,8 @@ updated_at: 2026-05-07T01:35:21.863Z
     "adapters/rust/src/main.rs",
     "examples/veribiota-example-project/.github/workflows/veribiota.yml",
     "examples/veribiota-example-project/pyproject.toml",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
-    "Tests/golden/checks_min.json",
     "engine/biosim-checks/src/lib.rs",
     "engine/biosim-checks/Cargo.lock",
     "engine/biosim-checks/ffi/lib.c",
@@ -125,8 +125,8 @@ updated_at: 2026-05-07T01:35:21.863Z
     "README.md",
     "releases/pilot-demo-v1/README_pilot.md",
     "schema/README.md",
+    "Tests/golden/checks_min.json",
     "Tests/Main.lean",
-    "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
     "pyproject.toml"
   ],
   "dependencyEvidenceIds": [
@@ -183,10 +183,12 @@ updated_at: 2026-05-07T01:35:21.863Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -198,8 +200,10 @@ updated_at: 2026-05-07T01:35:21.863Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -267,10 +271,12 @@ updated_at: 2026-05-07T01:35:21.863Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -282,8 +288,10 @@ updated_at: 2026-05-07T01:35:21.863Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -312,7 +320,7 @@ Documentation starts at adapters/README.md, docs/architecture.md, docs/assets/fa
 Context:
 - Version control: git
 - Detected ecosystems: node, python, rust
-- Inventory: 228 files, 36 components, 5 workflows
+- Inventory: 235 files, 36 components, 7 workflows
 
 ## Related Pages
 
@@ -340,7 +348,7 @@ Documentation starts at adapters/README.md, docs/architecture.md, docs/assets/fa
 Context:
 - Version control: git
 - Detected ecosystems: node, python, rust
-- Inventory: 228 files, 36 components, 5 workflows
+- Inventory: 235 files, 36 components, 7 workflows
 
 Primary capabilities:
 - build: `make`
@@ -388,8 +396,8 @@ Suggested reading order:
 - `adapters/rust/src/main.rs`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 </details>
 
 <details>
@@ -403,7 +411,7 @@ Suggested reading order:
 - `docs/ATTESTED_PROFILES.md`
 - `package.json`
 - `adapters/rust/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
@@ -412,7 +420,7 @@ Suggested reading order:
 ## Critical Components
 
 ### 1. engine/biosim-checks/src
-Why it matters: Hotspot score 162 with 24 inbound and 28 outbound inferred edges. Touches 9 inferred dependency edges.
+Why it matters: Hotspot score 174 with 27 inbound and 29 outbound inferred edges. Touches 9 inferred dependency edges.
 
 What it owns:
 - Source module rooted at engine/biosim-checks/src.
@@ -421,14 +429,14 @@ What it owns:
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
-Ranking score: 171.
+Ranking score: 183.
 
 ### 2. biosim-checks
-Why it matters: Hotspot score 45 with 2 inbound and 11 outbound inferred edges. Touches 15 inferred dependency edges.
+Why it matters: Hotspot score 93 with 10 inbound and 19 outbound inferred edges. Touches 16 inferred dependency edges.
 
 What it owns:
 - biosim-checks rust component
@@ -442,27 +450,10 @@ What it owns:
 - `engine/biosim-checks/ffi/lib.c`
 </details>
 
-Ranking score: 60.
+Ranking score: 109.
 
-### 3. biosim-eval
-Why it matters: Hotspot score 39 with 5 inbound and 7 outbound inferred edges. Contributes 1 runtime-facing entrypoint or service signal. Touches 5 inferred dependency edges.
-
-What it owns:
-- Rust binary target biosim-eval.
-- Owns files rooted at `engine/biosim-checks/src/bin`.
-- Entrypoint: `engine/biosim-checks/src/bin/eval.rs`.
-
-<details>
-<summary>Supporting citations:</summary>
-
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/Cargo.toml`
-</details>
-
-Ranking score: 48.
-
-### 4. Documentation
-Why it matters: Shows up in 4 inferred workflows. Touches 35 inferred dependency edges.
+### 3. Documentation
+Why it matters: Shows up in 6 inferred workflows. Touches 35 inferred dependency edges.
 
 What it owns:
 - Repository documentation and wiki source files.
@@ -476,7 +467,22 @@ What it owns:
 - `docs/assets/favicon.svg`
 </details>
 
-Ranking score: 43.
+Ranking score: 47.
+
+### 4. ajv
+Why it matters: Hotspot score 21 with 2 inbound and 4 outbound inferred edges. Shows up in 3 inferred workflows. Touches 12 inferred dependency edges.
+
+What it owns:
+- External node dependency inferred from package.json.
+- Owns files rooted at `external/node/ajv`.
+
+<details>
+<summary>Supporting citations:</summary>
+
+- `package.json`
+</details>
+
+Ranking score: 39.
 
 <details>
 <summary>Related files:</summary>
@@ -491,19 +497,21 @@ Ranking score: 43.
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
+- `package.json`
 </details>
 
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/ffi/lib.c`
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
+- `package.json`
 </details>
 
 ## Repository Summary
@@ -515,10 +523,10 @@ Documentation starts at adapters/README.md, docs/architecture.md, docs/assets/fa
 Context:
 - Version control: git
 - Detected ecosystems: node, python, rust
-- Inventory: 228 files, 36 components, 5 workflows
+- Inventory: 235 files, 36 components, 7 workflows
 
-Indexed revision: git:05d4fb146a4a694a636538cb48271dd92f1a4a98.
-Indexed at: 2026-05-07T01:35:21.780Z.
+Indexed revision: git:9b761b51bf741888d78eefbcf84e3c90658cba85.
+Indexed at: 2026-05-07T04:45:24.154Z.
 
 <details>
 <summary>Related files:</summary>
@@ -721,10 +729,10 @@ Languages:
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
-- `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/ffi/lib.c`
@@ -745,14 +753,14 @@ Languages:
 
 - `adapters/README.md`
 - `docs/architecture.md`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 - `package.json`
@@ -772,11 +780,11 @@ Languages:
 - `docs/ATTESTED_PROFILES.md`
 - `package.json`
 - `adapters/rust/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/ffi/lib.c`
 - `docs/canonicalization.md`
@@ -813,8 +821,8 @@ Languages:
 - `README.md`
 - `releases/pilot-demo-v1/README_pilot.md`
 - `schema/README.md`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 - `examples/veribiota-example-project/pyproject.toml`
 - `pyproject.toml`
 </details>

@@ -3,7 +3,7 @@ page_id: playbook
 page_type: playbook
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.869Z
+updated_at: 2026-05-07T04:45:24.254Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.869Z
 
 ```json
 {
-  "freshnessKey": "80b36fd48a7253919f5b82f01dc9d02427599f30",
+  "freshnessKey": "c00c5c4aff6a69a676e0b35f06be8d8f8ea28e3c",
   "plannerReason": "Generated when enough workflow, runtime, and hotspot evidence exists to assemble an operational guide.",
   "changedPaths": [
     "Makefile",
@@ -47,7 +47,8 @@ updated_at: 2026-05-07T01:35:21.869Z
     "component:engine/biosim-checks/Cargo.toml",
     "ingest:file:engine/biosim-checks/src/bin/eval.rs",
     "ingest:file:engine/biosim-checks/src/lib.rs",
-    "component:adapters/rust/Cargo.toml"
+    "component:adapters/rust/Cargo.toml",
+    "ingest:file:adapters/rust/src/main.rs"
   ],
   "evidenceIds": [
     "workflow:Makefile",
@@ -57,7 +58,8 @@ updated_at: 2026-05-07T01:35:21.869Z
     "component:engine/biosim-checks/Cargo.toml",
     "ingest:file:engine/biosim-checks/src/bin/eval.rs",
     "ingest:file:engine/biosim-checks/src/lib.rs",
-    "component:adapters/rust/Cargo.toml"
+    "component:adapters/rust/Cargo.toml",
+    "ingest:file:adapters/rust/src/main.rs"
   ],
   "qualityWarnings": []
 }
@@ -80,7 +82,8 @@ Operational guide for validating and debugging VeriBiota.
 1. Run `make` (build) from `.`.
 2. Run `python -m pytest` (test) from `.`.
 3. Run `python -m pytest` (test) from `examples/veribiota-example-project`.
-4. Run `npm run check:tasks` (check:tasks) from `.`.
+4. Run `npm run check` (check) from `.`.
+5. Run `npm run check:profiles` (check:profiles) from `.`.
 
 <details>
 <summary>Related files:</summary>
@@ -103,7 +106,8 @@ Operational guide for validating and debugging VeriBiota.
 ## Debugging Entrypoints
 
 - Start from workflow `veribiota` (run).
-- Start from workflow `npm run check:tasks` (check:tasks).
+- Start from workflow `npm run check` (check).
+- Start from workflow `npm run check:profiles` (check:profiles).
 - Inspect biosim-checks at `engine/biosim-checks`.
 - Inspect biosim-eval at `engine/biosim-checks/src/bin` via `engine/biosim-checks/src/bin/eval.rs`.
 - Inspect engine/biosim-checks/src at `engine/biosim-checks/src`.
@@ -130,17 +134,17 @@ Operational guide for validating and debugging VeriBiota.
 - `package.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 </details>
 
 ## Change-Safety Notes
 
-- engine/biosim-checks/src: score 162; validate around inbound 24, outbound 28, and 2 bridged subsystem boundaries.
-- biosim-checks: score 45; validate around inbound 2, outbound 11, and 2 bridged subsystem boundaries.
-- biosim-eval: score 39; validate around inbound 5, outbound 7, and 1 bridged subsystem boundary.
+- engine/biosim-checks/src: score 174; validate around inbound 27, outbound 29, and 2 bridged subsystem boundaries.
+- biosim-checks: score 93; validate around inbound 10, outbound 19, and 2 bridged subsystem boundaries.
+- adapters/rust/src: score 27; validate around inbound 1, outbound 6, and 2 bridged subsystem boundaries.
 
 <details>
 <summary>Related files:</summary>
@@ -150,15 +154,17 @@ Operational guide for validating and debugging VeriBiota.
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/ffi/lib.c`
+- `adapters/rust/src/main.rs`
 </details>
 
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
+- `adapters/rust/src/main.rs:19`
 </details>
 
 ## Citations
@@ -172,8 +178,8 @@ Operational guide for validating and debugging VeriBiota.
 - `package.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 </details>

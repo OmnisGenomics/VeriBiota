@@ -3,7 +3,7 @@ page_id: testing
 page_type: testing
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.854Z
+updated_at: 2026-05-07T04:45:24.239Z
 ---
 
 <details>
@@ -11,15 +11,17 @@ updated_at: 2026-05-07T01:35:21.854Z
 
 ```json
 {
-  "freshnessKey": "72e6389dc623d746ad89419546f236281a8f4179",
+  "freshnessKey": "e11f639e6f0de881c4be01dcd31a179a4c953e06",
   "plannerReason": "Generated because test workflows are critical for validation and agent execution safety.",
   "changedPaths": [
     "pyproject.toml",
     "examples/veribiota-example-project/pyproject.toml",
     "Tests/golden/checks_min.json",
-    "examples/veribiota-example-project/tests/dags/micro.dag.json",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "Tests/Main.lean",
+    "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Tests/profiles/edit_script_v1/ins_del_pass.json",
     "Tests/profiles/edit_script_v1/malformed_error.json",
@@ -31,19 +33,19 @@ updated_at: 2026-05-07T01:35:21.854Z
     "Tests/profiles/global_affine_v1/mismatch_pass.json",
     "Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
-    "Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
-    "Tests/profiles/prime_edit_plan_v1/pass_simple.json",
-    "Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
-    "Tests/profiles/vcf_normalization_v1/malformed_error.json"
+    "Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json"
   ],
   "dependencyPaths": [
     "pyproject.toml",
     "examples/veribiota-example-project/pyproject.toml",
     "Tests/golden/checks_min.json",
-    "examples/veribiota-example-project/tests/dags/micro.dag.json",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "Tests/Main.lean",
+    "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Tests/profiles/edit_script_v1/ins_del_pass.json",
     "Tests/profiles/edit_script_v1/malformed_error.json",
@@ -55,11 +57,9 @@ updated_at: 2026-05-07T01:35:21.854Z
     "Tests/profiles/global_affine_v1/mismatch_pass.json",
     "Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
-    "Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
-    "Tests/profiles/prime_edit_plan_v1/pass_simple.json",
-    "Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
-    "Tests/profiles/vcf_normalization_v1/malformed_error.json"
+    "Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json"
   ],
   "dependencyEvidenceIds": [
     "workflow:pyproject.toml",
@@ -105,9 +105,11 @@ Testing guidance for VeriBiota.
 ## Known Test Files
 
 - `Tests/golden/checks_min.json`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `Tests/Main.lean`
+- `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
+- `Tests/profiles/edit_script_normal_form_v1/malformed_error.json`
 - `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 - `Tests/profiles/edit_script_v1/ins_del_pass.json`
 - `Tests/profiles/edit_script_v1/malformed_error.json`
@@ -119,19 +121,19 @@ Testing guidance for VeriBiota.
 - `Tests/profiles/global_affine_v1/mismatch_pass.json`
 - `Tests/profiles/global_affine_v1/score_mismatch_fail.json`
 - `Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json`
+- `Tests/profiles/pair_hmm_bridge_v1/malformed_error.json`
 - `Tests/profiles/pair_hmm_bridge_v1/pass_simple.json`
 - `Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json`
-- `Tests/profiles/prime_edit_plan_v1/pass_simple.json`
-- `Tests/profiles/vcf_normalization_v1/fail_misaligned.json`
-- `Tests/profiles/vcf_normalization_v1/malformed_error.json`
 
 <details>
 <summary>Related files:</summary>
 
 - `Tests/golden/checks_min.json`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `Tests/Main.lean`
+- `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
+- `Tests/profiles/edit_script_normal_form_v1/malformed_error.json`
 - `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 - `Tests/profiles/edit_script_v1/ins_del_pass.json`
 - `Tests/profiles/edit_script_v1/malformed_error.json`
@@ -143,20 +145,20 @@ Testing guidance for VeriBiota.
 - `Tests/profiles/global_affine_v1/mismatch_pass.json`
 - `Tests/profiles/global_affine_v1/score_mismatch_fail.json`
 - `Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json`
+- `Tests/profiles/pair_hmm_bridge_v1/malformed_error.json`
 - `Tests/profiles/pair_hmm_bridge_v1/pass_simple.json`
 - `Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json`
-- `Tests/profiles/prime_edit_plan_v1/pass_simple.json`
-- `Tests/profiles/vcf_normalization_v1/fail_misaligned.json`
-- `Tests/profiles/vcf_normalization_v1/malformed_error.json`
 </details>
 
 <details>
 <summary>Citations:</summary>
 
 - `Tests/golden/checks_min.json`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `Tests/Main.lean`
+- `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
+- `Tests/profiles/edit_script_normal_form_v1/malformed_error.json`
 - `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 - `Tests/profiles/edit_script_v1/ins_del_pass.json`
 - `Tests/profiles/edit_script_v1/malformed_error.json`
@@ -168,11 +170,9 @@ Testing guidance for VeriBiota.
 - `Tests/profiles/global_affine_v1/mismatch_pass.json`
 - `Tests/profiles/global_affine_v1/score_mismatch_fail.json`
 - `Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json`
+- `Tests/profiles/pair_hmm_bridge_v1/malformed_error.json`
 - `Tests/profiles/pair_hmm_bridge_v1/pass_simple.json`
 - `Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json`
-- `Tests/profiles/prime_edit_plan_v1/pass_simple.json`
-- `Tests/profiles/vcf_normalization_v1/fail_misaligned.json`
-- `Tests/profiles/vcf_normalization_v1/malformed_error.json`
 </details>
 
 ## Citations
@@ -183,9 +183,11 @@ Testing guidance for VeriBiota.
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `Tests/golden/checks_min.json`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `Tests/Main.lean`
+- `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
+- `Tests/profiles/edit_script_normal_form_v1/malformed_error.json`
 - `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 - `Tests/profiles/edit_script_v1/ins_del_pass.json`
 - `Tests/profiles/edit_script_v1/malformed_error.json`
@@ -197,9 +199,7 @@ Testing guidance for VeriBiota.
 - `Tests/profiles/global_affine_v1/mismatch_pass.json`
 - `Tests/profiles/global_affine_v1/score_mismatch_fail.json`
 - `Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json`
+- `Tests/profiles/pair_hmm_bridge_v1/malformed_error.json`
 - `Tests/profiles/pair_hmm_bridge_v1/pass_simple.json`
 - `Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json`
-- `Tests/profiles/prime_edit_plan_v1/pass_simple.json`
-- `Tests/profiles/vcf_normalization_v1/fail_misaligned.json`
-- `Tests/profiles/vcf_normalization_v1/malformed_error.json`
 </details>

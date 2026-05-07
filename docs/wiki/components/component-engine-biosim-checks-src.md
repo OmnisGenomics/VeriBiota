@@ -3,7 +3,7 @@ page_id: component-component:engine/biosim-checks/src
 page_type: component
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.813Z
+updated_at: 2026-05-07T04:45:24.195Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.813Z
 
 ```json
 {
-  "freshnessKey": "3ec77bb8c6693b416f934b433eb4074621a21167",
+  "freshnessKey": "0793a1fe466bce494aa0bda00a80c30b5fd9ebf9",
   "plannerReason": "Generated because the component was ranked as significant for repo navigation.",
   "changedPaths": [
     "engine/biosim-checks/src/lib.rs",
@@ -22,11 +22,11 @@ updated_at: 2026-05-07T01:35:21.813Z
     "docs/assets/logo-wordmark.svg",
     "docs/assets/logo.svg",
     "engine/biosim-checks/src",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "adapters/rust/Cargo.toml",
     "engine/biosim-checks/Cargo.toml",
     "Makefile",
@@ -42,11 +42,11 @@ updated_at: 2026-05-07T01:35:21.813Z
     "docs/assets/logo-wordmark.svg",
     "docs/assets/logo.svg",
     "engine/biosim-checks/src",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "adapters/rust/Cargo.toml",
     "engine/biosim-checks/Cargo.toml",
     "Makefile",
@@ -97,10 +97,12 @@ updated_at: 2026-05-07T01:35:21.813Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -112,8 +114,10 @@ updated_at: 2026-05-07T01:35:21.813Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -173,10 +177,12 @@ updated_at: 2026-05-07T01:35:21.813Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -188,8 +194,10 @@ updated_at: 2026-05-07T01:35:21.813Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -230,12 +238,12 @@ Proved signals:
 - Defines execution-like symbols `RuntimeChecks`.
 - Defines validation-like symbols `ChecksBundle`, `CheckSpec`.
 - Defines boundary-oriented symbols `load_checks`, `load_checks`.
-- Participates in 24 connected call edges.
-- Exports 10 symbols on the visible component surface.
+- Participates in 27 connected call edges.
+- Exports 12 symbols on the visible component surface.
 Why this role fits: These proved signals suggest this unit enforces checks or normalizes inputs before downstream work proceeds.
 Supporting implementation citations:
-- `engine/biosim-checks/src/lib.rs:227`
-- `engine/biosim-checks/src/lib.rs:67`
+- `engine/biosim-checks/src/lib.rs:344`
+- `engine/biosim-checks/src/lib.rs:76`
 
 <details>
 <summary>Related files:</summary>
@@ -246,20 +254,20 @@ Supporting implementation citations:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:227`
-- `engine/biosim-checks/src/lib.rs:67`
+- `engine/biosim-checks/src/lib.rs:344`
+- `engine/biosim-checks/src/lib.rs:76`
 </details>
 
 ## Module Responsibilities
 
 ### `engine/biosim-checks/src/lib.rs`
 Role: Core implementation module.
-Primary behavior: Exports `Snapshot` (class), `Outcome` (class), `SigMode` (class), which makes this one of the visible implementation surfaces for `engine/biosim-checks/src`.
-Why this module matters: 10 exported symbols make this file part of the component's public surface. 24 connected call edges mark this file as implementation-active.
+Primary behavior: Exports `Snapshot` (class), `Outcome` (class), `EvaluationSummary` (class), which makes this one of the visible implementation surfaces for `engine/biosim-checks/src`.
+Why this module matters: 12 exported symbols make this file part of the component's public surface. 27 connected call edges mark this file as implementation-active.
 Supporting implementation citations:
-- `engine/biosim-checks/src/lib.rs:14`
-- `engine/biosim-checks/src/lib.rs:22`
-- `engine/biosim-checks/src/lib.rs:31`
+- `engine/biosim-checks/src/lib.rs:15`
+- `engine/biosim-checks/src/lib.rs:23`
+- `engine/biosim-checks/src/lib.rs:32`
 
 <details>
 <summary>Related files:</summary>
@@ -270,24 +278,24 @@ Supporting implementation citations:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:14`
-- `engine/biosim-checks/src/lib.rs:22`
-- `engine/biosim-checks/src/lib.rs:31`
+- `engine/biosim-checks/src/lib.rs:15`
+- `engine/biosim-checks/src/lib.rs:23`
+- `engine/biosim-checks/src/lib.rs:32`
 </details>
 
 ## Key Symbols
 
 ### `from_json` (function)
 Behavior: Implements component logic in `engine/biosim-checks/src/lib.rs` by coordinating nearby symbol calls. It directly calls `load_checks`.
-Receives: Called by `main`, `invariant_drift_detected_with_baseline`, `invariant_ok_at_baseline`.
+Receives: Called by `main`, `main`, `invariant_drift_detected_with_baseline`.
 Produces or triggers: Triggers `load_checks`.
 Connected symbols:
-- Callers: `main`, `invariant_drift_detected_with_baseline`, `invariant_ok_at_baseline`.
+- Callers: `main`, `main`, `invariant_drift_detected_with_baseline`.
 - Callees: `load_checks`.
 Supporting implementation citations:
-- `engine/biosim-checks/src/lib.rs:209`
+- `engine/biosim-checks/src/lib.rs:235`
 - `adapters/rust/src/main.rs:41`
-- `engine/biosim-checks/src/lib.rs:55`
+- `engine/biosim-checks/src/lib.rs:64`
 
 ### `evaluate_counts` (function)
 Behavior: Implements component logic in `engine/biosim-checks/src/lib.rs` by coordinating nearby symbol calls. It directly calls `evaluate`.
@@ -297,9 +305,9 @@ Connected symbols:
 - Callers: `invariant_drift_detected_with_baseline`, `invariant_ok_at_baseline`, `positivity_violation_detected`.
 - Callees: `evaluate`.
 Supporting implementation citations:
-- `engine/biosim-checks/src/lib.rs:220`
-- `engine/biosim-checks/src/lib.rs:674`
-- `engine/biosim-checks/src/lib.rs:56`
+- `engine/biosim-checks/src/lib.rs:250`
+- `engine/biosim-checks/src/lib.rs:827`
+- `engine/biosim-checks/src/lib.rs:65`
 
 ### `make_signed_bundle` (function)
 Behavior: Constructs or initializes an implementation boundary in `engine/biosim-checks/src/lib.rs`. It directly calls `sha256_hex`.
@@ -309,9 +317,9 @@ Connected symbols:
 - Callers: `signed_init_ok`, `signed_init_rejects_bad_signature`, `signed_init_rejects_payload_hash_mismatch`.
 - Callees: `sha256_hex`.
 Supporting implementation citations:
-- `engine/biosim-checks/src/lib.rs:543`
-- `engine/biosim-checks/src/lib.rs:596`
-- `engine/biosim-checks/src/lib.rs:349`
+- `engine/biosim-checks/src/lib.rs:696`
+- `engine/biosim-checks/src/lib.rs:749`
+- `engine/biosim-checks/src/lib.rs:496`
 
 <details>
 <summary>Related files:</summary>
@@ -322,15 +330,15 @@ Supporting implementation citations:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:209`
+- `engine/biosim-checks/src/lib.rs:235`
 - `adapters/rust/src/main.rs:41`
-- `engine/biosim-checks/src/lib.rs:55`
-- `engine/biosim-checks/src/lib.rs:220`
-- `engine/biosim-checks/src/lib.rs:674`
-- `engine/biosim-checks/src/lib.rs:56`
-- `engine/biosim-checks/src/lib.rs:543`
-- `engine/biosim-checks/src/lib.rs:596`
-- `engine/biosim-checks/src/lib.rs:349`
+- `engine/biosim-checks/src/lib.rs:64`
+- `engine/biosim-checks/src/lib.rs:250`
+- `engine/biosim-checks/src/lib.rs:827`
+- `engine/biosim-checks/src/lib.rs:65`
+- `engine/biosim-checks/src/lib.rs:696`
+- `engine/biosim-checks/src/lib.rs:749`
+- `engine/biosim-checks/src/lib.rs:496`
 </details>
 
 ## State Boundaries
@@ -384,8 +392,8 @@ Ecosystem: unknown
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ## Entrypoints and Runtime Surface
@@ -421,44 +429,44 @@ External dependency edges (bounded):
 - `docs/assets/logo-wordmark.svg`
 - `docs/assets/logo.svg`
 - `engine/biosim-checks/src`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
-- `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 </details>
 
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ## Why This Hotspot Matters
 
-Architectural role: Hotspot score 162 with 24 inbound and 28 outbound inferred edges marks `engine/biosim-checks/src` as a coordination-heavy component. It bridges `adapters`, `external`.
+Architectural role: Hotspot score 174 with 27 inbound and 29 outbound inferred edges marks `engine/biosim-checks/src` as a coordination-heavy component. It bridges `adapters`, `external`.
 
 Main coupling surfaces:
 - Coupled components: `Documentation`, `Tests`, `anyhow`, `base64`.
-- Call-heavy surface with 46 inferred call edges.
+- Call-heavy surface with 50 inferred call edges.
 - Dependency-heavy surface with 6 inferred dependency edges.
 
 Likely failure modes:
-- Upstream breakage risk: 24 inbound edges suggest downstream callers depend on this boundary staying stable.
-- Coordination risk: 28 outbound edges mean changes can ripple into neighboring components.
+- Upstream breakage risk: 27 inbound edges suggest downstream callers depend on this boundary staying stable.
+- Coordination risk: 29 outbound edges mean changes can ripple into neighboring components.
 - Cross-subsystem regression risk: changes can disrupt handoffs across `adapters`, `external`.
 
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
 </details>
@@ -472,7 +480,7 @@ Likely failure modes:
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
 </details>
@@ -480,13 +488,13 @@ Likely failure modes:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
 </details>
@@ -510,8 +518,8 @@ First validation checks:
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
 - `Makefile`
@@ -532,8 +540,8 @@ First validation checks:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
 - `Makefile`
@@ -549,7 +557,7 @@ Failure trigger: if the condition enforced by `ChecksBundle` is not met, downstr
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ### `requires_signature`
@@ -559,7 +567,7 @@ Failure trigger: if the condition enforced by `requires_signature` is not met, d
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:38`
+- `engine/biosim-checks/src/lib.rs:47`
 </details>
 
 ### `CheckSpec`
@@ -569,7 +577,7 @@ Failure trigger: if the condition enforced by `CheckSpec` is not met, downstream
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:67`
+- `engine/biosim-checks/src/lib.rs:76`
 </details>
 
 <details>
@@ -581,9 +589,9 @@ Failure trigger: if the condition enforced by `CheckSpec` is not met, downstream
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:227`
-- `engine/biosim-checks/src/lib.rs:38`
-- `engine/biosim-checks/src/lib.rs:67`
+- `engine/biosim-checks/src/lib.rs:344`
+- `engine/biosim-checks/src/lib.rs:47`
+- `engine/biosim-checks/src/lib.rs:76`
 </details>
 
 ## Where to Edit
@@ -602,8 +610,8 @@ Nearby verification surfaces:
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -620,8 +628,8 @@ Nearby verification surfaces:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -631,7 +639,7 @@ Nearby verification surfaces:
 Impacted areas:
 - Downstream components likely affected: `anyhow`, `base64`, `once_cell`, `rand`.
 - Cross-subsystem risk touches `adapters`, `external`.
-- Hotspot score 162 with 24 inbound and 28 outbound edges suggests higher coordination risk.
+- Hotspot score 174 with 27 inbound and 29 outbound edges suggests higher coordination risk.
 
 Suggested verification steps:
 - Validate with `python -m pytest` (test) from `.`.
@@ -640,8 +648,8 @@ Suggested verification steps:
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -658,8 +666,8 @@ Suggested verification steps:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -673,30 +681,30 @@ Suggested verification steps:
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:227`
-- `engine/biosim-checks/src/lib.rs:67`
-- `engine/biosim-checks/src/lib.rs:14`
-- `engine/biosim-checks/src/lib.rs:22`
-- `engine/biosim-checks/src/lib.rs:31`
-- `engine/biosim-checks/src/lib.rs:209`
+- `engine/biosim-checks/src/lib.rs:344`
+- `engine/biosim-checks/src/lib.rs:76`
+- `engine/biosim-checks/src/lib.rs:15`
+- `engine/biosim-checks/src/lib.rs:23`
+- `engine/biosim-checks/src/lib.rs:32`
+- `engine/biosim-checks/src/lib.rs:235`
 - `adapters/rust/src/main.rs:41`
-- `engine/biosim-checks/src/lib.rs:55`
-- `engine/biosim-checks/src/lib.rs:220`
-- `engine/biosim-checks/src/lib.rs:674`
-- `engine/biosim-checks/src/lib.rs:56`
-- `engine/biosim-checks/src/lib.rs:543`
-- `engine/biosim-checks/src/lib.rs:596`
-- `engine/biosim-checks/src/lib.rs:349`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/lib.rs:64`
+- `engine/biosim-checks/src/lib.rs:250`
+- `engine/biosim-checks/src/lib.rs:827`
+- `engine/biosim-checks/src/lib.rs:65`
+- `engine/biosim-checks/src/lib.rs:696`
+- `engine/biosim-checks/src/lib.rs:749`
+- `engine/biosim-checks/src/lib.rs:496`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
 - `Makefile`
 - `pyproject.toml`
-- `engine/biosim-checks/src/lib.rs:38`
+- `engine/biosim-checks/src/lib.rs:47`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>

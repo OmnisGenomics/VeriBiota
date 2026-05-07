@@ -3,7 +3,7 @@ page_id: components
 page_type: components
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.850Z
+updated_at: 2026-05-07T04:45:24.234Z
 ---
 
 <details>
@@ -11,17 +11,17 @@ updated_at: 2026-05-07T01:35:21.850Z
 
 ```json
 {
-  "freshnessKey": "79e0a8295590c8499cd22bd7f794eb501136590e",
+  "freshnessKey": "77e405dda225581c93df11ee011273cde9fa0917",
   "plannerReason": "Service template selected because deterministic evidence suggests a runnable application or service surface. The generic runtime page is suppressed because start-here now covers startup orientation more directly, while playbook keeps validation guidance separate. The generic components navigation section is demoted to an appendix because change-guide plus component pages provide the stronger explanation-first edit path for this service-shaped repository. The generic components navigation section is demoted to an appendix because change-guide and component pages now provide the stronger explanation-first path for this repo shape.",
   "changedPaths": [
     "adapters/README.md",
     "docs/architecture.md",
     "docs/assets/favicon.svg",
     "docs/assets/logo-wordmark.svg",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
-    "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
     "engine/biosim-checks/Cargo.lock",
     "engine/biosim-checks/Cargo.toml",
     "engine/biosim-checks/ffi/lib.c",
@@ -41,10 +41,10 @@ updated_at: 2026-05-07T01:35:21.850Z
     "docs/architecture.md",
     "docs/assets/favicon.svg",
     "docs/assets/logo-wordmark.svg",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
-    "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
     "engine/biosim-checks/Cargo.lock",
     "engine/biosim-checks/Cargo.toml",
     "engine/biosim-checks/ffi/lib.c",
@@ -100,10 +100,12 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -115,8 +117,10 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -176,10 +180,12 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -191,8 +197,10 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -238,8 +246,8 @@ Component inventory for VeriBiota.
 ## Component Inventory
 
 - Documentation (docs) at `.` with 40 files.
-- Tests (tests) at `tests` with 26 files.
-- biosim-checks (package) at `engine/biosim-checks` with 6 files.
+- Tests (tests) at `tests` with 30 files.
+- biosim-checks (package) at `engine/biosim-checks` with 7 files.
 - veribiota-example-project (application) at `examples/veribiota-example-project` with 4 files.
 - biosim-eval (application) at `engine/biosim-checks/src/bin` with 2 files.
 - engine/biosim-checks/src (module) at `engine/biosim-checks/src` with 2 files.
@@ -256,10 +264,10 @@ Component inventory for VeriBiota.
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
-- `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/ffi/lib.c`
@@ -280,14 +288,14 @@ Component inventory for VeriBiota.
 
 - `adapters/README.md`
 - `docs/architecture.md`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 - `package.json`
@@ -315,14 +323,14 @@ Component inventory for VeriBiota.
 
 - `adapters/README.md`
 - `docs/architecture.md`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 - `package.json`

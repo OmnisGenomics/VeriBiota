@@ -3,7 +3,7 @@ page_id: component-component:python-script:veribiota
 page_type: component
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.817Z
+updated_at: 2026-05-07T04:45:24.199Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.817Z
 
 ```json
 {
-  "freshnessKey": "e48fbc4e8b3d94a9456c2535cb19f9d11a57ce96",
+  "freshnessKey": "8e12e89a0a10db1e6b1332f375dea79c0266070f",
   "plannerReason": "Generated because the component was ranked as significant for repo navigation.",
   "changedPaths": [
     "pyproject.toml",
@@ -21,11 +21,11 @@ updated_at: 2026-05-07T01:35:21.817Z
     "docs/assets/favicon.svg",
     "docs/assets/logo-wordmark.svg",
     "docs/assets/logo.svg",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Makefile",
     "package.json",
     "examples/veribiota-example-project/pyproject.toml"
@@ -38,11 +38,11 @@ updated_at: 2026-05-07T01:35:21.817Z
     "docs/assets/favicon.svg",
     "docs/assets/logo-wordmark.svg",
     "docs/assets/logo.svg",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Makefile",
     "package.json",
     "examples/veribiota-example-project/pyproject.toml"
@@ -89,10 +89,12 @@ updated_at: 2026-05-07T01:35:21.817Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -104,8 +106,10 @@ updated_at: 2026-05-07T01:35:21.817Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -162,10 +166,12 @@ updated_at: 2026-05-07T01:35:21.817Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -177,8 +183,10 @@ updated_at: 2026-05-07T01:35:21.817Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -344,11 +352,11 @@ Repository-owned edges:
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
 - `docs/assets/logo.svg`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
-- `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 </details>
 
 <details>
@@ -403,7 +411,7 @@ Nearby verification surfaces:
 - Run `make` (build) from `.`.
 - Run `veribiota` (run) from `.`.
 - Run `python -m pytest` (test) from `.`.
-- Run `npm run check:tasks` (check:tasks) from `.`.
+- Run `npm run check` (check) from `.`.
 
 <details>
 <summary>Supporting citations:</summary>
@@ -451,6 +459,8 @@ Insufficient evidence to infer change-planning guidance.
 - `make` (build)
 - `veribiota` (run)
 - `python -m pytest` (test)
+- `npm run check` (check)
+- `npm run check:profiles` (check:profiles)
 - `npm run check:tasks` (check:tasks)
 
 <details>

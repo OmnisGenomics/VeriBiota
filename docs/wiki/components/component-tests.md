@@ -3,7 +3,7 @@ page_id: component-component:tests
 page_type: component
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.803Z
+updated_at: 2026-05-07T04:45:24.184Z
 ---
 
 <details>
@@ -11,17 +11,17 @@ updated_at: 2026-05-07T01:35:21.803Z
 
 ```json
 {
-  "freshnessKey": "22c2e37339c8a8a9a8535d8ea9908ef24b071767",
+  "freshnessKey": "25544e05cf1b7ac7f5e79b2e0c5ad814419ee6f7",
   "plannerReason": "Generated because the component was ranked as significant for repo navigation.",
   "changedPaths": [
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Tests/profiles/edit_script_v1/ins_del_pass.json",
-    "Tests/profiles/edit_script_v1/malformed_error.json",
-    "Tests/profiles/edit_script_v1/simple_sub_pass.json",
     "adapters/README.md",
     "docs/architecture.md",
     "docs/assets/favicon.svg",
@@ -31,14 +31,14 @@ updated_at: 2026-05-07T01:35:21.803Z
     "examples/veribiota-example-project/pyproject.toml"
   ],
   "dependencyPaths": [
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Tests/profiles/edit_script_v1/ins_del_pass.json",
-    "Tests/profiles/edit_script_v1/malformed_error.json",
-    "Tests/profiles/edit_script_v1/simple_sub_pass.json",
     "adapters/README.md",
     "docs/architecture.md",
     "docs/assets/favicon.svg",
@@ -48,10 +48,12 @@ updated_at: 2026-05-07T01:35:21.803Z
     "examples/veribiota-example-project/pyproject.toml"
   ],
   "dependencyEvidenceIds": [
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -63,8 +65,10 @@ updated_at: 2026-05-07T01:35:21.803Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -118,10 +122,12 @@ updated_at: 2026-05-07T01:35:21.803Z
     "workflow:examples/veribiota-example-project/pyproject.toml"
   ],
   "evidenceIds": [
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -133,8 +139,10 @@ updated_at: 2026-05-07T01:35:21.803Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -281,23 +289,23 @@ Ecosystem: unknown
 <details>
 <summary>Related files:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
+- `Tests/profiles/edit_script_normal_form_v1/malformed_error.json`
 - `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 - `Tests/profiles/edit_script_v1/ins_del_pass.json`
-- `Tests/profiles/edit_script_v1/malformed_error.json`
-- `Tests/profiles/edit_script_v1/simple_sub_pass.json`
 </details>
 
 <details>
 <summary>Citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
-- `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
 </details>
 
 ## Entrypoints and Runtime Surface
@@ -339,14 +347,14 @@ External dependency edges (bounded):
 <details>
 <summary>Related files:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
+- `Tests/profiles/edit_script_normal_form_v1/malformed_error.json`
 - `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 - `Tests/profiles/edit_script_v1/ins_del_pass.json`
-- `Tests/profiles/edit_script_v1/malformed_error.json`
-- `Tests/profiles/edit_script_v1/simple_sub_pass.json`
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
@@ -357,10 +365,10 @@ External dependency edges (bounded):
 <details>
 <summary>Citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
-- `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
 </details>
 
 ## Why This Hotspot Matters
@@ -399,9 +407,9 @@ Insufficient evidence to infer invariants and failure handling confidently.
 ## Where to Edit
 
 Likely change entry files:
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 
 Owned interfaces:
 - none
@@ -413,9 +421,9 @@ Nearby verification surfaces:
 <details>
 <summary>Supporting citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -423,9 +431,9 @@ Nearby verification surfaces:
 <details>
 <summary>Related files:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -433,9 +441,9 @@ Nearby verification surfaces:
 <details>
 <summary>Citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -452,9 +460,9 @@ Suggested verification steps:
 <details>
 <summary>Supporting citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -462,10 +470,10 @@ Suggested verification steps:
 <details>
 <summary>Related files:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
-- `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -473,9 +481,9 @@ Suggested verification steps:
 <details>
 <summary>Citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>
@@ -489,10 +497,10 @@ Suggested verification steps:
 <details>
 <summary>Citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
-- `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
 - `pyproject.toml`
 - `examples/veribiota-example-project/pyproject.toml`
 </details>

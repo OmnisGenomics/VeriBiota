@@ -3,7 +3,7 @@ page_id: validation
 page_type: validation
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.855Z
+updated_at: 2026-05-07T04:45:24.240Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.855Z
 
 ```json
 {
-  "freshnessKey": "732608bba428303128c40270f19b63c009003bdb",
+  "freshnessKey": "edd440505ae44111e550d45b82e50574d60f8034",
   "plannerReason": "Generated when enough deterministic workflow evidence exists to separate fast feedback, behavioral verification, and release-safety validation.",
   "changedPaths": [
     "Makefile",
@@ -57,8 +57,11 @@ Validation strategy guide for VeriBiota.
 ## Fast Feedback
 
 - Run `make` (build) from `.` for fast structural feedback before broader validation.
+- Run `npm run check` (check) from `.` for fast structural feedback before broader validation.
+- Run `npm run check:profiles` (check:profiles) from `.` for fast structural feedback before broader validation.
 - Run `npm run check:tasks` (check:tasks) from `.` for fast structural feedback before broader validation.
-- Check prerequisite `npm install` before relying on `npm run check:tasks`.
+- Check prerequisite `npm install` before relying on `npm run check`.
+- Check prerequisite `npm install` before relying on `npm run check:profiles`.
 
 <details>
 <summary>Related files:</summary>

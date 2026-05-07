@@ -3,7 +3,7 @@ page_id: component-component:cargo:engine/biosim-checks
 page_type: component
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.806Z
+updated_at: 2026-05-07T04:45:24.188Z
 ---
 
 <details>
@@ -11,9 +11,10 @@ updated_at: 2026-05-07T01:35:21.806Z
 
 ```json
 {
-  "freshnessKey": "3d8cae6c5811beacc384daf1fec47022617338b7",
+  "freshnessKey": "f682a665d7b308475aef369e3c635f246d293ee7",
   "plannerReason": "Generated because the component was ranked as significant for repo navigation.",
   "changedPaths": [
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "engine/biosim-checks/Cargo.lock",
     "engine/biosim-checks/Cargo.toml",
     "engine/biosim-checks/ffi/lib.c",
@@ -31,12 +32,12 @@ updated_at: 2026-05-07T01:35:21.806Z
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Makefile",
     "pyproject.toml",
     "examples/veribiota-example-project/pyproject.toml"
   ],
   "dependencyPaths": [
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "engine/biosim-checks/Cargo.lock",
     "engine/biosim-checks/Cargo.toml",
     "engine/biosim-checks/ffi/lib.c",
@@ -54,12 +55,12 @@ updated_at: 2026-05-07T01:35:21.806Z
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "Makefile",
     "pyproject.toml",
     "examples/veribiota-example-project/pyproject.toml"
   ],
   "dependencyEvidenceIds": [
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "component:engine/biosim-checks/Cargo.toml",
     "component:adapters/rust/Cargo.toml",
     "ingest:file:adapters/README.md",
@@ -106,6 +107,7 @@ updated_at: 2026-05-07T01:35:21.806Z
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -117,8 +119,10 @@ updated_at: 2026-05-07T01:35:21.806Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -133,6 +137,7 @@ updated_at: 2026-05-07T01:35:21.806Z
     "workflow:examples/veribiota-example-project/pyproject.toml"
   ],
   "evidenceIds": [
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "component:engine/biosim-checks/Cargo.toml",
     "component:adapters/rust/Cargo.toml",
     "ingest:file:adapters/README.md",
@@ -179,6 +184,7 @@ updated_at: 2026-05-07T01:35:21.806Z
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -190,8 +196,10 @@ updated_at: 2026-05-07T01:35:21.806Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -246,14 +254,52 @@ Insufficient evidence to infer module responsibilities confidently.
 
 ## Key Symbols
 
-Insufficient evidence to infer key symbol behavior confidently.
+### `write_case` (function)
+Behavior: Persists or emits downstream effects from `engine/biosim-checks/tests/biosim_eval.rs`. It directly calls `temp_case_dir`.
+Receives: Called by `json_summary_reports_clean_results`, `json_summary_reports_contract_violations`, `model_hash_mismatch_is_a_hard_error`.
+Produces or triggers: Triggers `temp_case_dir`.
+Connected symbols:
+- Callers: `json_summary_reports_clean_results`, `json_summary_reports_contract_violations`, `model_hash_mismatch_is_a_hard_error`.
+- Callees: `temp_case_dir`.
+Supporting implementation citations:
+- `engine/biosim-checks/tests/biosim_eval.rs:22`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
+- `engine/biosim-checks/tests/biosim_eval.rs:7`
+
+### `run_eval_json` (function)
+Behavior: Starts or orchestrates execution for `engine/biosim-checks/tests/biosim_eval.rs`.
+Receives: Called by `json_summary_reports_clean_results`, `json_summary_reports_contract_violations`, `model_hash_mismatch_is_a_hard_error`.
+Produces or triggers: No strong downstream trigger evidence was inferred.
+Connected symbols:
+- Callers: `json_summary_reports_clean_results`, `json_summary_reports_contract_violations`, `model_hash_mismatch_is_a_hard_error`.
+Supporting implementation citations:
+- `engine/biosim-checks/tests/biosim_eval.rs:52`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
+
+### `json_summary_reports_clean_results` (function)
+Behavior: Implements component logic in `engine/biosim-checks/tests/biosim_eval.rs` by coordinating nearby symbol calls. It directly calls `run_eval_json`, `write_case`.
+Receives: No strong upstream caller evidence was inferred.
+Produces or triggers: Triggers `run_eval_json`, `write_case`.
+Connected symbols:
+- Callees: `run_eval_json`, `write_case`.
+Supporting implementation citations:
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
+- `engine/biosim-checks/tests/biosim_eval.rs:52`
 
 <details>
-<summary>Supporting citations:</summary>
+<summary>Related files:</summary>
 
-- none
+- `engine/biosim-checks/tests/biosim_eval.rs`
 </details>
 
+<details>
+<summary>Citations:</summary>
+
+- `engine/biosim-checks/tests/biosim_eval.rs:22`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
+- `engine/biosim-checks/tests/biosim_eval.rs:7`
+- `engine/biosim-checks/tests/biosim_eval.rs:52`
+</details>
 
 ## State Boundaries
 
@@ -305,6 +351,7 @@ Ecosystem: rust
 - `engine/biosim-checks/ffi/veribiota_checks.h`
 - `engine/biosim-checks/src/bin/eval.rs`
 - `engine/biosim-checks/src/lib.rs`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 </details>
 
 <details>
@@ -343,6 +390,7 @@ External dependency edges (bounded):
 - `component:cargo:engine/biosim-checks` depends_on `component:external:rust:serde` (high)
 - `component:cargo:engine/biosim-checks` depends_on `component:external:rust:serde_json` (high)
 - `component:cargo:engine/biosim-checks` depends_on `component:external:rust:sha2` (high)
+- `component:cargo:engine/biosim-checks` depends_on `component:external:rust:serde_json` (medium)
 
 <details>
 <summary>Related files:</summary>
@@ -353,6 +401,7 @@ External dependency edges (bounded):
 - `engine/biosim-checks/ffi/veribiota_checks.h`
 - `engine/biosim-checks/src/bin/eval.rs`
 - `engine/biosim-checks/src/lib.rs`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks`
 - `adapters/README.md`
@@ -364,7 +413,6 @@ External dependency edges (bounded):
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
-- `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 </details>
 
 <details>
@@ -378,15 +426,16 @@ External dependency edges (bounded):
 
 ## Why This Hotspot Matters
 
-Architectural role: Hotspot score 45 with 2 inbound and 11 outbound inferred edges marks `biosim-checks` as a coordination-heavy component. It bridges `adapters`, `external`.
+Architectural role: Hotspot score 93 with 10 inbound and 19 outbound inferred edges marks `biosim-checks` as a coordination-heavy component. It bridges `adapters`, `external`.
 
 Main coupling surfaces:
 - Coupled components: `veribiota-rust-adapter`, `anyhow`, `base64`, `ed25519-dalek`.
-- Dependency-heavy surface with 13 inferred dependency edges.
+- Call-heavy surface with 14 inferred call edges.
+- Dependency-heavy surface with 15 inferred dependency edges.
 
 Likely failure modes:
-- Upstream breakage risk: 2 inbound edges suggest downstream callers depend on this boundary staying stable.
-- Coordination risk: 11 outbound edges mean changes can ripple into neighboring components.
+- Upstream breakage risk: 10 inbound edges suggest downstream callers depend on this boundary staying stable.
+- Coordination risk: 19 outbound edges mean changes can ripple into neighboring components.
 - Cross-subsystem regression risk: changes can disrupt handoffs across `adapters`, `external`.
 
 <details>
@@ -528,7 +577,7 @@ Nearby verification surfaces:
 Impacted areas:
 - Downstream components likely affected: `anyhow`, `base64`, `ed25519-dalek`, `hex`.
 - Cross-subsystem risk touches `adapters`, `external`.
-- Hotspot score 45 with 2 inbound and 11 outbound edges suggests higher coordination risk.
+- Hotspot score 93 with 10 inbound and 19 outbound edges suggests higher coordination risk.
 
 Suggested verification steps:
 - Validate with `python -m pytest` (test) from `.`.
@@ -574,6 +623,10 @@ Suggested verification steps:
 <details>
 <summary>Citations:</summary>
 
+- `engine/biosim-checks/tests/biosim_eval.rs:22`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
+- `engine/biosim-checks/tests/biosim_eval.rs:7`
+- `engine/biosim-checks/tests/biosim_eval.rs:52`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/ffi/lib.c`

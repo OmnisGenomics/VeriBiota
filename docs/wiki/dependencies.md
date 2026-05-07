@@ -3,7 +3,7 @@ page_id: dependencies
 page_type: dependencies
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.854Z
+updated_at: 2026-05-07T04:45:24.238Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.854Z
 
 ```json
 {
-  "freshnessKey": "8e446f2fb37061cd09687303b45e73b28da9bb5f",
+  "freshnessKey": "814e67897390ec5407ab217889a7dffe5cc3d6ce",
   "plannerReason": "Service template selected because deterministic evidence suggests a runnable application or service surface. The generic runtime page is suppressed because start-here now covers startup orientation more directly, while playbook keeps validation guidance separate. The generic components navigation section is demoted to an appendix because change-guide plus component pages provide the stronger explanation-first edit path for this service-shaped repository.",
   "changedPaths": [
     "package.json",
@@ -27,8 +27,8 @@ updated_at: 2026-05-07T01:35:21.854Z
     "examples/veribiota-example-project/.github/workflows/veribiota.yml",
     "examples/veribiota-example-project/pyproject.toml",
     "pyproject.toml",
-    "examples/veribiota-example-project/tests/dags/micro.dag.json",
-    "Tests/golden/checks_min.json"
+    "engine/biosim-checks/tests/biosim_eval.rs",
+    "examples/veribiota-example-project/tests/dags/micro.dag.json"
   ],
   "dependencyPaths": [
     "package.json",
@@ -44,12 +44,13 @@ updated_at: 2026-05-07T01:35:21.854Z
     "examples/veribiota-example-project/.github/workflows/veribiota.yml",
     "examples/veribiota-example-project/pyproject.toml",
     "pyproject.toml",
-    "examples/veribiota-example-project/tests/dags/micro.dag.json",
-    "Tests/golden/checks_min.json"
+    "engine/biosim-checks/tests/biosim_eval.rs",
+    "examples/veribiota-example-project/tests/dags/micro.dag.json"
   ],
   "dependencyEvidenceIds": [
     "component:package.json",
     "ingest:file:scripts/schemaValidate.mjs",
+    "ingest:file:scripts/validateProfiles.mjs",
     "ingest:file:scripts/validateTasks.mjs",
     "ingest:file:.github/scripts/validate_snapshots.py",
     "ingest:file:adapters/python/demo.py",
@@ -57,6 +58,7 @@ updated_at: 2026-05-07T01:35:21.854Z
     "ingest:file:adapters/rust/src/main.rs",
     "ingest:file:engine/biosim-checks/src/lib.rs",
     "ingest:file:engine/biosim-checks/src/bin/eval.rs",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:python/veribiota_py/core.py",
     "ingest:file:python/veribiota/adapter/cli.py",
     "ingest:file:python/veribiota/adapter/preflight.py",
@@ -113,6 +115,7 @@ updated_at: 2026-05-07T01:35:21.854Z
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -124,8 +127,10 @@ updated_at: 2026-05-07T01:35:21.854Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -142,6 +147,7 @@ updated_at: 2026-05-07T01:35:21.854Z
   "evidenceIds": [
     "component:package.json",
     "ingest:file:scripts/schemaValidate.mjs",
+    "ingest:file:scripts/validateProfiles.mjs",
     "ingest:file:scripts/validateTasks.mjs",
     "ingest:file:.github/scripts/validate_snapshots.py",
     "ingest:file:adapters/python/demo.py",
@@ -149,6 +155,7 @@ updated_at: 2026-05-07T01:35:21.854Z
     "ingest:file:adapters/rust/src/main.rs",
     "ingest:file:engine/biosim-checks/src/lib.rs",
     "ingest:file:engine/biosim-checks/src/bin/eval.rs",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:python/veribiota_py/core.py",
     "ingest:file:python/veribiota/adapter/cli.py",
     "ingest:file:python/veribiota/adapter/preflight.py",
@@ -205,6 +212,7 @@ updated_at: 2026-05-07T01:35:21.854Z
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -216,8 +224,10 @@ updated_at: 2026-05-07T01:35:21.854Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -308,42 +318,46 @@ Insufficient evidence to infer dependency boundaries confidently.
 - `symbol:.github/scripts/validate_snapshots.py:main:57` calls `symbol:.github/scripts/validate_snapshots.py:load_schema:25` (high)
 - `symbol:.github/scripts/validate_snapshots.py:main:57` calls `symbol:.github/scripts/validate_snapshots.py:validate_signature:42` (high)
 - `symbol:.github/scripts/validate_snapshots.py:validate_signature:42` calls `symbol:scripts/schemaValidate.mjs:load:14` (low)
-- `symbol:.github/scripts/validate_snapshots.py:validate_signature:42` calls `symbol:scripts/validateTasks.mjs:validate:16` (low)
 - `symbol:adapters/python/demo.py:main:22` calls `symbol:adapters/python/demo.py:load_trajectory:14` (high)
 - `symbol:adapters/python/demo.py:main:22` calls `symbol:adapters/python/veribiota_adapter.py:eval_stream:48` (low)
 - `symbol:adapters/python/demo.py:main:22` calls `symbol:adapters/python/veribiota_adapter.py:init_checks:41` (low)
 - `symbol:adapters/python/veribiota_adapter.py:eval_stream:48` calls `symbol:adapters/python/veribiota_adapter.py:Outcome:25` (high)
 - `symbol:adapters/python/veribiota_adapter.py:eval_stream:48` calls `symbol:adapters/python/veribiota_adapter.py:Snapshot:15` (high)
 - `symbol:adapters/rust/src/main.rs:main:41` calls `symbol:adapters/rust/src/main.rs:load_args:19` (high)
-- `symbol:adapters/rust/src/main.rs:main:41` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:215` (low)
-- `symbol:adapters/rust/src/main.rs:main:41` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:209` (low)
-- `symbol:engine/biosim-checks/src/bin/eval.rs:evaluate:93` calls `symbol:engine/biosim-checks/src/bin/eval.rs:to_vec_f64:51` (high)
-- `symbol:engine/biosim-checks/src/bin/eval.rs:evaluate:93` calls `symbol:engine/biosim-checks/src/bin/eval.rs:weights_from_json:68` (high)
-- `symbol:engine/biosim-checks/src/bin/eval.rs:main:186` calls `symbol:engine/biosim-checks/src/bin/eval.rs:evaluate:93` (high)
-- `symbol:engine/biosim-checks/src/bin/eval.rs:main:186` calls `symbol:engine/biosim-checks/src/bin/eval.rs:to_vec_f64:51` (high)
-- `symbol:engine/biosim-checks/src/bin/eval.rs:main:186` calls `symbol:engine/biosim-checks/src/bin/eval.rs:weights_from_json:68` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:215` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate:56` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:220` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate:56` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:from_json:209` calls `symbol:engine/biosim-checks/src/lib.rs:load_checks:55` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:invariant_drift_detected_with_baseline:674` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:220` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:invariant_drift_detected_with_baseline:674` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:209` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:invariant_drift_detected_with_baseline:674` calls `symbol:engine/biosim-checks/src/lib.rs:sample_checks_json:641` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:invariant_ok_at_baseline:683` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:220` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:invariant_ok_at_baseline:683` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:209` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:invariant_ok_at_baseline:683` calls `symbol:engine/biosim-checks/src/lib.rs:sample_checks_json:641` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:load_checks:105` calls `symbol:engine/biosim-checks/src/lib.rs:weights_from_json:235` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:543` calls `symbol:engine/biosim-checks/src/lib.rs:sha256_hex:349` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:positivity_violation_detected:666` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:220` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:positivity_violation_detected:666` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:209` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:positivity_violation_detected:666` calls `symbol:engine/biosim-checks/src/lib.rs:sample_checks_json:641` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_ok:596` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:588` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_ok:596` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:543` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_bad_signature:604` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:588` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_bad_signature:604` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:543` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_payload_hash_mismatch:613` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:588` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_payload_hash_mismatch:613` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:543` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_requires_signature:631` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:588` (high)
-- `symbol:engine/biosim-checks/src/lib.rs:signed_init_requires_signature:631` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:543` (high)
+- `symbol:adapters/rust/src/main.rs:main:41` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:241` (low)
+- `symbol:adapters/rust/src/main.rs:main:41` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:235` (low)
+- `symbol:engine/biosim-checks/src/bin/eval.rs:main:6` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_jsonl:259` (low)
+- `symbol:engine/biosim-checks/src/bin/eval.rs:main:6` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:235` (low)
+- `symbol:engine/biosim-checks/src/lib.rs:evaluate_conc:241` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate:65` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:250` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate:65` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:evaluate_jsonl:259` calls `symbol:engine/biosim-checks/src/lib.rs:to_vec_f64:362` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:from_json:235` calls `symbol:engine/biosim-checks/src/lib.rs:load_checks:64` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:invariant_drift_detected_with_baseline:827` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:250` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:invariant_drift_detected_with_baseline:827` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:235` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:invariant_drift_detected_with_baseline:827` calls `symbol:engine/biosim-checks/src/lib.rs:sample_checks_json:794` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:invariant_ok_at_baseline:836` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:250` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:invariant_ok_at_baseline:836` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:235` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:invariant_ok_at_baseline:836` calls `symbol:engine/biosim-checks/src/lib.rs:sample_checks_json:794` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:load_checks:118` calls `symbol:engine/biosim-checks/src/lib.rs:weights_from_json:379` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:696` calls `symbol:engine/biosim-checks/src/lib.rs:sha256_hex:496` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:positivity_violation_detected:819` calls `symbol:engine/biosim-checks/src/lib.rs:evaluate_counts:250` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:positivity_violation_detected:819` calls `symbol:engine/biosim-checks/src/lib.rs:from_json:235` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:positivity_violation_detected:819` calls `symbol:engine/biosim-checks/src/lib.rs:sample_checks_json:794` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_ok:749` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:741` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_ok:749` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:696` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_bad_signature:757` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:741` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_bad_signature:757` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:696` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_payload_hash_mismatch:766` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:741` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_rejects_payload_hash_mismatch:766` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:696` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_requires_signature:784` calls `symbol:engine/biosim-checks/src/lib.rs:init_with:741` (high)
+- `symbol:engine/biosim-checks/src/lib.rs:signed_init_requires_signature:784` calls `symbol:engine/biosim-checks/src/lib.rs:make_signed_bundle:696` (high)
+- `symbol:engine/biosim-checks/tests/biosim_eval.rs:json_summary_reports_clean_results:64` calls `symbol:engine/biosim-checks/tests/biosim_eval.rs:run_eval_json:52` (high)
+- `symbol:engine/biosim-checks/tests/biosim_eval.rs:json_summary_reports_clean_results:64` calls `symbol:engine/biosim-checks/tests/biosim_eval.rs:write_case:22` (high)
+- `symbol:engine/biosim-checks/tests/biosim_eval.rs:json_summary_reports_contract_violations:87` calls `symbol:engine/biosim-checks/tests/biosim_eval.rs:run_eval_json:52` (high)
+- `symbol:engine/biosim-checks/tests/biosim_eval.rs:json_summary_reports_contract_violations:87` calls `symbol:engine/biosim-checks/tests/biosim_eval.rs:write_case:22` (high)
+- `symbol:engine/biosim-checks/tests/biosim_eval.rs:model_hash_mismatch_is_a_hard_error:109` calls `symbol:engine/biosim-checks/tests/biosim_eval.rs:run_eval_json:52` (high)
+- `symbol:engine/biosim-checks/tests/biosim_eval.rs:model_hash_mismatch_is_a_hard_error:109` calls `symbol:engine/biosim-checks/tests/biosim_eval.rs:write_case:22` (high)
+- `symbol:engine/biosim-checks/tests/biosim_eval.rs:write_case:22` calls `symbol:engine/biosim-checks/tests/biosim_eval.rs:temp_case_dir:7` (high)
 - `symbol:python/veribiota_py/core.py:check_alignment_global_affine_v1:25` calls `symbol:python/veribiota_py/core.py:_run:9` (high)
 - `symbol:python/veribiota_py/core.py:check_edit_script_v1:29` calls `symbol:python/veribiota_py/core.py:_run:9` (high)
 - `symbol:python/veribiota/adapter/cli.py:cmd_check_json:30` calls `symbol:python/veribiota/adapter/cli.py:_collect_inputs:23` (high)
@@ -466,7 +480,9 @@ Insufficient evidence to infer dependency boundaries confidently.
 - `symbol:scripts/schemaValidate.mjs:certSchema:17` calls `symbol:scripts/schemaValidate.mjs:load:14` (high)
 - `symbol:scripts/schemaValidate.mjs:checksSchema:16` calls `symbol:scripts/schemaValidate.mjs:load:14` (high)
 - `symbol:scripts/schemaValidate.mjs:data:28` calls `symbol:scripts/schemaValidate.mjs:load:14` (high)
-- `symbol:scripts/schemaValidate.mjs:ok:29` calls `symbol:scripts/validateTasks.mjs:validate:16` (low)
+- `symbol:scripts/validateProfiles.mjs:actualCoverage:146` calls `symbol:scripts/validateProfiles.mjs:fixtureCoverage:53` (high)
+- `symbol:scripts/validateProfiles.mjs:fixtureCoverage:53` calls `symbol:scripts/validateProfiles.mjs:fail:26` (high)
+- `symbol:scripts/validateProfiles.mjs:schemaHash:117` calls `symbol:scripts/validateProfiles.mjs:sha256Hex:31` (high)
 - `symbol:scripts/validateTasks.mjs:ok:45` calls `symbol:scripts/validateTasks.mjs:validate:16` (high)
 - `symbol:scripts/veribiota_integration.py:run_veribiota_check:33` calls `symbol:scripts/veribiota_integration.py:VeriBiotaResult:24` (high)
 - `symbol:tests/python/test_veribundle.py:test_invalid_digest_rejected:23` calls `symbol:python/veribiota/veribundle.py:validate_bundle:506` (low)
@@ -607,13 +623,14 @@ Insufficient evidence to infer dependency boundaries confidently.
 - `component:adapters/rust/src` depends_on `component:external:rust:serde` (medium)
 - `component:adapters/rust/src` depends_on `engine/biosim-checks/src/lib.rs` (medium)
 - `component:bin:biosim-eval` depends_on `component:external:rust:anyhow` (medium)
-- `component:bin:biosim-eval` depends_on `component:external:rust:serde` (medium)
+- `component:bin:biosim-eval` depends_on `engine/biosim-checks/src/lib.rs` (medium)
 - `component:engine/biosim-checks/src` depends_on `component:external:rust:anyhow` (medium)
 - `component:engine/biosim-checks/src` depends_on `component:external:rust:base64` (medium)
 - `component:engine/biosim-checks/src` depends_on `component:external:rust:once_cell` (medium)
 - `component:engine/biosim-checks/src` depends_on `component:external:rust:rand` (medium)
 - `component:engine/biosim-checks/src` depends_on `component:external:rust:serde` (medium)
 - `component:engine/biosim-checks/src` depends_on `component:external:rust:sha2` (medium)
+- `component:cargo:engine/biosim-checks` depends_on `component:external:rust:serde_json` (medium)
 - `python/veribiota_py/__init__.py` depends_on `python/veribiota_py/core.py` (medium)
 - `python/veribiota/__init__.py` depends_on `python/veribiota/__init__.py` (medium)
 - `python/veribiota/__init__.py` depends_on `python/veribiota/profile.py` (medium)
@@ -630,6 +647,7 @@ Insufficient evidence to infer dependency boundaries confidently.
 - `python/veribiota/adapter/suite_codegen.py` depends_on `python/veribiota/adapter/schema.py` (medium)
 - `scripts/schemaValidate.mjs` depends_on `component:external:node:ajv` (medium)
 - `scripts/schemaValidate.mjs` depends_on `component:external:node:ajv-formats` (medium)
+- `scripts/validateProfiles.mjs` depends_on `component:external:node:ajv` (medium)
 - `scripts/validateTasks.mjs` depends_on `component:external:node:ajv` (medium)
 - `scripts/validateTasks.mjs` depends_on `component:external:node:glob` (medium)
 - `scripts/validateTasks.mjs` depends_on `component:external:node:yaml` (medium)
@@ -651,27 +669,27 @@ Insufficient evidence to infer dependency boundaries confidently.
 - `examples/veribiota-example-project/pyproject.toml`
 - `package.json`
 - `pyproject.toml`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 </details>
 
 <details>
 <summary>Citations:</summary>
 
 - `adapters/rust/src/main.rs:19`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.lock`
 - `adapters/README.md`
 - `docs/architecture.md`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `package.json`
 - `pyproject.toml`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 </details>
 
 ## Navigation Guidance
@@ -688,16 +706,16 @@ Insufficient evidence to infer dependency boundaries confidently.
 - `package.json`
 - `package-lock.json`
 - `adapters/rust/src/main.rs:19`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.lock`
 - `adapters/README.md`
 - `docs/architecture.md`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `pyproject.toml`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 </details>

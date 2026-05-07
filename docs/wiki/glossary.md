@@ -3,7 +3,7 @@ page_id: glossary
 page_type: glossary
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.861Z
+updated_at: 2026-05-07T04:45:24.246Z
 ---
 
 <details>

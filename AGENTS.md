@@ -2,7 +2,7 @@
 
 ## Repository
 
-VeriBiota is a repository indexed by RepoIntel MCP. Version control: git. Detected ecosystems: node, python, rust. Inventory: 228 files, 36 components, 5 workflows. Documentation starts at adapters/README.md, docs/architecture.md, docs/assets/favicon.svg.
+VeriBiota is a repository indexed by RepoIntel MCP. Version control: git. Detected ecosystems: node, python, rust. Inventory: 235 files, 36 components, 7 workflows. Documentation starts at adapters/README.md, docs/architecture.md, docs/assets/favicon.svg.
 
 ## Navigation
 
@@ -30,6 +30,8 @@ VeriBiota is a repository indexed by RepoIntel MCP. Version control: git. Detect
 - `veribiota` (run)
 - `python -m pytest` (test)
 - `python -m pytest` (test)
+- `npm run check` (check)
+- `npm run check:profiles` (check:profiles)
 - `npm run check:tasks` (check:tasks)
 
 ## Components
@@ -85,7 +87,7 @@ Initial index created all repository artifacts.
 - `docs/cli.md`
 - `docs/code_scanning.md`
 </details>
-- Indexed evidence records: 237
+- Indexed evidence records: 244
 - Wiki quality warnings: none
 - Wiki page refresh status: 26 updated/new, 0 reused
 

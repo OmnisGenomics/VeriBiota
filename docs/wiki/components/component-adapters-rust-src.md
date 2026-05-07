@@ -3,7 +3,7 @@ page_id: component-component:adapters/rust/src
 page_type: component
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.814Z
+updated_at: 2026-05-07T04:45:24.196Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.814Z
 
 ```json
 {
-  "freshnessKey": "b5cffcc62c862277dfd7e29da79d26611a6e5756",
+  "freshnessKey": "96febd0fbe481341d60a59f9ba1d93f7e382eaf9",
   "plannerReason": "Generated because the component was ranked as significant for repo navigation.",
   "changedPaths": [
     "adapters/rust/src/main.rs",
@@ -21,11 +21,11 @@ updated_at: 2026-05-07T01:35:21.814Z
     "docs/assets/favicon.svg",
     "docs/assets/logo-wordmark.svg",
     "docs/assets/logo.svg",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "adapters/rust/Cargo.toml",
     "engine/biosim-checks/Cargo.toml",
     "Makefile",
@@ -40,11 +40,11 @@ updated_at: 2026-05-07T01:35:21.814Z
     "docs/assets/favicon.svg",
     "docs/assets/logo-wordmark.svg",
     "docs/assets/logo.svg",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
     "Tests/Main.lean",
     "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
-    "Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "adapters/rust/Cargo.toml",
     "engine/biosim-checks/Cargo.toml",
     "Makefile",
@@ -94,10 +94,12 @@ updated_at: 2026-05-07T01:35:21.814Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -109,8 +111,10 @@ updated_at: 2026-05-07T01:35:21.814Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -169,10 +173,12 @@ updated_at: 2026-05-07T01:35:21.814Z
     "ingest:file:README.md",
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -184,8 +190,10 @@ updated_at: 2026-05-07T01:35:21.814Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -385,11 +393,11 @@ External dependency edges (bounded):
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
 - `docs/assets/logo.svg`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
 - `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
-- `Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json`
 </details>
 
 <details>
@@ -420,7 +428,7 @@ Likely failure modes:
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `adapters/rust/Cargo.toml`
 </details>
 
@@ -432,7 +440,7 @@ Likely failure modes:
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `adapters/rust/Cargo.toml`
 </details>
 
@@ -444,7 +452,7 @@ Likely failure modes:
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `adapters/rust/Cargo.toml`
 </details>
 
@@ -591,7 +599,7 @@ Suggested verification steps:
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
-- `examples/veribiota-example-project/tests/dags/micro.dag.json`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
 - `Makefile`

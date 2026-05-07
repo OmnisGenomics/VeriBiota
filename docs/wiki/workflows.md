@@ -3,7 +3,7 @@ page_id: workflows
 page_type: workflows
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.851Z
+updated_at: 2026-05-07T04:45:24.235Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.851Z
 
 ```json
 {
-  "freshnessKey": "e14926d19cb374b838da641220e2c699f42bc356",
+  "freshnessKey": "1d66a7ef5b8df34c72e1d716520b3941d55708ad",
   "plannerReason": "Generated because workflows are one of the primary agent interaction surfaces.",
   "changedPaths": [
     "Makefile",
@@ -58,6 +58,8 @@ Workflow guide for VeriBiota.
 - `veribiota` (run, confidence medium)
 - `python -m pytest` (test, confidence high)
 - `python -m pytest` (test, confidence high)
+- `npm run check` (check, confidence high) | prerequisites: npm install
+- `npm run check:profiles` (check:profiles, confidence high) | prerequisites: npm install
 - `npm run check:tasks` (check:tasks, confidence high) | prerequisites: npm install
 
 <details>

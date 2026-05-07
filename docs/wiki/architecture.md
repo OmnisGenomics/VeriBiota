@@ -3,7 +3,7 @@ page_id: architecture
 page_type: architecture
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.850Z
+updated_at: 2026-05-07T04:45:24.234Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.850Z
 
 ```json
 {
-  "freshnessKey": "1a7bc1b72497b0fdaf705c4c77d840463738d80e",
+  "freshnessKey": "470c7dd83c9c1370f9f11d5b91d80e7288c98be1",
   "plannerReason": "Inferred architecture page summarizing repo shape and component structure.",
   "changedPaths": [
     "adapters/README.md",
@@ -65,12 +65,12 @@ updated_at: 2026-05-07T01:35:21.850Z
     "adapters/rust/src/main.rs",
     "examples/veribiota-example-project/.github/workflows/veribiota.yml",
     "examples/veribiota-example-project/pyproject.toml",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
-    "Tests/Main.lean",
     "veribiota",
     "Makefile",
-    "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "Tests/Main.lean",
     "engine/biosim-checks/ffi/veribiota_checks.h"
   ],
   "dependencyPaths": [
@@ -125,17 +125,18 @@ updated_at: 2026-05-07T01:35:21.850Z
     "adapters/rust/src/main.rs",
     "examples/veribiota-example-project/.github/workflows/veribiota.yml",
     "examples/veribiota-example-project/pyproject.toml",
+    "engine/biosim-checks/tests/biosim_eval.rs",
     "examples/veribiota-example-project/tests/dags/micro.dag.json",
     "Tests/golden/checks_min.json",
-    "Tests/Main.lean",
     "veribiota",
     "Makefile",
-    "Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "Tests/Main.lean",
     "engine/biosim-checks/ffi/veribiota_checks.h"
   ],
   "dependencyEvidenceIds": [
     "ingest:file:engine/biosim-checks/src/lib.rs",
     "ingest:file:adapters/rust/src/main.rs",
+    "ingest:file:engine/biosim-checks/src/bin/eval.rs",
     "component:package.json",
     "component:adapters/rust/Cargo.toml",
     "component:engine/biosim-checks/Cargo.toml",
@@ -180,12 +181,13 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
     "component:pyproject.toml",
-    "ingest:file:engine/biosim-checks/src/bin/eval.rs",
     "component:examples/veribiota-example-project/pyproject.toml",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -197,8 +199,10 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -254,6 +258,7 @@ updated_at: 2026-05-07T01:35:21.850Z
   "evidenceIds": [
     "ingest:file:engine/biosim-checks/src/lib.rs",
     "ingest:file:adapters/rust/src/main.rs",
+    "ingest:file:engine/biosim-checks/src/bin/eval.rs",
     "component:package.json",
     "component:adapters/rust/Cargo.toml",
     "component:engine/biosim-checks/Cargo.toml",
@@ -298,12 +303,13 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:releases/pilot-demo-v1/README_pilot.md",
     "ingest:file:schema/README.md",
     "component:pyproject.toml",
-    "ingest:file:engine/biosim-checks/src/bin/eval.rs",
     "component:examples/veribiota-example-project/pyproject.toml",
+    "ingest:file:engine/biosim-checks/tests/biosim_eval.rs",
     "ingest:file:examples/veribiota-example-project/tests/dags/micro.dag.json",
     "ingest:file:Tests/golden/checks_min.json",
     "ingest:file:Tests/Main.lean",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json",
+    "ingest:file:Tests/profiles/edit_script_normal_form_v1/malformed_error.json",
     "ingest:file:Tests/profiles/edit_script_normal_form_v1/pass_simple_normal.json",
     "ingest:file:Tests/profiles/edit_script_v1/ins_del_pass.json",
     "ingest:file:Tests/profiles/edit_script_v1/malformed_error.json",
@@ -315,8 +321,10 @@ updated_at: 2026-05-07T01:35:21.850Z
     "ingest:file:Tests/profiles/global_affine_v1/mismatch_pass.json",
     "ingest:file:Tests/profiles/global_affine_v1/score_mismatch_fail.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/fail_mismatch.json",
+    "ingest:file:Tests/profiles/pair_hmm_bridge_v1/malformed_error.json",
     "ingest:file:Tests/profiles/pair_hmm_bridge_v1/pass_simple.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/fail_pam_mismatch.json",
+    "ingest:file:Tests/profiles/prime_edit_plan_v1/malformed_error.json",
     "ingest:file:Tests/profiles/prime_edit_plan_v1/pass_simple.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/fail_misaligned.json",
     "ingest:file:Tests/profiles/vcf_normalization_v1/malformed_error.json",
@@ -522,8 +530,8 @@ If you change it: Changing evaluate_conc core implementation module can shift a 
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:227`
-- `engine/biosim-checks/src/lib.rs:67`
+- `engine/biosim-checks/src/lib.rs:344`
+- `engine/biosim-checks/src/lib.rs:76`
 </details>
 
 ### eval.rs internal implementation module
@@ -534,7 +542,7 @@ If you change it: Changing eval.rs internal implementation module can shift a ce
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 </details>
 
 <details>
@@ -547,9 +555,9 @@ If you change it: Changing eval.rs internal implementation module can shift a ce
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/lib.rs:227`
-- `engine/biosim-checks/src/lib.rs:67`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/lib.rs:344`
+- `engine/biosim-checks/src/lib.rs:76`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 </details>
 
 ## State Transitions and Recovery
@@ -681,7 +689,7 @@ Key dependencies:
 Boundary notes:
 - Mostly operates within its own inferred subsystem boundary.
 - No strong adjacent subsystem boundary was inferred.
-- Dominant paths: `examples/veribiota-example-project/tests/dags/micro.dag.json`, `Tests/golden/checks_min.json`, `Tests/Main.lean`.
+- Dominant paths: `engine/biosim-checks/tests/biosim_eval.rs`, `examples/veribiota-example-project/tests/dags/micro.dag.json`, `Tests/golden/checks_min.json`.
 
 <details>
 <summary>Related files:</summary>
@@ -701,9 +709,9 @@ Boundary notes:
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `examples/veribiota-example-project/README.md`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 </details>
 
 <details>
@@ -716,17 +724,17 @@ Boundary notes:
 - `docs/architecture.md`
 - `pyproject.toml`
 - `docs/assets/favicon.svg`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.lock`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 - `engine/biosim-checks/ffi/lib.c`
 - `adapters/rust/src/main.rs:19`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `examples/veribiota-example-project/README.md`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 </details>
 
 ## Execution Narrative
@@ -756,8 +764,8 @@ Handoffs:
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/Cargo.lock`
 - `adapters/rust/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 <details>
@@ -779,11 +787,11 @@ Handoffs:
 
 - `pyproject.toml`
 - `veribiota`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/Cargo.lock`
 - `adapters/rust/Cargo.toml`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ## Code Path Slice
@@ -814,8 +822,8 @@ Storage or sinks:
 
 - `pyproject.toml`
 - `veribiota`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 - `adapters/rust/src/main.rs`
 - `engine/biosim-checks/src/bin/eval.rs`
 - `engine/biosim-checks/Cargo.toml`
@@ -829,9 +837,9 @@ Storage or sinks:
 
 - `pyproject.toml`
 - `veribiota`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `adapters/rust/src/main.rs`
 - `engine/biosim-checks/src/bin/eval.rs`
 - `engine/biosim-checks/Cargo.toml`
@@ -847,14 +855,14 @@ Storage or sinks:
 
 - `pyproject.toml`
 - `veribiota`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
-- `Tests/golden/checks_min.json`
 - `adapters/rust/src/main.rs:19`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.lock`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ## Subsystem Interactions
@@ -874,8 +882,8 @@ Handoff: engine hands off to `anyhow`, `base64`, `ed25519-dalek` in external thr
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ### adapters -> external
@@ -904,8 +912,8 @@ Handoff: adapters hands off to `engine/biosim-checks/src`, `biosim-checks` in en
 <summary>Supporting citations:</summary>
 
 - `adapters/rust/src/main.rs:19`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
@@ -947,8 +955,8 @@ Handoff: root hands off to `ajv`, `ajv-formats`, `glob` in external through 4 in
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/src/main.rs:19`
 - `package.json`
 </details>
@@ -956,13 +964,13 @@ Handoff: root hands off to `ajv`, `ajv-formats`, `glob` in external through 4 in
 ## Invariants and Risks
 
 ### engine/biosim-checks/src is an implicit compatibility boundary
-Assumption: Assumption: engine/biosim-checks/src can change without breaking `adapters`, `external` is risky, because the component bridges those subsystems and carries hotspot score 162.
+Assumption: Assumption: engine/biosim-checks/src can change without breaking `adapters`, `external` is risky, because the component bridges those subsystems and carries hotspot score 174.
 
 <details>
 <summary>Supporting citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ### engine -> external is a cross-subsystem coupling hazard
@@ -974,8 +982,8 @@ Coupling hazard: Coupling hazard: engine hands off to `anyhow`, `base64`, `ed255
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ### Operational changes tend to fail first at validation boundaries
@@ -988,8 +996,8 @@ Failure boundary: Failure boundary: verify high-coordination component `engine/b
 - `package.json`
 - `Makefile`
 - `examples/veribiota-example-project/pyproject.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 <details>
@@ -1010,8 +1018,8 @@ Failure boundary: Failure boundary: verify high-coordination component `engine/b
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
@@ -1036,7 +1044,7 @@ Insufficient evidence to infer external systems confidently.
 
 - Documentation (docs) depends on 35 known edges.
 - Tests (tests) depends on 34 known edges.
-- biosim-checks (package) depends on 11 known edges.
+- biosim-checks (package) depends on 12 known edges.
 - veribiota-example-project (application) depends on 0 known edges.
 - biosim-eval (application) depends on 2 known edges.
 - engine/biosim-checks/src (module) depends on 6 known edges.
@@ -1053,10 +1061,10 @@ Insufficient evidence to infer external systems confidently.
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `docs/assets/logo-wordmark.svg`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
 - `Tests/Main.lean`
-- `Tests/profiles/edit_script_normal_form_v1/fail_not_normal.json`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/ffi/lib.c`
@@ -1078,17 +1086,17 @@ Insufficient evidence to infer external systems confidently.
 - `adapters/README.md`
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `engine/biosim-checks/ffi/lib.c`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `examples/veribiota-example-project/README.md`
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
 - `package.json`
@@ -1101,10 +1109,10 @@ Diagram link: [Subsystem Clusters](diagrams.md#subsystem-clusters).
 
 - external: external groups 25 components under external/ or related paths. Strategy: path. Internal edges: 12. External edges: 0. Dominant paths: `package.json`, `adapters/rust/Cargo.toml`, `engine/biosim-checks/Cargo.toml`. Rationale: Grouped around dominant path prefix `external`.
 - root: root groups 4 components under root/ or related paths. Strategy: path. Internal edges: 0. External edges: 4. Dominant paths: `adapters/README.md`, `docs/architecture.md`, `docs/assets/favicon.svg`, `package.json`, `pyproject.toml`. Rationale: Grouped around dominant path prefix `root`. Most connected to `external` through inferred graph edges.
-- engine: engine groups 3 components under engine/ or related paths. Strategy: path. Internal edges: 27. External edges: 19. Dominant paths: `engine/biosim-checks/src/bin/eval.rs`, `engine/biosim-checks/Cargo.toml`, `engine/biosim-checks/Cargo.lock`, `engine/biosim-checks/ffi/lib.c`, `engine/biosim-checks/src/lib.rs`. Rationale: Grouped around dominant path prefix `engine`. Most connected to `external` through inferred graph edges.
+- engine: engine groups 3 components under engine/ or related paths. Strategy: path. Internal edges: 33. External edges: 19. Dominant paths: `engine/biosim-checks/src/bin/eval.rs`, `engine/biosim-checks/Cargo.toml`, `engine/biosim-checks/Cargo.lock`, `engine/biosim-checks/ffi/lib.c`, `engine/biosim-checks/src/lib.rs`. Rationale: Grouped around dominant path prefix `engine`. Most connected to `external` through inferred graph edges.
 - adapters: adapters groups 2 components under adapters/ or related paths. Strategy: path. Internal edges: 1. External edges: 9. Dominant paths: `adapters/rust/src/main.rs`, `adapters/rust/Cargo.toml`. Rationale: Grouped around dominant path prefix `adapters`. Most connected to `external`, `engine` through inferred graph edges.
 - examples: examples groups 1 components under examples/ or related paths. Strategy: path. Internal edges: 0. External edges: 0. Dominant paths: `examples/veribiota-example-project/.github/workflows/veribiota.yml`, `examples/veribiota-example-project/pyproject.toml`, `examples/veribiota-example-project/README.md`. Rationale: Grouped around dominant path prefix `examples`.
-- tests: tests groups 1 components under tests/ or related paths. Strategy: path. Internal edges: 0. External edges: 0. Dominant paths: `examples/veribiota-example-project/tests/dags/micro.dag.json`, `Tests/golden/checks_min.json`, `Tests/Main.lean`. Rationale: Grouped around dominant path prefix `tests`.
+- tests: tests groups 1 components under tests/ or related paths. Strategy: path. Internal edges: 0. External edges: 0. Dominant paths: `engine/biosim-checks/tests/biosim_eval.rs`, `examples/veribiota-example-project/tests/dags/micro.dag.json`, `Tests/golden/checks_min.json`. Rationale: Grouped around dominant path prefix `tests`.
 
 <details>
 <summary>Related files:</summary>
@@ -1124,9 +1132,9 @@ Diagram link: [Subsystem Clusters](diagrams.md#subsystem-clusters).
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `examples/veribiota-example-project/README.md`
+- `engine/biosim-checks/tests/biosim_eval.rs`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 </details>
 
 <details>
@@ -1139,31 +1147,31 @@ Diagram link: [Subsystem Clusters](diagrams.md#subsystem-clusters).
 - `docs/architecture.md`
 - `docs/assets/favicon.svg`
 - `pyproject.toml`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/ffi/lib.c`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 - `adapters/rust/src/main.rs:19`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `examples/veribiota-example-project/README.md`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 </details>
 
 ## Graph Hotspots
 
 Diagram links: [Dependency Graph](diagrams.md#dependency-graph) and [Component Overview](diagrams.md#component-overview).
 
-- engine/biosim-checks/src (module) at `engine/biosim-checks/src`: score 162. Inbound 24, outbound 28, calls 46, dependencies 6. Inbound edges: 24. Outbound edges: 28. Call edges: 46; dependency edges: 6. Bridges 2 subsystem boundaries: `adapters`, `external`.
-- biosim-checks (package) at `engine/biosim-checks`: score 45. Inbound 2, outbound 11, calls 0, dependencies 13. Inbound edges: 2. Outbound edges: 11. Call edges: 0; dependency edges: 13. Bridges 2 subsystem boundaries: `adapters`, `external`.
-- biosim-eval (application) at `engine/biosim-checks/src/bin`: score 39. Inbound 5, outbound 7, calls 10, dependencies 2. Inbound edges: 5. Outbound edges: 7. Call edges: 10; dependency edges: 2. Bridges 1 subsystem boundaries: `external`.
+- engine/biosim-checks/src (module) at `engine/biosim-checks/src`: score 174. Inbound 27, outbound 29, calls 50, dependencies 6. Inbound edges: 27. Outbound edges: 29. Call edges: 50; dependency edges: 6. Bridges 2 subsystem boundaries: `adapters`, `external`.
+- biosim-checks (package) at `engine/biosim-checks`: score 93. Inbound 10, outbound 19, calls 14, dependencies 15. Inbound edges: 10. Outbound edges: 19. Call edges: 14; dependency edges: 15. Bridges 2 subsystem boundaries: `adapters`, `external`.
 - adapters/rust/src (module) at `adapters/rust/src`: score 27. Inbound 1, outbound 6, calls 4, dependencies 3. Inbound edges: 1. Outbound edges: 6. Call edges: 4; dependency edges: 3. Bridges 2 subsystem boundaries: `engine`, `external`.
 - anyhow (package) at `external/rust/anyhow`: score 21. Inbound 5, outbound 0, calls 0, dependencies 5. Inbound edges: 5. Outbound edges: 0. Call edges: 0; dependency edges: 5. Bridges 2 subsystem boundaries: `adapters`, `engine`.
-- serde (package) at `external/rust/serde`: score 21. Inbound 5, outbound 0, calls 0, dependencies 5. Inbound edges: 5. Outbound edges: 0. Call edges: 0; dependency edges: 5. Bridges 2 subsystem boundaries: `adapters`, `engine`.
 - ajv (package) at `external/node/ajv`: score 21. Inbound 2, outbound 4, calls 0, dependencies 6. Inbound edges: 2. Outbound edges: 4. Call edges: 0; dependency edges: 6. Bridges 1 subsystem boundaries: `root`.
+- serde (package) at `external/rust/serde`: score 18. Inbound 4, outbound 0, calls 0, dependencies 4. Inbound edges: 4. Outbound edges: 0. Call edges: 0; dependency edges: 4. Bridges 2 subsystem boundaries: `adapters`, `engine`.
 - veribiota-rust-adapter (package) at `adapters/rust`: score 18. Inbound 0, outbound 4, calls 0, dependencies 4. Inbound edges: 0. Outbound edges: 4. Call edges: 0; dependency edges: 4. Bridges 2 subsystem boundaries: `engine`, `external`.
+- serde_json (package) at `external/rust/serde_json`: score 15. Inbound 3, outbound 0, calls 0, dependencies 3. Inbound edges: 3. Outbound edges: 0. Call edges: 0; dependency edges: 3. Bridges 2 subsystem boundaries: `adapters`, `engine`.
 
 <details>
 <summary>Related files:</summary>
@@ -1181,8 +1189,8 @@ Diagram links: [Dependency Graph](diagrams.md#dependency-graph) and [Component O
 <details>
 <summary>Citations:</summary>
 
-- `engine/biosim-checks/src/bin/eval.rs:31`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/bin/eval.rs:6`
+- `engine/biosim-checks/src/lib.rs:344`
 - `engine/biosim-checks/Cargo.lock`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/src/main.rs:19`
@@ -1241,9 +1249,9 @@ Diagram links: [Dependency Graph](diagrams.md#dependency-graph) and [Component O
 - `README.md`
 - `releases/pilot-demo-v1/README_pilot.md`
 - `schema/README.md`
-- `engine/biosim-checks/src/lib.rs:227`
-- `engine/biosim-checks/src/lib.rs:67`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/lib.rs:344`
+- `engine/biosim-checks/src/lib.rs:76`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `package.json`
 - `adapters/rust/Cargo.toml`
 - `engine/biosim-checks/Cargo.toml`
@@ -1253,9 +1261,9 @@ Diagram links: [Dependency Graph](diagrams.md#dependency-graph) and [Component O
 - `adapters/rust/src/main.rs:19`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
+- `engine/biosim-checks/tests/biosim_eval.rs:64`
 - `examples/veribiota-example-project/tests/dags/micro.dag.json`
 - `Tests/golden/checks_min.json`
-- `Tests/Main.lean`
 - `veribiota`
 - `Makefile`
 </details>

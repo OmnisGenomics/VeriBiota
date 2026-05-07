@@ -3,7 +3,7 @@ page_id: interfaces
 page_type: interfaces
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.851Z
+updated_at: 2026-05-07T04:45:24.236Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.851Z
 
 ```json
 {
-  "freshnessKey": "2483b6abf79098188da52e9e7176cef925333a3f",
+  "freshnessKey": "cc1793a052668b05bf0b34427a8e04256826517c",
   "plannerReason": "Generated because interface surfaces are central to safe code changes.",
   "changedPaths": [
     "pyproject.toml",
@@ -24,6 +24,7 @@ updated_at: 2026-05-07T01:35:21.851Z
     "schemas/hmm/pair_hmm_bridge_v1.schema.json",
     "schemas/pipeline/read_set_conservation_v1.schema.json",
     "schemas/prime/prime_edit_plan_v1.schema.json",
+    "schemas/profile_status.schema.json",
     "schemas/provenance/snapshot_signature_v1.schema.json",
     "schemas/task.schema.json",
     "schemas/variant/vcf_normalization_v1.schema.json",
@@ -42,6 +43,7 @@ updated_at: 2026-05-07T01:35:21.851Z
     "schemas/hmm/pair_hmm_bridge_v1.schema.json",
     "schemas/pipeline/read_set_conservation_v1.schema.json",
     "schemas/prime/prime_edit_plan_v1.schema.json",
+    "schemas/profile_status.schema.json",
     "schemas/provenance/snapshot_signature_v1.schema.json",
     "schemas/task.schema.json",
     "schemas/variant/vcf_normalization_v1.schema.json",
@@ -61,6 +63,7 @@ updated_at: 2026-05-07T01:35:21.851Z
     "ingest:file:schemas/hmm/pair_hmm_bridge_v1.schema.json",
     "ingest:file:schemas/pipeline/read_set_conservation_v1.schema.json",
     "ingest:file:schemas/prime/prime_edit_plan_v1.schema.json",
+    "ingest:file:schemas/profile_status.schema.json",
     "ingest:file:schemas/provenance/snapshot_signature_v1.schema.json",
     "ingest:file:schemas/task.schema.json",
     "ingest:file:schemas/variant/vcf_normalization_v1.schema.json",
@@ -80,6 +83,7 @@ updated_at: 2026-05-07T01:35:21.851Z
     "ingest:file:schemas/hmm/pair_hmm_bridge_v1.schema.json",
     "ingest:file:schemas/pipeline/read_set_conservation_v1.schema.json",
     "ingest:file:schemas/prime/prime_edit_plan_v1.schema.json",
+    "ingest:file:schemas/profile_status.schema.json",
     "ingest:file:schemas/provenance/snapshot_signature_v1.schema.json",
     "ingest:file:schemas/task.schema.json",
     "ingest:file:schemas/variant/vcf_normalization_v1.schema.json",
@@ -117,8 +121,8 @@ Interface and configuration surface inventory.
 - schemas/hmm/pair_hmm_bridge_v1.schema.json
 - schemas/pipeline/read_set_conservation_v1.schema.json
 - schemas/prime/prime_edit_plan_v1.schema.json
-- schemas/provenance/snapshot_signature_v1.schema.json
-- 5 more schema interface surfaces omitted.
+- schemas/profile_status.schema.json
+- 6 more schema interface surfaces omitted.
 
 ### Config surfaces
 
@@ -139,7 +143,7 @@ Interface and configuration surface inventory.
 - `schemas/hmm/pair_hmm_bridge_v1.schema.json`
 - `schemas/pipeline/read_set_conservation_v1.schema.json`
 - `schemas/prime/prime_edit_plan_v1.schema.json`
-- `schemas/provenance/snapshot_signature_v1.schema.json`
+- `schemas/profile_status.schema.json`
 </details>
 
 <details>
@@ -155,7 +159,7 @@ Interface and configuration surface inventory.
 - `schemas/hmm/pair_hmm_bridge_v1.schema.json`
 - `schemas/pipeline/read_set_conservation_v1.schema.json`
 - `schemas/prime/prime_edit_plan_v1.schema.json`
-- `schemas/provenance/snapshot_signature_v1.schema.json`
+- `schemas/profile_status.schema.json`
 </details>
 
 ## Contract Surfaces
@@ -167,6 +171,7 @@ Interface and configuration surface inventory.
 - schemas/hmm/pair_hmm_bridge_v1.schema.json (schema)
 - schemas/pipeline/read_set_conservation_v1.schema.json (schema)
 - schemas/prime/prime_edit_plan_v1.schema.json (schema)
+- schemas/profile_status.schema.json (schema)
 - schemas/provenance/snapshot_signature_v1.schema.json (schema)
 - schemas/task.schema.json (schema)
 - schemas/variant/vcf_normalization_v1.schema.json (schema)
@@ -184,6 +189,7 @@ Interface and configuration surface inventory.
 - `schemas/hmm/pair_hmm_bridge_v1.schema.json`
 - `schemas/pipeline/read_set_conservation_v1.schema.json`
 - `schemas/prime/prime_edit_plan_v1.schema.json`
+- `schemas/profile_status.schema.json`
 - `schemas/provenance/snapshot_signature_v1.schema.json`
 - `schemas/task.schema.json`
 - `schemas/variant/vcf_normalization_v1.schema.json`
@@ -202,6 +208,7 @@ Interface and configuration surface inventory.
 - `schemas/hmm/pair_hmm_bridge_v1.schema.json`
 - `schemas/pipeline/read_set_conservation_v1.schema.json`
 - `schemas/prime/prime_edit_plan_v1.schema.json`
+- `schemas/profile_status.schema.json`
 - `schemas/provenance/snapshot_signature_v1.schema.json`
 - `schemas/task.schema.json`
 - `schemas/variant/vcf_normalization_v1.schema.json`
@@ -223,7 +230,7 @@ Interface and configuration surface inventory.
 - schemas/hmm/pair_hmm_bridge_v1.schema.json: no owning component inferred
 - schemas/pipeline/read_set_conservation_v1.schema.json: no owning component inferred
 - schemas/prime/prime_edit_plan_v1.schema.json: no owning component inferred
-- 6 more unowned interface surfaces omitted.
+- 7 more unowned interface surfaces omitted.
 
 <details>
 <summary>Related files:</summary>
@@ -270,6 +277,7 @@ Interface and configuration surface inventory.
 - `schemas/hmm/pair_hmm_bridge_v1.schema.json`
 - `schemas/pipeline/read_set_conservation_v1.schema.json`
 - `schemas/prime/prime_edit_plan_v1.schema.json`
+- `schemas/profile_status.schema.json`
 - `schemas/provenance/snapshot_signature_v1.schema.json`
 - `schemas/task.schema.json`
 - `schemas/variant/vcf_normalization_v1.schema.json`

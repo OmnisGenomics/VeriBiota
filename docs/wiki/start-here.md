@@ -3,7 +3,7 @@ page_id: start-here
 page_type: start-here
 generation_mode: inferred
 freshness_status: new
-updated_at: 2026-05-07T01:35:21.870Z
+updated_at: 2026-05-07T04:45:24.254Z
 ---
 
 <details>
@@ -11,7 +11,7 @@ updated_at: 2026-05-07T01:35:21.870Z
 
 ```json
 {
-  "freshnessKey": "dee41a633ef497e7a278fa9a36c85d1d62fcd8d5",
+  "freshnessKey": "966ccaa93ae82c024163583f99b601b5b957bce6",
   "plannerReason": "Generated for service-like repositories when deterministic runtime/setup evidence is strong enough to separate startup guidance from validation guidance.",
   "changedPaths": [
     "pyproject.toml",
@@ -111,22 +111,24 @@ Startup-oriented guide for getting VeriBiota running the first time.
 - `pyproject.toml`
 - `package.json`
 - `veribiota`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `adapters/rust/src/main.rs:19`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `engine/biosim-checks/Cargo.lock`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ## Primary Run Path
 
 1. Start with `veribiota` (run) from `.`.
-2. Start with `npm run check:tasks` (check:tasks) from `.`.
-3. Enter through `veribiota`, `engine/biosim-checks/src/bin/eval.rs`, `adapters/rust/src/main.rs`.
-4. Hand off to `biosim-eval`, `veribiota-rust-adapter`, `veribiota-example-project`, `simulife` as the primary runtime owners.
+2. Start with `npm run check` (check) from `.`.
+3. Start with `npm run check:profiles` (check:profiles) from `.`.
+4. Start with `npm run check:tasks` (check:tasks) from `.`.
+5. Enter through `veribiota`, `engine/biosim-checks/src/bin/eval.rs`, `adapters/rust/src/main.rs`.
+6. Hand off to `biosim-eval`, `veribiota-rust-adapter`, `veribiota-example-project`, `simulife` as the primary runtime owners.
 
 <details>
 <summary>Related files:</summary>
@@ -152,14 +154,14 @@ Startup-oriented guide for getting VeriBiota running the first time.
 - `pyproject.toml`
 - `package.json`
 - `veribiota`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `adapters/rust/src/main.rs:19`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `engine/biosim-checks/Cargo.lock`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ## First Debugging Entrypoints
@@ -168,7 +170,7 @@ Startup-oriented guide for getting VeriBiota running the first time.
 - Inspect biosim-eval at `engine/biosim-checks/src/bin` via `engine/biosim-checks/src/bin/eval.rs`.
 - Inspect engine/biosim-checks/src at `engine/biosim-checks/src`.
 - Re-run `veribiota` to reproduce the startup path quickly.
-- Re-run `npm run check:tasks` to reproduce the startup path quickly.
+- Re-run `npm run check` to reproduce the startup path quickly.
 
 <details>
 <summary>Related files:</summary>
@@ -194,14 +196,14 @@ Startup-oriented guide for getting VeriBiota running the first time.
 - `pyproject.toml`
 - `package.json`
 - `veribiota`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `adapters/rust/src/main.rs:19`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `engine/biosim-checks/Cargo.lock`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
 
 ## Citations
@@ -212,12 +214,12 @@ Startup-oriented guide for getting VeriBiota running the first time.
 - `pyproject.toml`
 - `package.json`
 - `veribiota`
-- `engine/biosim-checks/src/bin/eval.rs:31`
+- `engine/biosim-checks/src/bin/eval.rs:6`
 - `adapters/rust/src/main.rs:19`
 - `engine/biosim-checks/Cargo.toml`
 - `adapters/rust/Cargo.toml`
 - `examples/veribiota-example-project/.github/workflows/veribiota.yml`
 - `examples/veribiota-example-project/pyproject.toml`
 - `engine/biosim-checks/Cargo.lock`
-- `engine/biosim-checks/src/lib.rs:227`
+- `engine/biosim-checks/src/lib.rs:344`
 </details>
