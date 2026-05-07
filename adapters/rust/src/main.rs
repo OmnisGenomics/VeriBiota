@@ -1,4 +1,4 @@
-use anyhow::{Context, Result};
+use anyhow::{bail, Context, Result};
 use biosim_checks::Evaluator;
 use serde::Deserialize;
 use std::env;
@@ -10,11 +10,17 @@ use std::path::PathBuf;
 struct Sample {
     t: f64,
     conc: Option<Vec<f64>>,
-    counts: Option<Vec<f64>>,
+    counts: Option<Vec<i64>>,
 }
 
-const DEFAULT_CHECKS: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../../examples/checks.mass.json");
-const DEFAULT_TRAJ: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/../../examples/trajectory.sample.jsonl");
+const DEFAULT_CHECKS: &str = concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../examples/checks.mass.json"
+);
+const DEFAULT_TRAJ: &str = concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../examples/trajectory.sample.jsonl"
+);
 
 fn load_args() -> (PathBuf, PathBuf) {
     let mut args = env::args().skip(1);
@@ -55,14 +61,11 @@ fn main() -> Result<()> {
         }
         let rec: Sample = serde_json::from_str(&line)
             .with_context(|| format!("parse trajectory line {}", idx + 1))?;
-        let conc = if let Some(c) = rec.conc {
-            c
-        } else if let Some(counts) = rec.counts {
-            counts
-        } else {
-            Vec::new()
+        let outcome = match (rec.conc.as_deref(), rec.counts.as_deref()) {
+            (Some(conc), _) => evaluator.evaluate_conc(rec.t, conc),
+            (None, Some(counts)) => evaluator.evaluate_counts(rec.t, counts),
+            (None, None) => bail!("trajectory line {} missing conc or counts", idx + 1),
         };
-        let outcome = evaluator.evaluate_conc(rec.t, &conc);
         if outcome.violated {
             eprintln!(
                 "[FAIL] t={:.3} max_abs={} max_rel={}",
