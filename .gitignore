@@ -1,4 +1,5 @@
 .lake/
+artifacts/
 build/
 dist/
 engine/biosim-checks/target/
@@ -11,9 +12,6 @@ venv/
 site/
 Tests/tmp/
 *.egg-info/
-
-# Local RepoIntel MCP store
-artifacts/repointel/*.db
 
 # Generated Lean suites (EditDAG DAGs) – not committed
 Biosim/VeriBiota/*/*.lean
