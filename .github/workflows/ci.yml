@@ -43,8 +43,27 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Cache Rust validation artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target/validate-rust
+          key: rust-validate-${{ runner.os }}-${{ hashFiles('engine/biosim-checks/Cargo.lock', 'adapters/rust/Cargo.lock') }}
+          restore-keys: |
+            rust-validate-${{ runner.os }}-
+
       - name: Install npm dependencies
         run: npm ci || true
+
+      - name: Fast validation
+        run: make validate-fast
+
+      - name: Rust runtime validation
+        env:
+          CARGO_TARGET_DIR: target/validate-rust
+        run: make validate-rust
 
       - name: Verify results (soft fallback with runtime if available)
         run: make verify-results
@@ -62,6 +81,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install .
           veribiota --help
+
+      - name: Python adapter validation
+        run: make validate-python
 
   build-test:
     if: github.event_name == 'schedule'

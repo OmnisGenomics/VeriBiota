@@ -7,14 +7,14 @@ This catalog defines what VeriBiota profiles judge across the stack. Profiles ar
 | global_affine_v1             | Implemented (proof-backed anchors)       | alignment     | OGN, Helix         |
 | edit_script_v1               | Implemented (proof-backed anchors)       | edit          | Helix, OGN         |
 | edit_script_normal_form_v1   | Implemented (proof-backed anchors)       | edit          | Helix              |
-| prime_edit_plan_v1           | Implemented (contract-checked; anchors reserved) | CRISPR/Prime  | Helix              |
-| pair_hmm_bridge_v1           | Implemented (contract-checked; anchors reserved) | HMM/variant   | OGN                |
+| prime_edit_plan_v1           | Implemented (contract-checked; partial proof coverage) | CRISPR/Prime  | Helix              |
+| pair_hmm_bridge_v1           | Implemented (contract proof-backed) | HMM/variant   | OGN                |
 | read_set_conservation_v1     | Schema/manifest only (no `check` route yet)      | pipeline      | OGN                |
 | vcf_normalization_v1         | Tier 1 (contract-checked; anchors reserved)      | variant       | OGN, external      |
 | offtarget_score_sanity_v1    | Schema/manifest only (no `check` route yet)      | CRISPR        | Helix              |
 | snapshot_signature_v1        | Emitted provenance record (proof-backed anchor)  | provenance    | Helix, VeriBiota   |
 
-Proof status note: “proof-backed anchors” means the referenced theorem IDs are non-placeholder Lean theorems in `Biosim/VeriBiota/Theorems.lean`. “anchors reserved” means the profile is implemented and tested, but one or more referenced theorem IDs are still placeholders today.
+Proof status note: “proof-backed anchors” means the referenced theorem IDs are non-placeholder Lean theorems in `Biosim/VeriBiota/Theorems.lean`. “partial proof coverage” means at least one referenced theorem is proof-backed and at least one remains reserved. “anchors reserved” means the profile is implemented and tested, but all referenced theorem IDs are still placeholders today.
 
 ## Conventions
 
@@ -22,6 +22,9 @@ Proof status note: “proof-backed anchors” means the referenced theorem IDs a
 - JSON schema: `schemas/<domain>/<profile>.schema.json`.
 - Golden fixtures: `Tests/profiles/<profile>/*.json`.
 - Manifest: `profiles/manifest.json` maps profile name → schema hash, theorem IDs.
+- Machine-readable status: `profiles/status.json` records each profile's tier,
+  CLI route, proof status, snapshot support, and fixture coverage. Validate it
+  with `npm run check:profiles` or `make check-profiles`.
 - Verdict JSON shape:
 
 ```json
@@ -80,7 +83,7 @@ Proof status note: “proof-backed anchors” means the referenced theorem IDs a
 
 ## Implemented profiles with reserved theorem anchors
 
-### 4. prime_edit_plan_v1 (Status: Implemented, anchors reserved)
+### 4. prime_edit_plan_v1 (Status: Implemented, partial proof coverage)
 
 - **Purpose**: Verify that a Prime Editing plan (guide, RT template, nicking strategy) corresponds to a desired net edit script.
 - **Intended consumers**: Helix prime editor module (simulated); future recommendations, constraints, AI models.
@@ -92,9 +95,9 @@ Proof status note: “proof-backed anchors” means the referenced theorem IDs a
   - Plan-to-edit linkage: `net_edit_script` encodes exactly the delta between `ref_seq` and `target_seq`; sites of change align with RT template design.
   - Internal consistency: PBS and RT lengths within allowed bounds; PAM positions consistent with spacer location.
   - Relationship to `edit_script_v1`: calls `edit_script_v1` on (`ref_seq`, `target_seq`, `net_edit_script`).
-- **Theorem anchors**: `VB_PE_001` – reserved anchor for prime plan net-edit linkage; `VB_EDIT_001` reused for base script correctness.
+- **Theorem anchors**: `VB_PE_001` – reserved anchor for prime plan net-edit linkage; `VB_EDIT_001` reused for proof-backed base script correctness.
 
-### 5. pair_hmm_bridge_v1 (Status: Implemented, anchors reserved)
+### 5. pair_hmm_bridge_v1 (Status: Implemented, contract proof-backed)
 
 - **Purpose**: Tie DP-based alignment scoring to Pair-HMM likelihood scoring under a specified parameter mapping (small instances).
 - **Intended consumers**: OGN variant calling stack; any HMM-based likelihood computation referencing DP.
@@ -103,7 +106,7 @@ Proof status note: “proof-backed anchors” means the referenced theorem IDs a
   - Parameter mapping correctness: DP gap open/extend and mismatch penalties correspond to log transition/emission probabilities via the mapping.
   - Score equivalence within tolerance: for finite sequences, `dp_score` equals (or within rounding epsilon of) `hmm_score` under the mapping.
   - Structural equivalence (optional): Viterbi path encoded by HMM corresponds to a valid DP alignment path.
-- **Theorem anchors**: `VB_HMM_001` – reserved anchor for mapping lemma (DP parameters ↔ HMM parameters); `VB_HMM_002` – reserved anchor for small-instance equivalence theorem.
+- **Theorem anchors**: `VB_HMM_001` – proof-backed anchor binding the reported DP score to the global-affine DP spec within the explicit profile tolerance; `VB_HMM_002` – proof-backed anchor binding the reported HMM score to the reported DP score within the same tolerance. This is contract proof coverage, not a full floating-point HMM semantics proof.
 
 ### 6. read_set_conservation_v1 (Status: Schema/manifest only, planned)
 

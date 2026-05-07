@@ -42,13 +42,33 @@ def profileId : String := "pair_hmm_bridge_v1"
 def profileVersion : String := "1.0.0"
 def coreTheorems : List String := ["VB_HMM_001", "VB_HMM_002"]
 
-private def epsilon : Float := 1.0
+/-- Explicit score tolerance for the contract-checked DP/HMM bridge surface. -/
+def scoreEpsilon : Float := 1.0
 
 def SpecHolds (inst : Instance) : Prop :=
   let spec := GlobalAffineV1.specGlobalAffine inst.seqA inst.seqB inst.dpScoring
   let specF := Float.ofInt spec
-  Float.abs (inst.dpScore - specF) ≤ epsilon ∧
-    Float.abs (inst.dpScore - inst.hmmScore) ≤ epsilon
+  Float.abs (inst.dpScore - specF) ≤ scoreEpsilon ∧
+    Float.abs (inst.dpScore - inst.hmmScore) ≤ scoreEpsilon
+
+/-- The profile contract binds the reported DP score to the global-affine spec
+within the profile's explicit deterministic tolerance. -/
+theorem dpScore_matches_globalAffine_spec (inst : Instance) :
+    SpecHolds inst →
+      Float.abs
+        (inst.dpScore -
+          Float.ofInt (GlobalAffineV1.specGlobalAffine inst.seqA inst.seqB inst.dpScoring)) ≤
+        scoreEpsilon := by
+  intro h
+  simpa [SpecHolds] using h.left
+
+/-- The profile contract binds the reported HMM score to the reported DP score
+within the profile's explicit deterministic tolerance. -/
+theorem hmmScore_matches_dpScore (inst : Instance) :
+    SpecHolds inst →
+      Float.abs (inst.dpScore - inst.hmmScore) ≤ scoreEpsilon := by
+  intro h
+  simpa [SpecHolds] using h.right
 
 def checkInstance (inst : Instance) : Decidable (SpecHolds inst) := by
   unfold SpecHolds
