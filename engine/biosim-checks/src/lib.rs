@@ -521,14 +521,14 @@ fn verify_jws(jws: &str, jwks: &HashMap<String, Vec<u8>>) -> Result<(String, Vec
     let pubkey = jwks
         .get(kid)
         .ok_or_else(|| anyhow!("no jwk for kid {}", kid))?;
-    let verifying_key =
-        ed25519_dalek::PublicKey::from_bytes(pubkey).context("build verifying key")?;
-    let sig =
-        ed25519_dalek::Signature::from_bytes(&signature_bytes).context("parse signature bytes")?;
+    let verifying_key = ed25519_dalek::PublicKey::from_bytes(pubkey)
+        .map_err(|e| anyhow!("build verifying key: {e}"))?;
+    let sig = ed25519_dalek::Signature::from_bytes(&signature_bytes)
+        .map_err(|e| anyhow!("parse signature bytes: {e}"))?;
     let signing_input = format!("{}.{}", header_b64, payload_b64);
     verifying_key
         .verify(signing_input.as_bytes(), &sig)
-        .context("signature verification failed")?;
+        .map_err(|e| anyhow!("signature verification failed: {e}"))?;
     Ok((kid.to_string(), payload_bytes))
 }
 
@@ -549,12 +549,18 @@ fn parse_signed_bundle(
         .ok_or_else(|| anyhow!("missing signature"))?;
     let sig: SignatureBlock =
         serde_json::from_value(sig_obj.clone()).context("decode signature block")?;
+    if sig.alg != "Ed25519" {
+        return Err(anyhow!("unsupported signature alg {}", sig.alg));
+    }
     if sig.jws.is_empty() {
         return Err(anyhow!("missing jws in signature"));
     }
     let jwks_raw = jwks_json.ok_or_else(|| anyhow!("JWKS required for signed mode"))?;
     let jwks = parse_jwks(jwks_raw)?;
-    let (_kid, payload_bytes) = verify_jws(&sig.jws, &jwks)?;
+    let (kid, payload_bytes) = verify_jws(&sig.jws, &jwks)?;
+    if sig.kid != kid {
+        return Err(anyhow!("signature kid mismatch"));
+    }
     let payload_hash = format!("sha256:{}", sha256_hex(&payload_bytes));
     if sig.payload_hash != payload_hash {
         return Err(anyhow!("payloadHash mismatch"));
@@ -676,11 +682,17 @@ pub extern "C" fn veribiota_checks_free() {
 mod tests {
     use super::*;
     use ed25519_dalek::Signer;
-    use rand::rngs::OsRng;
     use std::ptr;
 
     fn make_signed_bundle() -> (String, String) {
-        let keypair = ed25519_dalek::Keypair::generate(&mut OsRng);
+        let secret = ed25519_dalek::SecretKey::from_bytes(&[
+            0x10, 0x41, 0x72, 0xa3, 0xd4, 0x05, 0x36, 0x67, 0x98, 0xc9, 0xfa, 0x2b, 0x5c, 0x8d,
+            0xbe, 0xef, 0x20, 0x51, 0x82, 0xb3, 0xe4, 0x15, 0x46, 0x77, 0xa8, 0xd9, 0x0a, 0x3b,
+            0x6c, 0x9d, 0xce, 0xff,
+        ])
+        .unwrap();
+        let public = ed25519_dalek::PublicKey::from(&secret);
+        let keypair = ed25519_dalek::Keypair { secret, public };
         let payload = serde_json::json!({
             "modelHash": "sha256:test",
             "checks": []
@@ -757,6 +769,42 @@ mod tests {
                 obj.insert(
                     "payloadHash".to_string(),
                     serde_json::Value::String("sha256:deadbeef".to_string()),
+                );
+            }
+        }
+        let tampered = serde_json::to_string(&json).unwrap();
+        let code = init_with(SigMode::SignedEnforced, &tampered, Some(&jwks));
+        assert_ne!(code, 0);
+        veribiota_checks_free();
+    }
+
+    #[test]
+    fn signed_init_rejects_unsupported_signature_alg() {
+        let (checks, jwks) = make_signed_bundle();
+        let mut json: serde_json::Value = serde_json::from_str(&checks).unwrap();
+        if let Some(sig) = json.get_mut("signature") {
+            if let Some(obj) = sig.as_object_mut() {
+                obj.insert(
+                    "alg".to_string(),
+                    serde_json::Value::String("EdDSA".to_string()),
+                );
+            }
+        }
+        let tampered = serde_json::to_string(&json).unwrap();
+        let code = init_with(SigMode::SignedEnforced, &tampered, Some(&jwks));
+        assert_ne!(code, 0);
+        veribiota_checks_free();
+    }
+
+    #[test]
+    fn signed_init_rejects_signature_kid_mismatch() {
+        let (checks, jwks) = make_signed_bundle();
+        let mut json: serde_json::Value = serde_json::from_str(&checks).unwrap();
+        if let Some(sig) = json.get_mut("signature") {
+            if let Some(obj) = sig.as_object_mut() {
+                obj.insert(
+                    "kid".to_string(),
+                    serde_json::Value::String("other-kid".to_string()),
                 );
             }
         }
