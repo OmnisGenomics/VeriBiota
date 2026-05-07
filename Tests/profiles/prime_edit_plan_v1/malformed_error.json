@@ -1,0 +1,28 @@
+{
+  "input": {
+    "ref_seq": "ACGT",
+    "target_seq": "AGGT",
+    "pegRNA": {
+      "spacer": "ACG",
+      "pam": "T",
+      "rt_template": "GGGGGGGGGG",
+      "pbs": "TTTTTTTT"
+    }
+  },
+  "expected": {
+    "theorems": ["VB_PE_001", "VB_EDIT_001"],
+    "status": "error",
+    "signature": null,
+    "profile_version": "1.0.0",
+    "profile": "prime_edit_plan_v1",
+    "instance": {
+      "error": "missing or invalid field 'net_edit_script'"
+    },
+    "engine": {
+      "veribiota_version": "0.1.0",
+      "lean_version": "4.9.0",
+      "build_id": "dev"
+    }
+  },
+  "exit": 1
+}
