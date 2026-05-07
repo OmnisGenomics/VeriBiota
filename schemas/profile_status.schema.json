@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veribiota.dev/schemas/profile_status.schema.json",
+  "title": "VeriBiota profile status matrix",
+  "type": "object",
+  "required": ["profiles"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "generated_from": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "profiles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "tier",
+          "schema_path",
+          "schema_sha256",
+          "theorem_ids",
+          "proof_status",
+          "snapshot_support",
+          "fixture_coverage"
+        ],
+        "properties": {
+          "tier": {
+            "type": "string",
+            "enum": ["tier0", "tier1", "schema_only", "provenance"]
+          },
+          "schema_path": { "type": "string", "pattern": "^schemas/.+\\.json$" },
+          "schema_sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+          "cli_route": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 3
+          },
+          "theorem_ids": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^VB_[A-Z0-9_]+$" },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "proof_status": {
+            "type": "string",
+            "enum": ["proof_backed", "partial", "reserved_anchor"]
+          },
+          "proof_scope": { "type": "string" },
+          "snapshot_support": { "type": "boolean" },
+          "fixture_dir": { "type": "string" },
+          "fixture_coverage": {
+            "type": "object",
+            "required": ["pass", "fail", "malformed"],
+            "properties": {
+              "pass": { "type": "integer", "minimum": 0 },
+              "fail": { "type": "integer", "minimum": 0 },
+              "malformed": { "type": "integer", "minimum": 0 }
+            },
+            "additionalProperties": false
+          },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

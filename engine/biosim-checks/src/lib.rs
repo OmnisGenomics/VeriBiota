@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::HashMap;
 use std::ffi::CStr;
+use std::io::BufRead;
 use std::os::raw::{c_char, c_int};
 use std::sync::Mutex;
 
@@ -21,6 +22,14 @@ pub struct Snapshot<'a> {
 #[derive(Default, Clone, Copy)]
 pub struct Outcome {
     pub t: f64,
+    pub any_neg: bool,
+    pub violated: bool,
+    pub max_abs_drift: f64,
+    pub max_rel_drift: f64,
+}
+
+#[derive(Default, Clone, Copy, Debug, PartialEq, Serialize)]
+pub struct EvaluationSummary {
     pub any_neg: bool,
     pub violated: bool,
     pub max_abs_drift: f64,
@@ -68,7 +77,11 @@ enum CheckSpec {
     #[serde(rename = "positivity_counts")]
     PosCounts { species: Vec<String> },
     #[serde(rename = "positivity_conc")]
-    PosConc { species: Vec<String>, #[serde(default)] tolerance: Option<f64> },
+    PosConc {
+        species: Vec<String>,
+        #[serde(default)]
+        tolerance: Option<f64>,
+    },
     #[serde(rename = "lin_invariant")]
     LinInv {
         name: String,
@@ -103,8 +116,8 @@ struct StubChecks {
 
 impl RuntimeChecks for StubChecks {
     fn load_checks(&mut self, checks_json: &str, _mode: SigMode) -> Result<()> {
-        let bundle: ChecksBundle = serde_json::from_str(checks_json)
-            .context("parse checks bundle JSON")?;
+        let bundle: ChecksBundle =
+            serde_json::from_str(checks_json).context("parse checks bundle JSON")?;
         self.model_hash = bundle.model_hash;
         self.species_index = bundle
             .species
@@ -126,12 +139,21 @@ impl RuntimeChecks for StubChecks {
             .checks
             .iter()
             .filter_map(|c| match c {
-                CheckSpec::LinInv { weights, tolerance, strict, baseline, .. } => {
-                    match weights_from_json(weights, &self.species_index) {
-                        Ok(w) => Some(ParsedInvariant { weights: w, tolerance: tolerance.clone(), strict: *strict, baseline: *baseline }),
-                        Err(_) => None,
-                    }
-                }
+                CheckSpec::LinInv {
+                    weights,
+                    tolerance,
+                    strict,
+                    baseline,
+                    ..
+                } => match weights_from_json(weights, &self.species_index) {
+                    Ok(w) => Some(ParsedInvariant {
+                        weights: w,
+                        tolerance: tolerance.clone(),
+                        strict: *strict,
+                        baseline: *baseline,
+                    }),
+                    Err(_) => None,
+                },
                 _ => None,
             })
             .collect();
@@ -179,7 +201,11 @@ impl RuntimeChecks for StubChecks {
                 .sum();
             let base = inv.baseline;
             let abs = (curr - base).abs();
-            let rel = if base.abs() > 1e-12 { abs / base.abs() } else { 0.0 };
+            let rel = if base.abs() > 1e-12 {
+                abs / base.abs()
+            } else {
+                0.0
+            };
             if abs > outcome.max_abs_drift {
                 outcome.max_abs_drift = abs;
             }
@@ -213,13 +239,90 @@ impl Evaluator {
     }
 
     pub fn evaluate_conc(&self, t: f64, conc: &[f64]) -> Outcome {
-        let snapshot = Snapshot { t, counts: None, conc: Some(conc) };
+        let snapshot = Snapshot {
+            t,
+            counts: None,
+            conc: Some(conc),
+        };
         self.inner.evaluate(&snapshot)
     }
 
     pub fn evaluate_counts(&self, t: f64, counts: &[i64]) -> Outcome {
-        let snapshot = Snapshot { t, counts: Some(counts), conc: None };
+        let snapshot = Snapshot {
+            t,
+            counts: Some(counts),
+            conc: None,
+        };
         self.inner.evaluate(&snapshot)
+    }
+
+    pub fn evaluate_jsonl<R: BufRead>(&self, reader: R) -> Result<EvaluationSummary> {
+        let mut summary = EvaluationSummary::default();
+
+        for (line_no, line) in reader.lines().enumerate() {
+            let line = line?;
+            if line.trim().is_empty() {
+                continue;
+            }
+            let rec: ResultLine = serde_json::from_str(&line)
+                .with_context(|| format!("parse JSONL at line {}", line_no + 1))?;
+            if rec.model_hash != self.inner.model_hash {
+                return Err(anyhow!(
+                    "modelHash mismatch at line {}: expected {}, got {}",
+                    line_no + 1,
+                    self.inner.model_hash,
+                    rec.model_hash
+                ));
+            }
+
+            let values = if let Some(conc) = rec.conc {
+                conc
+            } else if let Some(counts) = rec.counts {
+                to_vec_f64(&counts)?
+            } else {
+                Vec::new()
+            };
+
+            if self.inner.has_pos_counts || self.inner.has_pos_conc {
+                if values.iter().any(|&v| v < 0.0 || v.is_nan()) {
+                    summary.any_neg = true;
+                    summary.violated = true;
+                }
+            }
+
+            if !self.inner.invariants.is_empty() {
+                for inv in &self.inner.invariants {
+                    let curr: f64 = inv
+                        .weights
+                        .iter()
+                        .map(|(i, a)| values.get(*i).copied().unwrap_or(0.0) * a)
+                        .sum();
+                    let base = inv.baseline;
+                    let abs = (curr - base).abs();
+                    let rel = if base.abs() > 1e-12 {
+                        abs / base.abs()
+                    } else {
+                        0.0
+                    };
+                    if abs > summary.max_abs_drift {
+                        summary.max_abs_drift = abs;
+                    }
+                    if rel > summary.max_rel_drift {
+                        summary.max_rel_drift = rel;
+                    }
+                    let exceeds = match inv.tolerance.mode.as_str() {
+                        "absolute" => abs > inv.tolerance.value,
+                        "relative" => rel > inv.tolerance.value,
+                        _ => false,
+                    };
+                    if inv.strict && exceeds {
+                        summary.violated = true;
+                    }
+                }
+            }
+        }
+
+        Ok(summary)
     }
 }
 
@@ -232,7 +335,37 @@ struct ChecksBundle {
     species: Vec<String>,
 }
 
-fn weights_from_json(v: &serde_json::Value, index: &HashMap<String, usize>) -> Result<Vec<(usize, f64)>> {
+#[derive(Deserialize)]
+struct ResultLine {
+    #[serde(default)]
+    counts: Option<serde_json::Value>,
+    #[serde(default)]
+    conc: Option<Vec<f64>>,
+    #[serde(rename = "modelHash")]
+    model_hash: String,
+}
+
+fn to_vec_f64(val: &serde_json::Value) -> Result<Vec<f64>> {
+    let arr = val
+        .as_array()
+        .ok_or_else(|| anyhow!("counts must be an array"))?;
+    let mut out = Vec::with_capacity(arr.len());
+    for v in arr {
+        if let Some(i) = v.as_i64() {
+            out.push(i as f64);
+        } else if let Some(f) = v.as_f64() {
+            out.push(f);
+        } else {
+            return Err(anyhow!("counts must contain numeric elements"));
+        }
+    }
+    Ok(out)
+}
+
+fn weights_from_json(
+    v: &serde_json::Value,
+    index: &HashMap<String, usize>,
+) -> Result<Vec<(usize, f64)>> {
     let obj = v
         .as_object()
         .ok_or_else(|| anyhow!("weights must be an object"))?;
@@ -372,8 +505,8 @@ fn verify_jws(jws: &str, jwks: &HashMap<String, Vec<u8>>) -> Result<(String, Vec
         .decode(signature_b64.as_bytes())
         .map_err(|e| anyhow!("decode JWS signature: {e}"))?;
 
-    let header_json: serde_json::Value = serde_json::from_slice(&header_bytes)
-        .context("parse JWS header JSON")?;
+    let header_json: serde_json::Value =
+        serde_json::from_slice(&header_bytes).context("parse JWS header JSON")?;
     let kid = header_json
         .get("kid")
         .and_then(|v| v.as_str())
@@ -388,14 +521,14 @@ fn verify_jws(jws: &str, jwks: &HashMap<String, Vec<u8>>) -> Result<(String, Vec
     let pubkey = jwks
         .get(kid)
         .ok_or_else(|| anyhow!("no jwk for kid {}", kid))?;
-    let verifying_key =
-        ed25519_dalek::PublicKey::from_bytes(pubkey).context("build verifying key")?;
+    let verifying_key = ed25519_dalek::PublicKey::from_bytes(pubkey)
+        .map_err(|e| anyhow!("build verifying key: {e}"))?;
     let sig = ed25519_dalek::Signature::from_bytes(&signature_bytes)
-        .context("parse signature bytes")?;
+        .map_err(|e| anyhow!("parse signature bytes: {e}"))?;
     let signing_input = format!("{}.{}", header_b64, payload_b64);
     verifying_key
         .verify(signing_input.as_bytes(), &sig)
-        .context("signature verification failed")?;
+        .map_err(|e| anyhow!("signature verification failed: {e}"))?;
     Ok((kid.to_string(), payload_bytes))
 }
 
@@ -404,8 +537,8 @@ fn parse_signed_bundle(
     sig_mode: SigMode,
     jwks_json: Option<&str>,
 ) -> Result<ChecksBundle> {
-    let unsigned_bundle: ChecksBundle = serde_json::from_str(checks_json)
-        .context("parse checks bundle JSON")?;
+    let unsigned_bundle: ChecksBundle =
+        serde_json::from_str(checks_json).context("parse checks bundle JSON")?;
     if !sig_mode.requires_signature() {
         return Ok(unsigned_bundle);
     }
@@ -416,18 +549,24 @@ fn parse_signed_bundle(
         .ok_or_else(|| anyhow!("missing signature"))?;
     let sig: SignatureBlock =
         serde_json::from_value(sig_obj.clone()).context("decode signature block")?;
+    if sig.alg != "Ed25519" {
+        return Err(anyhow!("unsupported signature alg {}", sig.alg));
+    }
     if sig.jws.is_empty() {
         return Err(anyhow!("missing jws in signature"));
     }
     let jwks_raw = jwks_json.ok_or_else(|| anyhow!("JWKS required for signed mode"))?;
     let jwks = parse_jwks(jwks_raw)?;
-    let (_kid, payload_bytes) = verify_jws(&sig.jws, &jwks)?;
+    let (kid, payload_bytes) = verify_jws(&sig.jws, &jwks)?;
+    if sig.kid != kid {
+        return Err(anyhow!("signature kid mismatch"));
+    }
     let payload_hash = format!("sha256:{}", sha256_hex(&payload_bytes));
     if sig.payload_hash != payload_hash {
         return Err(anyhow!("payloadHash mismatch"));
     }
-    let bundle: ChecksBundle = serde_json::from_slice(&payload_bytes)
-        .context("parse unsigned payload from JWS")?;
+    let bundle: ChecksBundle =
+        serde_json::from_slice(&payload_bytes).context("parse unsigned payload from JWS")?;
     Ok(bundle)
 }
 
@@ -494,7 +633,9 @@ pub extern "C" fn veribiota_checks_eval(
         let guard = state()
             .lock()
             .map_err(|_| anyhow!("failed to lock runtime state"))?;
-        let runtime = guard.as_ref().ok_or_else(|| anyhow!("runtime not initialized"))?;
+        let runtime = guard
+            .as_ref()
+            .ok_or_else(|| anyhow!("runtime not initialized"))?;
         let snapshot = unsafe { &*snap };
         let snapshot = Snapshot {
             t: snapshot.t,
@@ -510,7 +651,11 @@ pub extern "C" fn veribiota_checks_eval(
             (*out).max_rel_drift = evaluation.max_rel_drift;
         }
         // Return 2 on checks violation (contract), 0 otherwise
-        if evaluation.violated { Err(anyhow!("checks-violation")) } else { Ok(()) }
+        if evaluation.violated {
+            Err(anyhow!("checks-violation"))
+        } else {
+            Ok(())
+        }
     })();
     match result {
         Ok(_) => 0,
@@ -536,12 +681,18 @@ pub extern "C" fn veribiota_checks_free() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rand::rngs::OsRng;
-    use std::ptr;
     use ed25519_dalek::Signer;
+    use std::ptr;
 
     fn make_signed_bundle() -> (String, String) {
-        let keypair = ed25519_dalek::Keypair::generate(&mut OsRng);
+        let secret = ed25519_dalek::SecretKey::from_bytes(&[
+            0x10, 0x41, 0x72, 0xa3, 0xd4, 0x05, 0x36, 0x67, 0x98, 0xc9, 0xfa, 0x2b, 0x5c, 0x8d,
+            0xbe, 0xef, 0x20, 0x51, 0x82, 0xb3, 0xe4, 0x15, 0x46, 0x77, 0xa8, 0xd9, 0x0a, 0x3b,
+            0x6c, 0x9d, 0xce, 0xff,
+        ])
+        .unwrap();
+        let public = ed25519_dalek::PublicKey::from(&secret);
+        let keypair = ed25519_dalek::Keypair { secret, public };
         let payload = serde_json::json!({
             "modelHash": "sha256:test",
             "checks": []
@@ -618,6 +769,42 @@ mod tests {
                 obj.insert(
                     "payloadHash".to_string(),
                     serde_json::Value::String("sha256:deadbeef".to_string()),
+                );
+            }
+        }
+        let tampered = serde_json::to_string(&json).unwrap();
+        let code = init_with(SigMode::SignedEnforced, &tampered, Some(&jwks));
+        assert_ne!(code, 0);
+        veribiota_checks_free();
+    }
+
+    #[test]
+    fn signed_init_rejects_unsupported_signature_alg() {
+        let (checks, jwks) = make_signed_bundle();
+        let mut json: serde_json::Value = serde_json::from_str(&checks).unwrap();
+        if let Some(sig) = json.get_mut("signature") {
+            if let Some(obj) = sig.as_object_mut() {
+                obj.insert(
+                    "alg".to_string(),
+                    serde_json::Value::String("EdDSA".to_string()),
+                );
+            }
+        }
+        let tampered = serde_json::to_string(&json).unwrap();
+        let code = init_with(SigMode::SignedEnforced, &tampered, Some(&jwks));
+        assert_ne!(code, 0);
+        veribiota_checks_free();
+    }
+
+    #[test]
+    fn signed_init_rejects_signature_kid_mismatch() {
+        let (checks, jwks) = make_signed_bundle();
+        let mut json: serde_json::Value = serde_json::from_str(&checks).unwrap();
+        if let Some(sig) = json.get_mut("signature") {
+            if let Some(obj) = sig.as_object_mut() {
+                obj.insert(
+                    "kid".to_string(),
+                    serde_json::Value::String("other-kid".to_string()),
                 );
             }
         }

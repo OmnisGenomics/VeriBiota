@@ -196,7 +196,7 @@ def writeFileAtomic (path : FilePath) (bytes : ByteArray) : IO Unit := do
 
 private def tryShaCmd (cmd : String) (args : List String) (path : FilePath) :
     IO (Option String) := do
-  let argArray := (args ++ [path.toString]).toArray
+  let argArray := (args ++ ["--", path.toString]).toArray
   let child ← IO.Process.output {cmd := cmd, args := argArray}
   if child.exitCode != 0 then
     pure none

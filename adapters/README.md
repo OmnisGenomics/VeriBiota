@@ -5,7 +5,10 @@ invariants through other engines. Each adapter reuses the same sample bundle
 under `examples/`:
 
 - `examples/checks.mass.json` – tiny checks spec (positivity + total-mass).
-- `examples/trajectory.sample.jsonl` – three-step trajectory.
+- `examples/trajectory.sample.jsonl` – three-step concentration trajectory.
+- `examples/trajectory.counts.jsonl` – three-step integer-count trajectory.
+- `examples/trajectory.counts.violation.jsonl` – synthetic negative-path fixture
+  that must exit with code 2.
 - `examples/species.example.json` – canonical ordering (`["S","I","R"]`).
 
 ## C++ (CMake)
@@ -39,8 +42,11 @@ the first violation.
 
 ```
 cargo run --manifest-path adapters/rust/Cargo.toml -- \
-  --checks ../../examples/checks.mass.json \
-  --trajectory ../../examples/trajectory.sample.jsonl
+  --checks examples/checks.mass.json \
+  --trajectory examples/trajectory.sample.jsonl
+cargo run --manifest-path adapters/rust/Cargo.toml -- \
+  --checks examples/checks.mass.json \
+  --trajectory examples/trajectory.counts.jsonl
 ```
 
 This sample pulls in the `biosim-checks` crate directly, avoiding FFI overhead.
