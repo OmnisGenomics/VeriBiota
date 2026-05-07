@@ -70,7 +70,11 @@ fn json_summary_reports_clean_results() {
     );
 
     let output = run_eval_json(&checks_path, &results_path);
-    assert!(output.status.success(), "stderr: {}", String::from_utf8_lossy(&output.stderr));
+    assert!(
+        output.status.success(),
+        "stderr: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
 
     let summary: Value = serde_json::from_slice(&output.stdout).expect("parse JSON summary");
     assert_eq!(summary["any_neg"], false);
@@ -89,7 +93,11 @@ fn json_summary_reports_contract_violations() {
     );
 
     let output = run_eval_json(&checks_path, &results_path);
-    assert!(output.status.success(), "stderr: {}", String::from_utf8_lossy(&output.stderr));
+    assert!(
+        output.status.success(),
+        "stderr: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
 
     let summary: Value = serde_json::from_slice(&output.stdout).expect("parse JSON summary");
     assert_eq!(summary["any_neg"], true);
@@ -107,7 +115,11 @@ fn model_hash_mismatch_is_a_hard_error() {
     );
 
     let output = run_eval_json(&checks_path, &results_path);
-    assert!(!output.status.success(), "stdout: {}", String::from_utf8_lossy(&output.stdout));
+    assert!(
+        !output.status.success(),
+        "stdout: {}",
+        String::from_utf8_lossy(&output.stdout)
+    );
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(stderr.contains("modelHash mismatch"), "stderr: {stderr}");
 }
