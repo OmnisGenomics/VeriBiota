@@ -6,7 +6,9 @@ cd "$ROOT"
 
 tier="${1:-fast}"
 timeout_s="${VERIBIOTA_VALIDATE_TIMEOUT:-180s}"
-rust_target="${CARGO_TARGET_DIR:-/tmp/veribiota-biosim-checks-target}"
+rust_target_root="${CARGO_TARGET_DIR:-/tmp/veribiota-rust-target}"
+engine_target="${rust_target_root}/biosim-checks"
+adapter_target="${rust_target_root}/rust-adapter"
 
 log() {
   printf '[validate] %s\n' "$*"
@@ -40,6 +42,7 @@ validate_fast() {
 
   if command -v cargo >/dev/null 2>&1; then
     run cargo fmt --manifest-path engine/biosim-checks/Cargo.toml --check
+    run cargo fmt --manifest-path adapters/rust/Cargo.toml --check
   else
     log "cargo not found; skipping Rust formatting check"
   fi
@@ -47,9 +50,15 @@ validate_fast() {
 
 validate_rust() {
   need cargo
-  log "CARGO_TARGET_DIR=${rust_target}"
-  CARGO_TARGET_DIR="$rust_target" run_with_timeout \
+  log "engine CARGO_TARGET_DIR=${engine_target}"
+  CARGO_TARGET_DIR="$engine_target" run_with_timeout \
     cargo test --manifest-path engine/biosim-checks/Cargo.toml
+  log "adapter CARGO_TARGET_DIR=${adapter_target}"
+  CARGO_TARGET_DIR="$adapter_target" run_with_timeout \
+    cargo run --manifest-path adapters/rust/Cargo.toml --quiet
+  CARGO_TARGET_DIR="$adapter_target" run_with_timeout \
+    cargo run --manifest-path adapters/rust/Cargo.toml --quiet -- \
+      --trajectory examples/trajectory.counts.jsonl
 }
 
 validate_lean() {

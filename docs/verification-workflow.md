@@ -60,8 +60,11 @@ The tiers are intentionally explicit:
 - `make validate-fast` runs task/profile JSON checks and Rust formatting when
   Cargo is installed.
 - `make validate-rust` runs the Rust runtime test suite for `biosim-checks` with
-  `CARGO_TARGET_DIR` defaulting to `/tmp/veribiota-biosim-checks-target` and
-  `VERIBIOTA_VALIDATE_TIMEOUT` defaulting to `180s` when GNU `timeout` exists.
+  `CARGO_TARGET_DIR` defaulting to `/tmp/veribiota-rust-target`. The script
+  isolates per-manifest build outputs below that root so independent lockfiles
+  cannot reuse stale artifacts. `VERIBIOTA_VALIDATE_TIMEOUT` defaults to `180s`
+  when GNU `timeout` exists. The tier then runs the in-process Rust adapter demo
+  against the concentration and count sample trajectories.
 - `make validate-lean` runs `lake build` and `lake exe biosim_tests`.
 - `make validate-all` runs fast, Rust, and Lean validation in sequence.
 
